@@ -1,5 +1,5 @@
 import * as actionTypes from '../../../common/actionTypes';
-import { axiosMovies } from '../../../axiosInstances';
+import MoviesAPI from '../../../api/MoviesAPI';
 
 export const setMovies = (movies) => {
   return {
@@ -10,11 +10,7 @@ export const setMovies = (movies) => {
 
 export const getMovies = (query) => {
   return dispatch => {
-    axiosMovies.get('', {
-      params: {
-        query
-      }
-    })
+    MoviesAPI.getMoviesByQuery(query)
     .then(response => {
       dispatch(setMovies(response.data.results))
     })

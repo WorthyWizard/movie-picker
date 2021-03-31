@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from 'react-redux';
 import { getMovies } from './state/homeActions';
 
-import Movie from "../../common/Movie";
-import Search from "../../common/Search";
+import Movie from "../../components/Movie";
+import Search from "../../components/Search";
 
 const Home = (props) => {
 
