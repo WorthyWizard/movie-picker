@@ -1,10 +1,11 @@
 import './App.css';
+import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 
 function App() {
   return (
     <div>
-      <h1>Movie App</h1>
+      <Header/>
       <Home />
     </div>
   );

@@ -1,0 +1,33 @@
+.Header {
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.Header h1 {
+  font-size: 1.5rem;
+  margin-right: 50px;
+}
+
+.Header nav {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.HeaderInner {
+  height: 100%;
+  background-color: var(--header-bg-color);
+}
+
+.HeaderContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
