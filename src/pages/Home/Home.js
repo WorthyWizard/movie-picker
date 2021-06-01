@@ -7,25 +7,9 @@ import Search from "../../components/Search/Search";
 
 const Home = (props) => {
 
-  let moviesList = "No movies found";
-
-  if (props.movies.length > 0) {
-    moviesList = props.movies.map((movie) => (
-      <Movie
-        key={movie.id}
-        original_title={movie.original_title}
-        poster_path={movie.poster_path}
-        overview={movie.overview}
-      />
-    ));
-  }
-
   return (
     <>
-      <Search onMovieSearch={props.getMoviesBySearch} />
-      <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
-        {moviesList}
-      </div>
+      <h2>Soon</h2>
     </>
   );
 };

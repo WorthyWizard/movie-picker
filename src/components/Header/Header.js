@@ -12,8 +12,8 @@ const Header = () => {
             <nav>
               <ul>
                 <li><NavLink exact to='/'>Home</NavLink></li>
-                <li><NavLink to='/favourites'>Favourites</NavLink></li>
-                <li><NavLink to='/auth'>Sign In</NavLink></li>
+                <li><NavLink to='/discover'>Discover</NavLink></li>
+                <li><NavLink to='/search'>Search</NavLink></li>
               </ul> 
             </nav>
           </div>
