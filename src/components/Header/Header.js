@@ -1,21 +1,30 @@
 import React from 'react';
+
 import { NavLink } from 'react-router-dom';
-import styles from './Header.module.css';
+import s from './Header.module.css';
+import { FavoriteBorderOutlined } from '@material-ui/icons';
+import { Face } from '@material-ui/icons';
 
 const Header = () => {
   return (
-    <div className={styles.Header}>
-      <div className={styles.HeaderInner}>
-        <div className='wrapper'>
-          <div className={styles.HeaderContent}>
-            <h1>MoviePicker</h1>
-            <nav>
-              <ul>
-                <li><NavLink exact to='/'>Home</NavLink></li>
-                <li><NavLink to='/discover'>Discover</NavLink></li>
-                <li><NavLink to='/search'>Search</NavLink></li>
-              </ul> 
-            </nav>
+    <div className={s.Header}>
+      <div className={s.HeaderInner}>
+        <div className={s.HeaderContent}>
+          <h1 className={s.HeaderLogo}>MoviePicker</h1>
+          <nav>
+            <ul>
+              <li><NavLink activeClassName="active-menu-item" exact to='/'>Home</NavLink></li>
+              <li><NavLink activeClassName="active" to='/discover'>Discover</NavLink></li>
+              <li><NavLink activeClassName="active" to='/search'>Search</NavLink></li>
+            </ul> 
+          </nav>
+          <div className={s.HeaderUserBlock}>
+            <div className={s.WatchlistIcon}>
+              <NavLink to='/watchlist'><FavoriteBorderOutlined /></NavLink>
+            </div>
+            <div className={s.AccountIcon}>
+              <NavLink to='/account'><Face /></NavLink>
+            </div>
           </div>
         </div>
       </div>

@@ -51,4 +51,8 @@ body, input {
   font-weight: 400;
 }
 
+a {
+  color: var(--text-light);
+}
+
 
