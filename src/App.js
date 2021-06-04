@@ -1,12 +1,16 @@
 import './App.css';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 
 function App() {
   return (
-    <div>
+    <div id='page'>
       <Header />
-      <Home />
+      <main>
+        <Home />
+      </main>
+      <Footer />
     </div>
   );
 }

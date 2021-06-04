@@ -41,7 +41,7 @@
 }
 
 body {
-  margin-top: 80px;
+  margin-top: 90px;
   background-color: var(--dark);
   position: relative;
 }
@@ -55,4 +55,7 @@ a {
   color: var(--text-light);
 }
 
+main {
+  min-height: (100vh - 190px);
+}
 

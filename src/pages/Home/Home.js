@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { getMovies } from './state/homeActions';
 
-const Home = (props) => {
+const Home = ({ }) => {
 
   return (
     <>
