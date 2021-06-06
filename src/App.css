@@ -56,6 +56,6 @@ a {
 }
 
 main {
-  min-height: (100vh - 190px);
+  min-height: calc(100vh - 190px);
 }
 
