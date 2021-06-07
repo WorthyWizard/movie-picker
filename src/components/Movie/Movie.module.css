@@ -1,25 +1,21 @@
-.FullsizeMovie {
-  height: 800px;
-  position: relative;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
+.Movie {
+  
 }
 
-.FullsizeMovieInner {
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  margin-left: 200px;
+.MovieInner {
+
 }
 
 .Poster {
   position: relative;
+  margin-bottom: 3px;
 }
 
 .Poster img {
+  width: 100%;
+  max-width: 300px;
+  height: 400px;
+  object-fit: cover;
   border-radius: 5px;
 }
 
@@ -31,72 +27,39 @@
   text-align: center;
   padding: 5px 13px;
   background-color: var(--accent);
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .Rating > div {
   font-size: 1rem;
 }
 
-.MovieInfo {
-  width: 100%;
-  max-width: 600px;
-  margin-left: 100px;
-}
-
 .MovieTitle {
-  font-size: 4.45rem;
-  font-weight: 500;
-  letter-spacing: 3px;
+  max-width: 300px;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   line-height: 1.4;
+  margin-bottom: 5px;
 }
 
 .MovieFactsWrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  opacity: 0.8;
 }
 
 .MovieFactsWrapper > div {
-  font-size: 0.78rem;
-  /* letter-spacing: 1px; */
+  font-size: 0.7rem;
   font-weight: 300;
+  letter-spacing: 0.3px;
 }
 
-.MovieFactsWrapper > div:not(:last-child) {
-  margin-right: 50px;
-}
-
-.MovieGenre {
-
-}
-
-.MovieRuntime {
-
-}
-
-.MoviePG {
-  padding: 3px 5px;
-  outline: 1px solid var(--text-light);
-}
-
-.MovieOverview {
-  font-size: 1rem;
-  margin-bottom: 40px;
-}
-
-.MovieButtons {
-  display: flex;
-  height: 60px;
-}
-
-.BackdropFilter {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.8);
+.DotDivider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--accent-light);
+  margin: 0 12px;
 }

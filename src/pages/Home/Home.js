@@ -1,10 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
 
+import s from './Home.module.css';
+import FullsizeMovie from '../../components/Movie/FullsizeMovie';
 import Movie from '../../components/Movie/Movie';
 import { getMovies } from './state/homeActions';
 
-const Home = ({ }) => {
+const Home = (props) => {
 
   const movie = {
     "adult": false,
@@ -82,9 +84,17 @@ const Home = ({ }) => {
 }
 
   return (
-    <>
-      <Movie data={movie} />
-    </>
+    <div className={s.Homepage}>
+      <FullsizeMovie data={movie} />
+      <h2 className={`main-heading`}>Also recommended for you</h2>
+      <div className={s.Test}>
+        <Movie data={movie} />
+        <Movie data={movie} />
+        <Movie data={movie} />
+        <Movie data={movie} />
+        <Movie data={movie} />
+      </div>
+    </div>
   );
 };
 

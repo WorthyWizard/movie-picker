@@ -1,57 +1,39 @@
 import React from 'react';
 
-import { ImagesEndpoints } from '../../common/utils';
-
+import { ImagesEndpoints, getYearString } from '../../common/utils';
+import Button from '../UI/Button/Button';
+ 
 import s from './Movie.module.css';
 
 const Movie = (props) => {
 
-  const { backdrop_path, poster_path, vote_average, original_title, genres, runtime, overview } = props.data;
+  const {  
+    poster_path, 
+    vote_average, 
+    original_title, 
+    genres, 
+    release_date 
+  } = props.data;
 
-  const getGenreString = (genres) => genres.map(genre => genre.name).join(', ');
-  const getRuntimeString = (time) => {
-    const hours = Math.floor(time / 60);
-    const minutesLeft = time - hours * 60;
-    return `${hours}h ${minutesLeft}m`;
-  }
-
-  const fullsize = (
-
-    <section className={s.FullsizeMovie} style={{ background: `url(${ImagesEndpoints.backgrop() + backdrop_path})` }}>
-      <div className={s.FullsizeMovieInner}>
+  return (
+    <article className={s.Movie}>
+      <div className={s.MovieInner}>
         <div className={s.Poster}>
           <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={original_title} />
           <div className={s.Rating}>
             <div>{vote_average}</div>
           </div>
         </div>
-        <div className={s.MovieInfo}>
-          <h2 className={s.MovieTitle}>{original_title}</h2>
-          <div className={s.MovieFactsWrapper}>
-            <div className={s.MovieGenre}>{getGenreString(genres)}</div>
-            <div className={s.MovieRuntime}>{getRuntimeString(runtime)}</div>
-            <div className={s.MoviePG}>PG-13</div>
-          </div>
-          <p className={s.MovieOverview}>{overview}</p>
-          <div className={s.MovieButtons}>
-            <div className={s.MovieWatchBtn}>
-              <button>Watch</button>
-            </div>
-            <div className={s.MovieWatchlistBtn}>
-              <button>Add</button>
-            </div>
-          </div>
+        <h3 className={s.MovieTitle}>{original_title}</h3>
+        <div className={s.MovieFactsWrapper}>
+          <div className={s.MovieGenre}>{genres[0].name}</div>
+          <div className={s.DotDivider}></div>
+          <div className={s.MovieDate}>{getYearString(release_date)}</div>
+          <div className={s.DotDivider}></div>
+          <div className={s.MoviePG}>PG-13</div>
         </div>
       </div>
-      <div className={s.BackdropFilter}></div>
-    </section>
-
-  );
-
-  return (
-    <>
-      {fullsize}
-    </>
+    </article>
   );
 };
 
