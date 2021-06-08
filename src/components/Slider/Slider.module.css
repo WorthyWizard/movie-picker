@@ -1,0 +1,12 @@
+.Slider {
+  max-width: 1700px;
+  margin: 0 auto 100px auto;
+}
+
+.SliderPrev {
+  color: red;
+}
+
+.SliderNext {
+  color: red;
+}

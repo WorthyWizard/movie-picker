@@ -5,6 +5,7 @@ import s from './Home.module.css';
 import FullsizeMovie from '../../components/Movie/FullsizeMovie';
 import Movie from '../../components/Movie/Movie';
 import { getMovies } from './state/homeActions';
+import Slider from '../../components/Slider/Slider';
 
 const Home = (props) => {
 
@@ -83,17 +84,21 @@ const Home = (props) => {
     "vote_count": 25943
 }
 
+const movies = [
+  <Movie data={movie} />,
+  <Movie data={movie} />,
+  <Movie data={movie} />,
+  <Movie data={movie} />,
+  <Movie data={movie} />,
+  <Movie data={movie} />
+]
+
   return (
     <div className={s.Homepage}>
       <FullsizeMovie data={movie} />
       <h2 className={`main-heading`}>Also recommended for you</h2>
-      <div className={s.Test}>
-        <Movie data={movie} />
-        <Movie data={movie} />
-        <Movie data={movie} />
-        <Movie data={movie} />
-        <Movie data={movie} />
-      </div>
+      <Slider id={1} movies={movies} />
+      <Slider id={2} movies={movies} />
     </div>
   );
 };
