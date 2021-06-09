@@ -16,17 +16,14 @@ const Slider = ({ movies, id }) => {
         slidesPerView={5}
         spaceBetween={50}
         navigation={{
-          prevEl: '.swiper-button-prev',
-          nextEl: '.swiper-button-next',
+          prevEl: `#${s.SliderPrev}-${id}`,
+          nextEl: `#${s.SliderNext}-${id}`,
         }}
       >
-        {
-          movies.map(slide => <SwiperSlide>{slide}</SwiperSlide>)
-        }
-
-        <div className={`swiper-button-prev ${s.SliderPrev}`}></div>
-        <div className={`swiper-button-next ${s.SliderNext}`}></div>
+        { movies.map(slide => <SwiperSlide>{slide}</SwiperSlide>) }
       </Swiper>
+      <div id={`${s.SliderPrev}-${id}`} className={`swiper-button-prev ${s.SliderPrev}`}></div>
+      <div id={`${s.SliderNext}-${id}`} className={`swiper-button-next ${s.SliderNext}`}></div>
     </div>
   );
 };

@@ -1,12 +1,22 @@
 .Slider {
   max-width: 1700px;
-  margin: 0 auto 100px auto;
+  margin: 0 auto;
+  position: relative;
 }
 
 .SliderPrev {
-  color: red;
+  color: var(--text-light);
+  left: -60px;
+  top: 44%;
 }
 
 .SliderNext {
-  color: red;
+  color: var(--text-light);
+  right: -60px;
+  top: 44%;
 }
+
+.SliderNext::after, .SliderPrev::after {
+  font-size: 1.5rem;
+}
+

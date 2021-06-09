@@ -2,11 +2,7 @@
 
 }
 
-.Test {
-  display: flex;
-  justify-content: center;
-}
-
-.Test > article:not(:last-child) {
-  margin-right: 50px;
+.WatchlistBlock {
+  background-color: var(--darker);
+  margin-bottom: 40px;
 }

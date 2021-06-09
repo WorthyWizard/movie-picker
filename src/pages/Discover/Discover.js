@@ -1,14 +1,11 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import s from './Home.module.css';
-import FullsizeMovie from '../../components/Movie/FullsizeMovie';
+import s from './Discover.module.css';
 import Movie from '../../components/Movie/Movie';
-import WatchlistMovie from '../../components/Movie/WatchlistMovie';
-import { getMovies } from './state/homeActions';
 import SliderBlock from '../../components/Slider/SliderBlock';
 
-const Home = (props) => {
+const Discover = ({ }) => {
 
   const movie = {
     "adult": false,
@@ -94,43 +91,21 @@ const movies = [
   <Movie data={movie} />
 ]
 
-const watchlistMovies = [
-  <WatchlistMovie data={movie} />,
-  <WatchlistMovie data={movie} />,
-  <WatchlistMovie data={movie} />,
-  <WatchlistMovie data={movie} />,
-  <WatchlistMovie data={movie} />,
-  <WatchlistMovie data={movie} />
-]
-
   return (
     <div className={s.Homepage}>
-      <FullsizeMovie data={movie} />
       <SliderBlock 
         id={1} 
-        title='Also recommended for you' 
+        title='Check out this trending titles' 
         movies={movies} 
       />
       <SliderBlock 
         id={2} 
         className={s.WatchlistBlock}
-        title='Your Watchlist'
-        movies={watchlistMovies} 
+        title='Top rated movies just for you'
+        movies={movies} 
       />
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    movies: state.home.movies
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getMoviesBySearch: (query) => dispatch(getMovies(query))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Discover;
