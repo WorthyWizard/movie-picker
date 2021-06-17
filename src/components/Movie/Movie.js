@@ -1,8 +1,8 @@
 import React from 'react';
 
+import MovieControls from './MovieControls/MovieControls';
+
 import { ImagesEndpoints, getYearString } from '../../common/utils';
-import Button from '../UI/Button/Button';
- 
 import s from './Movie.module.css';
 
 const Movie = (props) => {
@@ -19,9 +19,15 @@ const Movie = (props) => {
     <article className={s.Movie}>
       <div className={s.MovieInner}>
         <div className={s.Poster}>
-          <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={original_title} />
+          <div className={s.MoviePoster}>
+            <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={original_title} />
+            <div className={s.DarkBackdrop}></div>
+          </div>
           <div className={s.Rating}>
             <div>{vote_average}</div>
+          </div>
+          <div className={s.MovieControls}>
+            <MovieControls />
           </div>
         </div>
         <h3 className={s.MovieTitle}>{original_title}</h3>

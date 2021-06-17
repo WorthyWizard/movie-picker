@@ -44,7 +44,7 @@ const FullsizeMovie = (props) => {
             </div>
           </div>
         </div>
-        <div className={s.BackdropFilter}></div>
+        <div className={s.DarkBackdrop}></div>
       </section>
     </>
   );

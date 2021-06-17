@@ -1,0 +1,26 @@
+.ControlsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ControlsWrapper > div:not(:last-child) {
+  margin-right: 25px;
+}
+
+.AddToWatchlist button,
+.RemoveFromWatchlist button {
+  width: 44px;
+  height: 44px;
+}
+
+.GoToMoviePage button {
+  width: 56px;
+  height: 56px;
+}
+
+.WatchlistMovieControls .GoToMoviePage button,
+.WatchlistMovieControls .RemoveFromWatchlist button {
+  width: 50px;
+  height: 50px;
+}

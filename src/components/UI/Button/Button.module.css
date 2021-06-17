@@ -14,7 +14,7 @@
   font-size: 1.12rem;
 }
 
-.PlayIcon {
+.WatchBtn .PlayIcon {
   display: inline-block;
   margin-right: 5px;
 }
@@ -23,11 +23,45 @@
   letter-spacing: 1px;
 }
 
-.WatchlistIcon svg {
+.WatchlistBtn .WatchlistIcon svg {
   font-size: 1.9rem;
 }
 
 .QuadShape:hover {
   color: var(--text-light);
   background-color: var(--accent);
+}
+
+.RoundShape {
+  border-radius: 50%;
+  background-color: var(--text-light);
+  transition: background-color 0.4s;
+}
+
+.RoundShape .Icon {
+  transition: color 0.5s;
+}
+
+.RoundShape:hover {
+  background-color: var(--accent);
+}
+
+.RoundShape:hover .Icon {
+  color: var(--text-light);
+}
+
+.PlayBtnRound .PlayIcon,
+.WatchBtnRound .WatchlistIcon,
+.RemoveBtnRound .RemoveIcon {
+  display: inline-block;
+  color: var(--accent);
+}
+
+.PlayBtnRound .PlayIcon svg {
+  font-size: 1.7rem;
+}
+
+.WatchBtnRound .WatchlistIcon svg,
+.RemoveBtnRound .RemoveIcon svg {
+  font-size: 1.3rem;
 }
