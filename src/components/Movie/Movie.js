@@ -24,7 +24,7 @@ const Movie = (props) => {
             <div className={s.DarkBackdrop}></div>
           </div>
           <div className={s.Rating}>
-            <div>{vote_average}</div>
+            <div>{vote_average.toFixed(1)}</div>
           </div>
           <div className={s.MovieControls}>
             <MovieControls />

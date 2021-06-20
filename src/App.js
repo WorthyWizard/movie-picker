@@ -3,8 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Home from './pages/Home/Home';
-import Discover from './pages/Discover/Discover';
+import HomePage from './pages/Home/HomePage';
+import DiscoverPage from './pages/Discover/DiscoverPage';
+import SearchPage from './pages/Search/SearchPage';
 import './App.css';
 
 function App() {
@@ -13,8 +14,9 @@ function App() {
       <Header />
       <main>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/discover' component={Discover} />
+          <Route exact path='/' component={HomePage} />
+          <Route path='/discover' component={DiscoverPage} />
+          <Route path='/search' component={SearchPage} />
         </Switch>
       </main>
       <Footer />

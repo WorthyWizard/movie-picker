@@ -2,16 +2,10 @@ import React from 'react';
 
 import s from './Hero.module.css';
 
-const Hero = ({ text, background }) => {
-
-  const backgroundStyles = {};
-
-  if(background) {
-    backgroundStyles.backgroundImage = `url(${background})`;
-  }
+const Hero = ({ text, styles }) => {
 
   return (
-    <section className={s.HeroBlock} style={backgroundStyles}>
+    <section className={s.HeroBlock} style={{...styles}}>
       <div className={s.HeroBlockInner}>
         <p className={s.HeroText}>{text}</p>
       </div>

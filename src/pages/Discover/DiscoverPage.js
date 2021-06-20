@@ -8,15 +8,15 @@ import background from '../../assets/Hero-image.jpg';
 
 import Hero from '../../components/Hero/Hero';
 
-import { moviesSample } from '../../common/moviesSample';
+import { getMoviesSample } from '../../common/moviesSample';
 
 const Discover = ({ }) => {
   
-  const movies = moviesSample.map(movie => <Movie data={movie} />);
+  const movies = getMoviesSample().map(movie => <Movie key={movie.id} data={movie} />);
 
   return (
     <div className={s.Homepage}>
-      <Hero text='Discover new awesome movies' background={background} />
+      <Hero text='Discover new awesome movies' styles={{ backgroundImage: `url(${background})` }} />
       <SliderBlock 
         id={1} 
         title='Check out this trending titles' 

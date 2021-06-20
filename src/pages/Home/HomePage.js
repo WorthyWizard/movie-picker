@@ -8,13 +8,13 @@ import WatchlistMovie from '../../components/Movie/WatchlistMovie';
 import { getMovies } from './state/homeActions';
 import SliderBlock from '../../components/Slider/SliderBlock';
 
-import { movieSample, moviesSample } from "../../common/moviesSample";
+import { movieSample, getMoviesSample } from "../../common/moviesSample";
 
 const Home = ({}) => {
 
-  const movies = moviesSample.map(movie => <Movie data={movie} />);
+  const movies = getMoviesSample().map(movie => <Movie key={movie.id} data={movie} />);
 
-  const watchlistMovies = moviesSample.map(movie => <WatchlistMovie data={movie} />);
+  const watchlistMovies = getMoviesSample().map(movie => <WatchlistMovie key={movie.id} data={movie} />);
 
   return (
     <div className={s.Homepage}>

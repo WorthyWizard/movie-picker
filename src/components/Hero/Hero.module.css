@@ -1,9 +1,10 @@
 .HeroBlock {
-  height: 400px;
+  height: 300px;
   position: relative;
   background-position: 50% 30%;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: var(--darker);
 }
 
 .HeroBlockInner {
