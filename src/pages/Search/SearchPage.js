@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import s from './Search.module.css';
+import s from './SearchPage.module.css';
 import Movie from '../../components/Movie/Movie';
-
 import Hero from '../../components/Hero/Hero';
+import Grid from '../../components/Grid/Grid';
 
 import { getMoviesSample, getMovieWithAPI } from '../../common/moviesSample';
 
@@ -19,18 +19,15 @@ import { getMoviesSample, getMovieWithAPI } from '../../common/moviesSample';
 /* testing */
 
 const Search = ({ }) => {
-  
-  const movies = getMoviesSample(20).map(movie => <Movie key={movie.id} data={movie} />);
 
   return (
     <div className={s.Search}>
       <Hero text='Go ahead and search' />
-      <div className={s.SearchContent}>
-        
+      <section className={s.SearchContent}>
         <div className={s.SearchResult}>
-          {movies}
+          <Grid data={getMoviesSample(17)} />
         </div>
-      </div>
+      </section>
     </div>
   );
 };

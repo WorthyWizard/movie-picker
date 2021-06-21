@@ -24,11 +24,18 @@ ul,
 li,
 body,
 nav,
-button {
+button,
+input {
   margin: 0;
   padding: 0;
   margin-block-start: 0;
   margin-block-end: 0;
+}
+
+input {
+  border: none;
+  outline: none;
+  font-family: inherit;
 }
 
 button {

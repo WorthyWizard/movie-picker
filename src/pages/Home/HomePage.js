@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import s from './Home.module.css';
+import s from './HomePage.module.css';
 import FullsizeMovie from '../../components/Movie/FullsizeMovie';
 import Movie from '../../components/Movie/Movie';
 import WatchlistMovie from '../../components/Movie/WatchlistMovie';

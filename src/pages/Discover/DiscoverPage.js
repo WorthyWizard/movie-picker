@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import s from './Discover.module.css';
+import s from './DiscoverPage.module.css';
 import Movie from '../../components/Movie/Movie';
 import SliderBlock from '../../components/Slider/SliderBlock';
 import background from '../../assets/Hero-image.jpg';
