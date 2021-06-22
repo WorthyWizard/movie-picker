@@ -2,28 +2,27 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import s from './SearchPage.module.css';
-import Movie from '../../components/Movie/Movie';
 import Hero from '../../components/Hero/Hero';
 import Grid from '../../components/Grid/Grid';
+import Search from '../../components/Search/Search';
 
 import { getMoviesSample, getMovieWithAPI } from '../../common/moviesSample';
 
 /* testing */
 
-// getMovieWithAPI("106646").then(data => {
-//   return data.json();
-// }).then(movie => {
-//   console.log(movie);
-// });
+getMovieWithAPI("155").then(movie => {
+  console.log(movie);
+})
   
 /* testing */
 
-const Search = ({ }) => {
+const SearchPage = ({ }) => {
 
   return (
     <div className={s.Search}>
       <Hero text='Go ahead and search' />
       <section className={s.SearchContent}>
+        <Search />
         <div className={s.SearchResult}>
           <Grid data={getMoviesSample(17)} />
         </div>
@@ -32,4 +31,4 @@ const Search = ({ }) => {
   );
 };
 
-export default Search;
+export default SearchPage;

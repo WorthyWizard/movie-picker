@@ -7,14 +7,11 @@
 .GridInner {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(5, 300px);
-  grid-auto-rows: min-content;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-auto-rows: auto;
   grid-gap: 50px;
-  /* flex-wrap: wrap; */
-  /* margin: 0 -25px; */
 }
 
 .GridInner article {
-  /* padding: 25px; */
-  /* box-sizing: content-box; */
+
 }

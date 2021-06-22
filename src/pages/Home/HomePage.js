@@ -4,17 +4,17 @@ import { connect } from 'react-redux';
 import s from './HomePage.module.css';
 import FullsizeMovie from '../../components/Movie/FullsizeMovie';
 import Movie from '../../components/Movie/Movie';
-import WatchlistMovie from '../../components/Movie/WatchlistMovie';
+import MovieLight from '../../components/Movie/MovieLight';
 import { getMovies } from './state/homeActions';
 import SliderBlock from '../../components/Slider/SliderBlock';
 
 import { movieSample, getMoviesSample } from "../../common/moviesSample";
 
-const Home = ({}) => {
+const HomePage = ({}) => {
 
-  const movies = getMoviesSample().map(movie => <Movie key={movie.id} data={movie} />);
+  const movies = getMoviesSample().map((movie, i) => <Movie key={movie.id + `-${i}`} data={movie} />);
 
-  const watchlistMovies = getMoviesSample().map(movie => <WatchlistMovie key={movie.id} data={movie} />);
+  const watchlistMovies = getMoviesSample().map((movie, i) => <MovieLight key={movie.id + `-${i}`} data={movie} />);
 
   return (
     <div className={s.Homepage}>
@@ -46,4 +46,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

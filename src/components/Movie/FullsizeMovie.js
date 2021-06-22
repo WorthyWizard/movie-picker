@@ -23,7 +23,7 @@ const FullsizeMovie = (props) => {
           <div className={s.Poster}>
             <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={original_title} />
             <div className={s.Rating}>
-              <div>{vote_average}</div>
+              <div>{vote_average.toFixed(1)}</div>
             </div>
           </div>
           <div className={s.MovieInfo}>

@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import HomePage from './pages/Home/HomePage';
 import DiscoverPage from './pages/Discover/DiscoverPage';
 import SearchPage from './pages/Search/SearchPage';
+import WatchlistPage from './pages/Watchlist/WatchlistPage';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/' component={HomePage} />
           <Route path='/discover' component={DiscoverPage} />
           <Route path='/search' component={SearchPage} />
+          <Route path='/watchlist' component={WatchlistPage} />
         </Switch>
       </main>
       <Footer />

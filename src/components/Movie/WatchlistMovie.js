@@ -1,33 +1,48 @@
 import React from 'react';
 
-import { ImagesEndpoints } from '../../common/utils';
-import MovieControls from './MovieControls/MovieControls';
- 
-import s from './Movie.module.css';
+import { ImagesEndpoints, getGenreString, getRuntimeString } from '../../common/utils';
+import Button from '../UI/Button/Button';
 
-const Movie = (props) => {
+import s from './WatchlistMovie.module.css';
 
-  const {  
-    poster_path, 
-    original_title, 
+const WatchlistMovie = (props) => {
+
+  const { 
+    backdrop_path,
+    vote_average,
+    original_title,
+    genres, 
+    runtime, 
+    overview,
   } = props.data;
 
   return (
-    <article className={s.Movie}>
-      <div className={s.MovieInner}>
-        <div className={s.Poster}>
-          <div className={s.MoviePoster}>
-            <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={original_title} />
-            <div className={s.DarkBackdrop}></div>
+    <article className={s.WatchlistMovie} style={{ background: `url(${ImagesEndpoints.backgrop() + backdrop_path})` }}>
+      <div className={s.WatchlistMovieInner}>
+        <div className={s.Rating}>
+          <div>{vote_average.toFixed(1)}</div>
+        </div>
+        <div className={s.MovieInfo}>
+          <h2 className={s.MovieTitle}>{original_title}</h2>
+          <div className={s.MovieFactsWrapper}>
+            <div className={s.MovieGenre}>{getGenreString(genres)}</div>
+            <div className={s.MovieRuntime}>{getRuntimeString(runtime)}</div>
+            <div className={s.MoviePG}>PG-13</div>
           </div>
-          <div className={s.MovieControls}>
-            <MovieControls type='watchlist' />
+          <p className={s.MovieOverview}>{overview}</p>
+        </div>
+        <div className={s.MovieButtons}>
+          <div className={s.MovieWatchBtn}>
+            <Button type='watch' />
+          </div>
+          <div className={s.MovieRemoveBtn}>
+            <Button type='watchlist' />
           </div>
         </div>
-        <h3 className={s.MovieTitle}>{original_title}</h3>
       </div>
+      <div className={s.DarkBackdrop}></div>
     </article>
   );
 };
 
-export default Movie;
+export default WatchlistMovie;

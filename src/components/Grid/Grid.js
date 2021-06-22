@@ -5,7 +5,7 @@ import Movie from '../../components/Movie/Movie';
 
 const Grid = ({ data }) => {
   
-  const movies = data.map(movie => <Movie key={movie.id} data={movie} />);
+  const movies = data.map((movie, i) => <Movie key={movie.id + `-${i}`} data={movie} />);
 
   return (
     <div className={s.Grid}>

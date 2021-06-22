@@ -10,9 +10,9 @@ import Hero from '../../components/Hero/Hero';
 
 import { getMoviesSample } from '../../common/moviesSample';
 
-const Discover = ({ }) => {
+const DiscoverPage = ({ }) => {
   
-  const movies = getMoviesSample().map(movie => <Movie key={movie.id} data={movie} />);
+  const movies = getMoviesSample().map((movie, i) => <Movie key={movie.id + `-${i}`} data={movie} />);
 
   return (
     <div className={s.Homepage}>
@@ -32,4 +32,4 @@ const Discover = ({ }) => {
   );
 };
 
-export default Discover;
+export default DiscoverPage;

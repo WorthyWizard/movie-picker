@@ -1,14 +1,15 @@
-.SearchContainer {
+.SearchInputWrapper {
   text-align: center;
-  margin: 50px 0;
+  margin-bottom: 50px;
 }
 
-.SearchContainer input {
+.SearchInputWrapper input {
   width: 100%;
-  max-width: 500px;
-  height: 40px;
+  max-width: 600px;
+  height: 60px;
   padding: 7px 7px 7px 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
 }
 
