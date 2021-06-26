@@ -22,13 +22,13 @@ const HomePage = ({}) => {
       <SliderBlock 
         id={1} 
         title='Also recommended for you' 
-        movies={movies} 
+        data={movies} 
       />
       <SliderBlock 
         id={2} 
         className={s.WatchlistBlock}
         title='Your Watchlist'
-        movies={watchlistMovies} 
+        data={watchlistMovies} 
       />
     </div>
   );

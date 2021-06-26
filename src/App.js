@@ -7,6 +7,7 @@ import HomePage from './pages/Home/HomePage';
 import DiscoverPage from './pages/Discover/DiscoverPage';
 import SearchPage from './pages/Search/SearchPage';
 import WatchlistPage from './pages/Watchlist/WatchlistPage';
+import MoviePage from './pages/Movie/MoviePage';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/discover' component={DiscoverPage} />
           <Route path='/search' component={SearchPage} />
           <Route path='/watchlist' component={WatchlistPage} />
+          <Route path='/movie' component={MoviePage} />
         </Switch>
       </main>
       <Footer />

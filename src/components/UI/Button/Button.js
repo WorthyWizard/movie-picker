@@ -1,64 +1,75 @@
 import React from 'react';
 
 import s from './Button.module.css';
-import { PlayArrow, Clear, FavoriteBorderOutlined } from '@material-ui/icons';
+import { 
+  PlayArrow, 
+  Clear, 
+  FavoriteBorderOutlined 
+} from '@material-ui/icons';
 
-const Button = (props) => {
-
-  let current = null;
+const Button = ({ type, clicked }) => {
 
   let watchBtn = (
-    <button className={`${s.WatchBtn} ${s.QuadShape}`} onClick={props.clicked}>
-      <div className={s.PlayIcon}><PlayArrow /></div>
+    <button className={`${s.Btn} ${s.WatchBtn} ${s.Quad}`} onClick={clicked}>
+      <div className={`${s.Icon}`}><PlayArrow /></div>
       <div className={s.Title}>Watch</div>
     </button>
   );
 
   let watchlistBtn = (
-    <button className={`${s.WatchlistBtn} ${s.QuadShape}`} onClick={props.clicked}>
-      <div className={s.WatchlistIcon}><FavoriteBorderOutlined /></div>
+    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Quad}`} onClick={clicked}>
+      <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
+    </button>
+  );
+
+  let playBtn = (
+    <button className={`${s.Btn} ${s.PlayBtn} ${s.Quad}`} onClick={clicked}>
+      <div className={`${s.Icon}`}><PlayArrow /></div>
     </button>
   );
 
   let playBtnRound = (
-    <button className={`${s.PlayBtnRound} ${s.RoundShape}`} onClick={props.clicked}>
-      <div className={`${s.PlayIcon} ${s.Icon}`}><PlayArrow /></div>
+    <button className={`${s.Btn} ${s.PlayBtn} ${s.Round}`} onClick={clicked}>
+      <div className={`${s.Icon}`}><PlayArrow /></div>
     </button>
   );
 
   let watchBtnRound = (
-    <button className={`${s.WatchBtnRound} ${s.RoundShape}`} onClick={props.clicked}>
-      <div className={`${s.WatchlistIcon} ${s.Icon}`}><FavoriteBorderOutlined /></div>
+    <button className={`${s.Btn} ${s.WatchBtn} ${s.Round}`} onClick={clicked}>
+      <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
+    </button>
+  );
+
+  let removeBtn = (
+    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Quad}`} onClick={clicked}>
+      <div className={`${s.Icon}`}><Clear /></div>
     </button>
   );
 
   let removeBtnRound = (
-    <button className={`${s.RemoveBtnRound} ${s.RoundShape}`} onClick={props.clicked}>
-      <div className={`${s.RemoveIcon} ${s.Icon}`}><Clear /></div>
+    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Round}`} onClick={clicked}>
+      <div className={`${s.Icon}`}><Clear /></div>
     </button>
   );
 
-  switch(props.type) {
-    case 'watch':
-      current = watchBtn;
-      break;
-    case 'watchlist':
-      current = watchlistBtn;
-      break;
+  switch(type) {
+    case 'movie-watch':
+      return watchBtn;
+    case 'add-to-watchlist':
+      return watchlistBtn;
     case 'play':
-      current = playBtnRound;
-      break;
-    case 'watchlistRound':
-      current = watchBtnRound;
-      break;
+      return playBtn;
+    case 'play-round':
+      return playBtnRound;
+    case 'add-to-watchlist-round':
+      return watchBtnRound;
     case 'remove':
-      current = removeBtnRound;
-      break;
+      return removeBtn;
+    case 'remove-round':
+      return removeBtnRound;
     default:
-      current = watchBtn;
+      return watchBtn;
   }
-
-  return current;
 };
 
 export default Button;

@@ -1,67 +1,98 @@
-.QuadShape {
-  height: 60px;
-  padding: 0 26px;
-  border-radius: 10px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background-color: var(--text-light);
-  transition: background-color 0.6s, color 0.3s;
-}
-
-.WatchBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.12rem;
-}
-
-.WatchBtn .PlayIcon {
-  display: inline-block;
-  margin-right: 5px;
-}
-
 .Title {
   letter-spacing: 1px;
 }
 
-.WatchlistBtn .WatchlistIcon svg {
+.Btn {
+  transition: background-color 0.4s, color 0.4s;
+  background-color: var(--text-light);
+}
+
+.Btn:hover {
+  background-color: var(--accent);
+}
+
+.Btn .Icon {
+  transition: color 0.4s;
+}
+
+.Btn:hover .Icon {
+  color: var(--text-light);
+}
+
+.Btn.Round {
+  border-radius: 50%;
+}
+
+.Btn.Quad {
+  height: 60px;
+  padding: 0 26px;
+  border-radius: 10px;
+}
+
+.Btn .Title {
+  transition: color 0.4s;
+}
+
+.Btn:hover .Title {
+  color: var(--text-light);
+}
+
+.WatchBtn.Quad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding: 0 26px;
+  border-radius: 10px;
+  font-size: 1.12rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.WatchBtn.Quad .Icon {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.WatchlistBtn .Icon svg {
   font-size: 1.9rem;
 }
 
-.QuadShape:hover {
-  color: var(--text-light);
-  background-color: var(--accent);
+.WatchlistBtn.Quad,
+.PlayBtn.Quad,
+.RemoveBtn.Quad {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.RoundShape {
-  border-radius: 50%;
-  background-color: var(--text-light);
-  transition: background-color 0.4s;
+.PlayBtn.Quad {
+  padding: 0 36px;
 }
 
-.RoundShape .Icon {
-  transition: color 0.5s;
+.RemoveBtn.Quad {
+  padding: 0 16px;
 }
 
-.RoundShape:hover {
-  background-color: var(--accent);
+.WatchlistBtn,
+.WatchBtn {
+  transition: background-color 0.5s, color 0.5s;
 }
 
-.RoundShape:hover .Icon {
-  color: var(--text-light);
-}
-
-.PlayBtnRound .PlayIcon,
-.WatchBtnRound .WatchlistIcon,
-.RemoveBtnRound .RemoveIcon {
-  display: inline-block;
-  color: var(--accent);
-}
-
-.PlayBtnRound .PlayIcon svg {
+.PlayBtn.Round .Icon svg {
   font-size: 1.7rem;
 }
 
-.WatchBtnRound .WatchlistIcon svg,
-.RemoveBtnRound .RemoveIcon svg {
+.WatchBtn.Round .Icon svg,
+.RemoveBtn.Round .Icon svg {
   font-size: 1.3rem;
+}
+
+.PlayBtn.Quad .Icon svg {
+  font-size: 1.9rem;
+}
+
+.RemoveBtn.Quad .Icon svg {
+  font-size: 1.9rem;
+}
+
+.RemoveBtn:hover {
+  background-color: var(--danger);
 }

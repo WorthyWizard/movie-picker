@@ -20,13 +20,13 @@ const DiscoverPage = ({ }) => {
       <SliderBlock 
         id={1} 
         title='Check out this trending titles' 
-        movies={movies} 
+        data={movies} 
       />
       <SliderBlock 
         id={2} 
         className={s.WatchlistBlock}
         title='Top rated movies just for you'
-        movies={movies}
+        data={movies}
       />
     </div>
   );

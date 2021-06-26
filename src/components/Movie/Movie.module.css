@@ -47,6 +47,7 @@
   right: 0;
   text-align: center;
   padding: 5px 13px;
+  letter-spacing: 1px;
   background-color: var(--accent);
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;

@@ -12,7 +12,7 @@ const WatchlistPage = ({ }) => {
   const movies = getMoviesSample(5).map((movie, i) => <WatchlistMovie key={movie.id + `-${i}`} data={movie} />);
 
   return (
-    <div className={s.Homepage}>
+    <div className={s.WatchlistPage}>
       <Hero text='Your nice watchlist, enjoy!'/>
       <div className={s.WatchlistContent}>
         {movies}

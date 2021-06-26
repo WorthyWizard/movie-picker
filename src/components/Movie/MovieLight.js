@@ -5,12 +5,12 @@ import MovieControls from './MovieControls/MovieControls';
  
 import s from './Movie.module.css';
 
-const MovieLight = (props) => {
+const MovieLight = ({ data }) => {
 
   const {  
     poster_path, 
     original_title, 
-  } = props.data;
+  } = data;
 
   return (
     <article className={s.Movie}>

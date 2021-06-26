@@ -10,16 +10,16 @@ const MovieControls = ({ type, onPlay, onAddToWatchlist, onRemove }) => {
 
   let watchlist = (
     <div className={`${s.ControlsWrapper} ${s.WatchlistMovieControls}`}>
-      <div className={s.GoToMoviePage}><Button clicked={onPlay} type='play'/></div>
-      <div className={s.RemoveFromWatchlist}><Button clicked={onRemove} type='remove'/></div>
+      <div className={s.GoToMoviePage}><Button clicked={onPlay} type='play-round'/></div>
+      <div className={s.RemoveFromWatchlist}><Button clicked={onRemove} type='remove-round'/></div>
     </div>
   );
 
   let regular = (
     <div className={s.ControlsWrapper}>
-      <div className={s.AddToWatchlist}><Button clicked={onAddToWatchlist} type='watchlistRound'/></div>
-      <div className={s.GoToMoviePage}><Button clicked={onPlay} type='play'/></div>
-      <div className={s.RemoveFromWatchlist}><Button clicked={onRemove} type='remove'/></div>
+      <div className={s.AddToWatchlist}><Button clicked={onAddToWatchlist} type='add-to-watchlist-round'/></div>
+      <div className={s.GoToMoviePage}><Button clicked={onPlay} type='play-round'/></div>
+      <div className={s.RemoveFromWatchlist}><Button clicked={onRemove} type='remove-round'/></div>
     </div>
   );
 

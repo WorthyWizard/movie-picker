@@ -1,0 +1,36 @@
+.MoviePage {
+  
+}
+
+.Container {
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+.DetailsBlock {
+  
+}
+
+.DetailsWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.45rem;
+}
+
+.Detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.DetailTitle {
+  width: 150px;
+}
+
+.DotDivider {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent-light);
+  margin: 0 40px;
+}
