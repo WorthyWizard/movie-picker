@@ -7,7 +7,7 @@ import {
   getMovieCertification
 } from '../../common/utils';
 import Button from '../UI/Button/Button';
-
+import Image from '../../components/Image/Image';
 import s from './FullsizeMovie.module.css';
 
 const FullsizeMovie = ({ data, type = '' }) => {
@@ -35,13 +35,13 @@ const FullsizeMovie = ({ data, type = '' }) => {
     </div>
   );
 
-  let movieBackdrop = type != 'movie-page' ? { background: `url(${ImagesEndpoints.backgrop() + backdrop_path})` } : {};
+  let movieBackdrop = type != 'movie-page' ? { background: `url(${ImagesEndpoints.backdrop() + backdrop_path})` } : {};
 
   return (
     <section className={`${s.FullsizeMovie} ${(type == 'movie-page' ? `${s.MoviePage}` : `${s.RegularPage}`)}`} style={movieBackdrop}>
       <div className={s.FullsizeMovieInner}>
         <div className={s.Poster}>
-          <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={title} />
+        <Image path={poster_path} type='poster' alt={title} />
           {type != 'movie-page' ? rating : null}
         </div>
         <div className={s.MovieInfo}>

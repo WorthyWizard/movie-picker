@@ -10,9 +10,9 @@ import { getMoviesSample, getMovieWithAPI } from '../../common/moviesSample';
 
 /* testing */
 
-getMovieWithAPI(24).then(movie => {
-  console.log(movie);
-})
+// getMovieWithAPI(68718).then(movie => {
+//   console.log(movie);
+// })
   
 /* testing */
 

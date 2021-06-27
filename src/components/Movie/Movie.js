@@ -1,12 +1,11 @@
 import React from 'react';
 
 import MovieControls from './MovieControls/MovieControls';
-
 import { 
-  ImagesEndpoints, 
   getYearString,
   getMovieCertification
 } from '../../common/utils';
+import Image from '../../components/Image/Image';
 import s from './Movie.module.css';
 
 const Movie = (props) => {
@@ -25,7 +24,7 @@ const Movie = (props) => {
       <div className={s.MovieInner}>
         <div className={s.Poster}>
           <div className={s.MoviePoster}>
-            <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={title} />
+            <Image path={poster_path} alt={title} type='poster' />
             <div className={s.DarkBackdrop}></div>
           </div>
           <div className={s.Rating}>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ImagesEndpoints } from '../../common/utils';
+import Image from '../../components/Image/Image';
 import MovieControls from './MovieControls/MovieControls';
  
 import s from './Movie.module.css';
@@ -9,7 +9,7 @@ const MovieLight = ({ data }) => {
 
   const {  
     poster_path, 
-    original_title, 
+    title, 
   } = data;
 
   return (
@@ -17,14 +17,14 @@ const MovieLight = ({ data }) => {
       <div className={s.MovieInner}>
         <div className={s.Poster}>
           <div className={s.MoviePoster}>
-            <img src={ImagesEndpoints.poster() + (poster_path ? poster_path : '')} alt={original_title} />
+            <Image path={poster_path} type='poster' alt={title} />
             <div className={s.DarkBackdrop}></div>
           </div>
           <div className={s.MovieControls}>
             <MovieControls type='watchlist' />
           </div>
         </div>
-        <h3 className={s.MovieTitle}>{original_title}</h3>
+        <h3 className={s.MovieTitle}>{title}</h3>
       </div>
     </article>
   );

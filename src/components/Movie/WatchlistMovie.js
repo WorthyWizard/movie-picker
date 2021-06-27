@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { 
-  ImagesEndpoints, 
+import {
+  ImagesEndpoints,
   getGenreString, 
   getRuntimeString,
   getMovieCertification
 } from '../../common/utils';
 import Button from '../UI/Button/Button';
-
 import s from './WatchlistMovie.module.css';
 
 const WatchlistMovie = (props) => {
@@ -23,7 +22,7 @@ const WatchlistMovie = (props) => {
   } = props.data;
 
   return (
-    <article className={s.WatchlistMovie} style={{ background: `url(${ImagesEndpoints.backgrop() + backdrop_path})` }}>
+    <article className={s.WatchlistMovie} style={{ background: `url(${ImagesEndpoints.backdrop() + backdrop_path})` }}>
       <div className={s.WatchlistMovieInner}>
         <div className={s.Rating}>
           <div>{vote_average.toFixed(1)}</div>

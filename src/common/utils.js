@@ -3,7 +3,7 @@ export class ImagesEndpoints {
     return 'https://image.tmdb.org/t/p/w342';
   }
 
-  static backgrop() {
+  static backdrop() {
     return 'https://image.tmdb.org/t/p/w1280';
   }
 
