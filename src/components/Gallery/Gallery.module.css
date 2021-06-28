@@ -1,0 +1,28 @@
+.Gallery {
+
+}
+
+.GalleryInner {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(2, 400px);
+  grid-gap: 15px;
+  grid-template-areas: 'img1 img1 img1 img1 img2 img2 img2'
+                        'img3 img3 img3 img4 img4 img4 img4';
+}
+
+.GalleryInner img:nth-child(1) {
+  grid-area: img1;
+}
+
+.GalleryInner img:nth-child(2) {
+  grid-area: img2;
+}
+
+.GalleryInner img:nth-child(3) {
+  grid-area: img3;
+}
+
+.GalleryInner img:nth-child(4) {
+  grid-area: img4;
+}

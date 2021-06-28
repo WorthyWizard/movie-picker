@@ -56,11 +56,8 @@ body, input {
   font-weight: 400;
 }
 
-a {
-  color: var(--text-light);
-}
-
 main {
+  color: var(--text-light);
   min-height: calc(100vh - 190px);
 }
 

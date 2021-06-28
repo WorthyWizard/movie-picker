@@ -5,7 +5,7 @@ import s from './MoviePage.module.css';
 import SliderBlock from '../../components/Slider/SliderBlock';
 import Person from '../../components/Person/Person';
 
-import { movieSample } from '../../common/moviesSample';
+import { movieSample, getMoviesSample } from '../../common/moviesSample';
 import { 
   getLanguageString,
   getReleaseString,
@@ -13,7 +13,11 @@ import {
   getFilteredCast,
   getFilteredCrew
 } from '../../common/utils';
+import Movie from '../../components/Movie/Movie';
 import FullsizeMovie from "../../components/Movie/FullsizeMovie";
+import Gallery from "../../components/Gallery/Gallery";
+import Video from '../../components/Video/Video';
+import WatchProviders from '../../components/WatchProviders/WatchProviders';
 
 const MoviePage = ({}) => {
   
@@ -21,10 +25,13 @@ const MoviePage = ({}) => {
     spoken_languages, release_date, 
     budget, revenue, credits,
     production_companies,
+    images, videos,
+    ['watch/providers']: providers
   } = movieSample;
 
   const actors = getFilteredCast(credits.cast, 10).map(person => <Person key={person.id} data={person} />);
   const crew = getFilteredCrew(credits.crew);
+  const movies = getMoviesSample(10).map((movie, i) => <Movie key={movie.id + `-${i}`} data={movie} />);
 
   let details = (
     <div className={s.DetailsWrapper}>
@@ -82,6 +89,22 @@ const MoviePage = ({}) => {
           slidesPerView={4}
           title='Cast'
           data={actors}
+        />
+        <div className={s.MediaWrapper}>
+          <h2 className={`main-heading`}>Media</h2>
+          <Gallery images={images.backdrops} />
+          <div className={s.TrailerWrapper}>
+            <h2 className={`main-heading`}>Trailer</h2>
+            <Video path={videos.results[0].key} width={1000} />
+          </div>
+        </div>
+        <WatchProviders data={providers} />
+        <SliderBlock 
+          id={1} 
+          className={s.SimilarMovies}
+          slidesPerView={4}
+          title='Checkout this similar movies'
+          data={movies}
         />
       </section>
     </div>

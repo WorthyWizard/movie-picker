@@ -7,49 +7,55 @@ import {
   FavoriteBorderOutlined 
 } from '@material-ui/icons';
 
-const Button = ({ type, clicked }) => {
+const Button = ({ type, clicked, title = '', className = '', link }) => {
 
   let watchBtn = (
-    <button className={`${s.Btn} ${s.WatchBtn} ${s.Quad}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.WatchBtn} ${s.Quad} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><PlayArrow /></div>
       <div className={s.Title}>Watch</div>
     </button>
   );
 
   let watchlistBtn = (
-    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Quad}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Quad} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
     </button>
   );
 
   let playBtn = (
-    <button className={`${s.Btn} ${s.PlayBtn} ${s.Quad}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.PlayBtn} ${s.Quad} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><PlayArrow /></div>
     </button>
   );
 
   let playBtnRound = (
-    <button className={`${s.Btn} ${s.PlayBtn} ${s.Round}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.PlayBtn} ${s.Round} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><PlayArrow /></div>
     </button>
   );
 
   let watchBtnRound = (
-    <button className={`${s.Btn} ${s.WatchBtn} ${s.Round}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.WatchBtn} ${s.Round} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
     </button>
   );
 
   let removeBtn = (
-    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Quad}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Quad} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><Clear /></div>
     </button>
   );
 
   let removeBtnRound = (
-    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Round}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Round} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><Clear /></div>
     </button>
+  );
+
+  let textBtn = (
+    <a target='_blank' href={link} className={`${s.Btn} ${s.TextBtn} ${s.Quad} ${className}`} onClick={clicked}>
+      <p className={`${s.BtnText}`}>{title}</p>
+    </a>
   );
 
   switch(type) {
@@ -67,6 +73,8 @@ const Button = ({ type, clicked }) => {
       return removeBtn;
     case 'remove-round':
       return removeBtnRound;
+    case 'text':
+      return textBtn;
     default:
       return watchBtn;
   }

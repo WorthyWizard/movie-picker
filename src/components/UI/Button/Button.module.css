@@ -3,8 +3,12 @@
 }
 
 .Btn {
-  transition: background-color 0.4s, color 0.4s;
+  display: inline-block;
+  color: var(--darker);
   background-color: var(--text-light);
+  transition: background-color 0.4s, color 0.4s;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .Btn:hover {
@@ -15,7 +19,8 @@
   transition: color 0.4s;
 }
 
-.Btn:hover .Icon {
+.Btn:hover .Icon,
+.Btn:hover p {
   color: var(--text-light);
 }
 
@@ -95,4 +100,9 @@
 
 .RemoveBtn:hover {
   background-color: var(--danger);
+}
+
+.BtnText {
+  font-size: 1.11rem;
+  line-height: 60px;
 }

@@ -35,7 +35,7 @@ const FullsizeMovie = ({ data, type = '' }) => {
     </div>
   );
 
-  let movieBackdrop = type != 'movie-page' ? { background: `url(${ImagesEndpoints.backdrop() + backdrop_path})` } : {};
+  let movieBackdrop = type != 'movie-page' ? { background: `url(${ImagesEndpoints.backdrop + backdrop_path})` } : {};
 
   return (
     <section className={`${s.FullsizeMovie} ${(type == 'movie-page' ? `${s.MoviePage}` : `${s.RegularPage}`)}`} style={movieBackdrop}>

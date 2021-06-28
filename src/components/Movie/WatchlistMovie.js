@@ -22,7 +22,7 @@ const WatchlistMovie = (props) => {
   } = props.data;
 
   return (
-    <article className={s.WatchlistMovie} style={{ background: `url(${ImagesEndpoints.backdrop() + backdrop_path})` }}>
+    <article className={s.WatchlistMovie} style={{ background: `url(${ImagesEndpoints.backdrop + backdrop_path})` }}>
       <div className={s.WatchlistMovieInner}>
         <div className={s.Rating}>
           <div>{vote_average.toFixed(1)}</div>

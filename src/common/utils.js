@@ -1,14 +1,18 @@
 export class ImagesEndpoints {
-  static poster() {
+  static get poster() {
     return 'https://image.tmdb.org/t/p/w342';
   }
 
-  static backdrop() {
+  static get backdrop() {
     return 'https://image.tmdb.org/t/p/w1280';
   }
 
-  static profile() {
+  static get profile() {
     return 'https://image.tmdb.org/t/p/w300';
+  }
+
+  static get logo() {
+    return 'https://image.tmdb.org/t/p/w92';
   }
 }
 
@@ -82,4 +86,12 @@ export const getMovieCertification = (dataArray) => {
   }
   
   return rate;
+}
+
+export const getFilteredImages = (dataArray) => {
+  return dataArray.filter(image => image.vote_average > 0).sort((a, b) => b.vote_average - a.vote_average);
+}
+
+export const getFilteredWatchProviders = (dataObject) => {
+  return dataObject['results']['US'];
 }

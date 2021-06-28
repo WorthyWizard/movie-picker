@@ -17,6 +17,11 @@
   font-size: 1.45rem;
 }
 
+.Column {
+  width: 100%;
+  max-width: 600px;
+}
+
 .Detail {
   display: flex;
   align-items: center;
@@ -25,6 +30,14 @@
 
 .DetailTitle {
   width: 150px;
+}
+
+.DetailValue {
+  max-width: 250px;
+}
+
+.MediaWrapper {
+  background-color: var(--darker);
 }
 
 .DotDivider {
