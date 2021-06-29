@@ -14,7 +14,7 @@
 .DetailsWrapper {
   display: flex;
   justify-content: space-between;
-  font-size: 1.45rem;
+  font-size: 1.4rem;
 }
 
 .Column {
@@ -37,6 +37,7 @@
 }
 
 .MediaWrapper {
+  padding-bottom: 60px;
   background-color: var(--darker);
 }
 

@@ -8,10 +8,10 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 
-import homeReducer from "./pages/Home/state/homeReducer";
+import movieReducer from "./store/reducers/movie";
 
 const rootReducer = combineReducers({
-  home: homeReducer,
+  movie: movieReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

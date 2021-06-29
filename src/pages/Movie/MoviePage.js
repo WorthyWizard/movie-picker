@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from 'react-redux';
+import * as actions from '../../store/actions/movie';
 
 import s from './MoviePage.module.css';
 import SliderBlock from '../../components/Slider/SliderBlock';
@@ -19,22 +20,25 @@ import Gallery from "../../components/Gallery/Gallery";
 import Video from '../../components/Video/Video';
 import WatchProviders from '../../components/WatchProviders/WatchProviders';
 
-const MoviePage = ({}) => {
-  
-  const {  
+const MoviePage = ({ onGetMovieData, movie: {
     spoken_languages, release_date, 
     budget, revenue, credits,
     production_companies,
     images, videos,
     ['watch/providers']: providers
-  } = movieSample;
+  }, match }) => {
 
+  useEffect(() => {
+    const id = match.params.id;
+    onGetMovieData(id);
+  }, []);
+  
   const actors = getFilteredCast(credits.cast, 10).map(person => <Person key={person.id} data={person} />);
   const crew = getFilteredCrew(credits.crew);
   const movies = getMoviesSample(10).map((movie, i) => <Movie key={movie.id + `-${i}`} data={movie} />);
 
   let details = (
-    <div className={s.DetailsWrapper}>
+    <div className={`${s.DetailsWrapper} ${s.Container}`}>
       <div className={s.Column}>
         <div className={s.Detail}>
           <p className={s.DetailTitle}>Languages</p>
@@ -80,28 +84,30 @@ const MoviePage = ({}) => {
   return (
     <div className={s.MoviePage}>
       <FullsizeMovie data={movieSample} type='movie-page' />
-      <section className={`${s.DetailsBlock} ${s.Container}`}>
+      <section className={`${s.DetailsBlock}`}>
         <h2 className={`main-heading`}>Details</h2>
         {details}
         <SliderBlock 
           id={1} 
-          className={s.CastBlock}
+          className={s.Container}
           slidesPerView={4}
           title='Cast'
           data={actors}
         />
         <div className={s.MediaWrapper}>
-          <h2 className={`main-heading`}>Media</h2>
-          <Gallery images={images.backdrops} />
-          <div className={s.TrailerWrapper}>
-            <h2 className={`main-heading`}>Trailer</h2>
-            <Video path={videos.results[0].key} width={1000} />
+          <div className={s.Container}>
+            <h2 className={`main-heading`}>Media</h2>
+            <Gallery images={images.backdrops} />
+            <div className={s.TrailerWrapper}>
+              <h2 className={`main-heading`}>Trailer</h2>
+              <Video path={videos.results[0].key} width={1000} />
+            </div>
           </div>
         </div>
         <WatchProviders data={providers} />
         <SliderBlock 
           id={1} 
-          className={s.SimilarMovies}
+          className={s.Container}
           slidesPerView={4}
           title='Checkout this similar movies'
           data={movies}
@@ -111,4 +117,16 @@ const MoviePage = ({}) => {
   );
 };
 
-export default MoviePage;
+const mapStateToProps = (state) => {
+  return {
+    movie: state.movie.singleMovie,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetMovieData: (id) => dispatch(actions.getMovieData(id)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

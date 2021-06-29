@@ -5,7 +5,6 @@ import s from './HomePage.module.css';
 import FullsizeMovie from '../../components/Movie/FullsizeMovie';
 import Movie from '../../components/Movie/Movie';
 import MovieLight from '../../components/Movie/MovieLight';
-import { getMovies } from './state/homeActions';
 import SliderBlock from '../../components/Slider/SliderBlock';
 
 import { movieSample, getMoviesSample } from "../../common/moviesSample";
@@ -36,13 +35,13 @@ const HomePage = ({}) => {
 
 const mapStateToProps = (state) => {
   return {
-    movies: state.home.movies
+    
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getMoviesBySearch: (query) => dispatch(getMovies(query))
+    
   }
 }
 

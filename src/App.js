@@ -20,7 +20,7 @@ function App() {
           <Route path='/discover' component={DiscoverPage} />
           <Route path='/search' component={SearchPage} />
           <Route path='/watchlist' component={WatchlistPage} />
-          <Route path='/movie' component={MoviePage} />
+          <Route path='/movie/:id' component={MoviePage} />
         </Switch>
       </main>
       <Footer />

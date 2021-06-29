@@ -16,6 +16,10 @@ export class ImagesEndpoints {
   }
 }
 
+export const updateState = (oldObject, updatedProperties) => {
+  return { ...oldObject, ...updatedProperties }
+} 
+
 export const getGenreString = (genres) => genres.map(genre => genre.name).join(', ');
 
 export const getYearString = (fullDate) => fullDate.split('-')[0];
