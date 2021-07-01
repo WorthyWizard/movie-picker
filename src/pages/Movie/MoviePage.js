@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../store/actions/movie';
 
 import s from './MoviePage.module.css';
@@ -20,22 +20,32 @@ import Gallery from "../../components/Gallery/Gallery";
 import Video from '../../components/Video/Video';
 import WatchProviders from '../../components/WatchProviders/WatchProviders';
 
-const MoviePage = ({ onGetMovieData, movie: {
+const MoviePage = ({ match }) => {
+
+  const dispatch = useDispatch();
+  const apiKey = process.env.REACT_APP_API_KEY;
+
+  useEffect(() => {
+    const id = match.params.id;
+    dispatch(actions.getMovie(id));
+    dispatch(actions.getSimilarMovies(id));
+  }, [dispatch]);
+  
+  const singleMovie = useSelector((state) => state.movie.singleMovie);
+  const similarMovies = useSelector((state) => state.movie.similarMovies);
+
+  if(!singleMovie) return <div>Loading...</div>;
+
+  const {
     spoken_languages, release_date, 
     budget, revenue, credits,
     production_companies,
     images, videos,
     ['watch/providers']: providers
-  }, match }) => {
-
-  useEffect(() => {
-    const id = match.params.id;
-    onGetMovieData(id);
-  }, []);
+  } = singleMovie;
   
   const actors = getFilteredCast(credits.cast, 10).map(person => <Person key={person.id} data={person} />);
   const crew = getFilteredCrew(credits.crew);
-  const movies = getMoviesSample(10).map((movie, i) => <Movie key={movie.id + `-${i}`} data={movie} />);
 
   let details = (
     <div className={`${s.DetailsWrapper} ${s.Container}`}>
@@ -81,9 +91,26 @@ const MoviePage = ({ onGetMovieData, movie: {
     </div>
   );
 
+  let similarSlider = null;
+
+  if(similarMovies) {
+    const movies = similarMovies.map((movie, i) => <Movie key={movie.id} data={movie} />);
+    similarSlider = (
+      <SliderBlock 
+        id={1} 
+        className={s.Container}
+        slidesPerView={4}
+        title='Checkout this similar movies'
+        data={movies}
+      />
+    );
+  } else {
+    similarSlider = <div>Loading...</div>;
+  }
+
   return (
     <div className={s.MoviePage}>
-      <FullsizeMovie data={movieSample} type='movie-page' />
+      <FullsizeMovie data={singleMovie} type='movie-page' />
       <section className={`${s.DetailsBlock}`}>
         <h2 className={`main-heading`}>Details</h2>
         {details}
@@ -105,28 +132,10 @@ const MoviePage = ({ onGetMovieData, movie: {
           </div>
         </div>
         <WatchProviders data={providers} />
-        <SliderBlock 
-          id={1} 
-          className={s.Container}
-          slidesPerView={4}
-          title='Checkout this similar movies'
-          data={movies}
-        />
+        {similarSlider}
       </section>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    movie: state.movie.singleMovie,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onGetMovieData: (id) => dispatch(actions.getMovieData(id)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+export default MoviePage;

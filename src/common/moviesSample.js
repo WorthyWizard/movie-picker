@@ -5604,13 +5604,3 @@ export const getMoviesSample = (amount = 10) => {
   }
   return moviesArray;
 }
-
-/* testing */
-
-export const getMovieWithAPI = async (id) => {
-    const apiKey = process.env.REACT_APP_API_KEY;
-    return await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&append_to_response=images,videos,release_dates,credits,watch/providers`)
-        .then(data => data.json());
-}
-
-/* testing */

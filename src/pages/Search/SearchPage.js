@@ -6,15 +6,7 @@ import Hero from '../../components/Hero/Hero';
 import Grid from '../../components/Grid/Grid';
 import Search from '../../components/Search/Search';
 
-import { getMoviesSample, getMovieWithAPI } from '../../common/moviesSample';
-
-/* testing */
-
-// getMovieWithAPI(72190).then(movie => {
-//   console.log(movie);
-// })
-  
-/* testing */
+import { getMoviesSample } from '../../common/moviesSample';
 
 const SearchPage = ({ }) => {
 

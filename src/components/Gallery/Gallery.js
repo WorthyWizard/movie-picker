@@ -6,7 +6,7 @@ import Image from '../../components/Image/Image';
 
 const Gallery = ({ images }) => {
 
-  const imagesArray = getFilteredImages(images).slice(0, 4).map(image => <Image path={image.file_path} type='backdrop' />);
+  const imagesArray = getFilteredImages(images).slice(0, 4).map((image, i) => <Image key={`gallery-img-${i}`} path={image.file_path} type='backdrop' />);
 
   return (
     <div className={s.Gallery}>
