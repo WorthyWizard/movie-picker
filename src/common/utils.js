@@ -14,9 +14,13 @@ export class ImagesEndpoints {
   static get logo() {
     return 'https://image.tmdb.org/t/p/w92';
   }
+
+  static get loader() {
+    return 'https://image.tmdb.org/t/p/w92';
+  }
 }
 
-export const updateState = (oldObject, updatedProperties) => {
+export const update = (oldObject, updatedProperties) => {
   return { ...oldObject, ...updatedProperties }
 } 
 

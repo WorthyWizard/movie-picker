@@ -24,10 +24,13 @@
 }
 
 .Poster {
+  width: 342px;
+  height: 500px;
   position: relative;
 }
 
 .Poster img {
+  position: absolute;
   border-radius: 5px;
 }
 

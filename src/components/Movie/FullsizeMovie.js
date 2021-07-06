@@ -41,7 +41,11 @@ const FullsizeMovie = ({ data, type = '' }) => {
     <section className={`${s.FullsizeMovie} ${(type == 'movie-page' ? `${s.MoviePage}` : `${s.RegularPage}`)}`} style={movieBackdrop}>
       <div className={s.FullsizeMovieInner}>
         <div className={s.Poster}>
-        <Image path={poster_path} type='poster' alt={title} />
+          <Image 
+            path={poster_path}  
+            type='poster' 
+            alt={title} 
+          />
           {type != 'movie-page' ? rating : null}
         </div>
         <div className={s.MovieInfo}>

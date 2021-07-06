@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateState } from '../../common/utils';
+import { update } from '../../common/utils';
 
 let initialState = {
   singleMovie: null,
@@ -12,11 +12,11 @@ let initialState = {
 }
 
 const setSingleMovie = (state, action) => {
-  return updateState(state, { singleMovie: action.movie })
+  return update(state, { singleMovie: action.movie })
 }
 
 const setSimilarMovies = (state, action) => {
-  return updateState(state, { similarMovies: action.movies })
+  return update(state, { similarMovies: action.movies })
 }
 
 const movieReducer = (state = initialState, action) => {

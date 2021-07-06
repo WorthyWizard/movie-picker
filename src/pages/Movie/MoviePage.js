@@ -5,8 +5,6 @@ import * as actions from '../../store/actions/movie';
 import s from './MoviePage.module.css';
 import SliderBlock from '../../components/Slider/SliderBlock';
 import Person from '../../components/Person/Person';
-
-import { movieSample, getMoviesSample } from '../../common/moviesSample';
 import { 
   getLanguageString,
   getReleaseString,
@@ -19,22 +17,20 @@ import FullsizeMovie from "../../components/Movie/FullsizeMovie";
 import Gallery from "../../components/Gallery/Gallery";
 import Video from '../../components/Video/Video';
 import WatchProviders from '../../components/WatchProviders/WatchProviders';
+import Loader from '../../components/UI/Loader/Loader';
 
 const MoviePage = ({ match }) => {
 
   const dispatch = useDispatch();
-  const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
     const id = match.params.id;
     dispatch(actions.getMovie(id));
-    dispatch(actions.getSimilarMovies(id));
   }, [dispatch]);
   
   const singleMovie = useSelector((state) => state.movie.singleMovie);
-  const similarMovies = useSelector((state) => state.movie.similarMovies);
 
-  if(!singleMovie) return <div>Loading...</div>;
+  if(!singleMovie) return <Loader/>;
 
   const {
     spoken_languages, release_date, 
@@ -46,6 +42,7 @@ const MoviePage = ({ match }) => {
   
   const actors = getFilteredCast(credits.cast, 10).map(person => <Person key={person.id} data={person} />);
   const crew = getFilteredCrew(credits.crew);
+  const similarMovies = singleMovie.similar.results.map((movie, i) => <Movie key={movie.id} data={movie} />);
 
   let details = (
     <div className={`${s.DetailsWrapper} ${s.Container}`}>
@@ -91,23 +88,6 @@ const MoviePage = ({ match }) => {
     </div>
   );
 
-  let similarSlider = null;
-
-  if(similarMovies) {
-    const movies = similarMovies.map((movie, i) => <Movie key={movie.id} data={movie} />);
-    similarSlider = (
-      <SliderBlock 
-        id={1} 
-        className={s.Container}
-        slidesPerView={4}
-        title='Checkout this similar movies'
-        data={movies}
-      />
-    );
-  } else {
-    similarSlider = <div>Loading...</div>;
-  }
-
   return (
     <div className={s.MoviePage}>
       <FullsizeMovie data={singleMovie} type='movie-page' />
@@ -132,7 +112,13 @@ const MoviePage = ({ match }) => {
           </div>
         </div>
         <WatchProviders data={providers} />
-        {similarSlider}
+        <SliderBlock 
+          id={1} 
+          className={s.Container}
+          slidesPerView={4}
+          title='Checkout this similar movies'
+          data={similarMovies}
+        />
       </section>
     </div>
   );

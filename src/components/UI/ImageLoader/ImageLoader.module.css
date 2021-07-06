@@ -1,0 +1,8 @@
+.ImageLoader {
+  position: absolute;
+  filter: blur(3px);
+}
+
+.ImageLoader img {
+  position: absolute;
+}
