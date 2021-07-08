@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from 'react-redux';
 
 import s from './DiscoverPage.module.css';
 import Movie from '../../components/Movie/Movie';

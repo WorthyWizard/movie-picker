@@ -6,8 +6,7 @@
   display: inline-block;
   color: var(--darker);
   background-color: var(--text-light);
-  transition: background-color 0.4s, color 0.4s;
-  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
   text-decoration: none;
 }
 
@@ -16,7 +15,7 @@
 }
 
 .Btn .Icon {
-  transition: color 0.4s;
+  transition: color 0.3s;
 }
 
 .Btn:hover .Icon,
@@ -35,31 +34,41 @@
 }
 
 .Btn .Title {
-  transition: color 0.4s;
+  transition: color 0.3s;
 }
 
 .Btn:hover .Title {
   color: var(--text-light);
 }
 
-.WatchBtn.Quad {
+.WatchBtn {
+  height: 60px;
+  border-radius: 10px;
+}
+
+.WatchBtn a {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 100%;
   padding: 0 26px;
-  border-radius: 10px;
   font-size: 1.12rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  text-decoration: none;
+  color: var(--darker);
 }
 
-.WatchBtn.Quad .Icon {
+.WatchBtn .Icon {
   display: inline-block;
   margin-right: 5px;
 }
 
 .WatchlistBtn .Icon svg {
   font-size: 1.9rem;
+}
+
+.WatchlistBtn.Round .Icon svg {
+  font-size: 1.5rem;
 }
 
 .WatchlistBtn.Quad,
@@ -72,26 +81,38 @@
   padding: 0 36px;
 }
 
-.RemoveBtn.Quad {
-  padding: 0 16px;
-}
-
-.WatchlistBtn,
-.WatchBtn {
-  transition: background-color 0.5s, color 0.5s;
+.PlayBtn.Round {
+  overflow: hidden;
 }
 
 .PlayBtn.Round .Icon svg {
   font-size: 1.7rem;
 }
 
-.WatchBtn.Round .Icon svg,
-.RemoveBtn.Round .Icon svg {
-  font-size: 1.3rem;
+.PlayBtn.Round a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--darker);
 }
 
 .PlayBtn.Quad .Icon svg {
   font-size: 1.9rem;
+}
+
+.RemoveBtn.Quad {
+  padding: 0 16px;
+}
+
+.WatchlistBtn,
+.WatchBtn {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.WatchBtn.Round .Icon svg,
+.RemoveBtn.Round .Icon svg {
+  font-size: 1.3rem;
 }
 
 .RemoveBtn.Quad .Icon svg {

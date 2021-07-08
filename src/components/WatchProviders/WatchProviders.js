@@ -26,6 +26,10 @@ const ProvidingType = ({ title, data }) => {
 const WatchProviders = ({ data }) => {
 
   const providersData = getFilteredWatchProviders(data);
+  
+  if(providersData.length == 0) {
+    return <div>No watch providers available</div>
+  }
 
   return (
     <div className={s.WatchProviders}>
@@ -40,11 +44,11 @@ const WatchProviders = ({ data }) => {
             <Image path={JustWatchLogo} alt='JustWatch Logo'/>
           </div>
         </div>
-        { providersData.rent.length > 0 ? <ProvidingType title='Rent' data={providersData.rent} /> : ''}
-        { providersData.buy.length > 0 ? <ProvidingType title='Buy' data={providersData.buy} /> : ''}
-        { providersData.flatrate.length > 0 ? <ProvidingType title='Flatrate' data={providersData.flatrate} /> : ''}
+        { providersData.rent && providersData.rent.length > 0 ? <ProvidingType title='Rent' data={providersData.rent} /> : ''}
+        { providersData.buy && providersData.buy.length > 0 ? <ProvidingType title='Buy' data={providersData.buy} /> : ''}
+        { providersData.flatrate && providersData.flatrate.length > 0 ? <ProvidingType title='Flatrate' data={providersData.flatrate} /> : ''}
         <div className={s.ButtonWrapper}>
-          <Button link={providersData.link} type='text' title='Pick Provider' className={s.PickBtn} />
+          <Button href={providersData.link} type='text' title='Pick Provider' className={s.PickBtn} />
         </div>
       </div>
     </div>

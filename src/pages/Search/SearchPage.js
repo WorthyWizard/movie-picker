@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from 'react-redux';
 
 import s from './SearchPage.module.css';
 import Hero from '../../components/Hero/Hero';

@@ -16,7 +16,7 @@ const FullsizeMovie = ({ data, type = '' }) => {
     backdrop_path, poster_path, 
     vote_average, title, 
     genres, runtime, overview, 
-    tagline, release_dates
+    tagline, release_dates, id
   } = data;
 
   let rating = (
@@ -31,7 +31,7 @@ const FullsizeMovie = ({ data, type = '' }) => {
 
   let watchBtn = (
     <div className={s.MovieWatchBtn}>
-      <Button type='movie-watch' />
+      <Button type='movie-watch' link={`/movie/${id}`} />
     </div>
   );
 

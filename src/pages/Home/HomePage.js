@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from 'react-redux';
 
 import s from './HomePage.module.css';
 import FullsizeMovie from '../../components/Movie/FullsizeMovie';
@@ -33,16 +32,4 @@ const HomePage = ({}) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

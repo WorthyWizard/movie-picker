@@ -7,9 +7,9 @@ import s from './Movie.module.css';
 
 const MovieLight = ({ data }) => {
 
-  const {  
+  const {
     poster_path, 
-    title, 
+    title, id
   } = data;
 
   return (
@@ -21,7 +21,10 @@ const MovieLight = ({ data }) => {
             <div className={s.DarkBackdrop}></div>
           </div>
           <div className={s.MovieControls}>
-            <MovieControls type='watchlist' />
+            <MovieControls 
+              type='watchlist' 
+              onPlayLink={`/movie/${id}`}
+            />
           </div>
         </div>
         <h3 className={s.MovieTitle}>{title}</h3>

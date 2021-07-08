@@ -82,8 +82,21 @@ export const getFilteredCrew = (dataArray) => {
 }
 
 export const getMovieCertification = (dataArray) => {
+
   let rate = '';
-  const certification = dataArray.filter(movie => movie['iso_3166_1'] == 'US')[0]['release_dates'];
+  let certification = '';
+
+  if(dataArray.length == 0) {
+    return 'Not defined';
+  } 
+
+  const certificationUS = dataArray.filter(movie => movie['iso_3166_1'] == 'US');
+
+  if(certificationUS.length == 0) {
+    return 'Not defined';
+  } else {
+    certification = certificationUS[0]['release_dates'];
+  }
   
   if(!rate) {
     certification.forEach(el => {
@@ -101,7 +114,7 @@ export const getFilteredImages = (dataArray) => {
 }
 
 export const getFilteredWatchProviders = (dataObject) => {
-  return dataObject['results']['US'];
+  return dataObject['results']['US'] ? dataObject['results']['US'] : [];
 }
 
 export const getFilteredGenreByIDs = (dataArray) => {

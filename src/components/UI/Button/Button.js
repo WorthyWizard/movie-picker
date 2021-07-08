@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import s from './Button.module.css';
 import { 
@@ -7,12 +8,14 @@ import {
   FavoriteBorderOutlined 
 } from '@material-ui/icons';
 
-const Button = ({ type, clicked, title = '', className = '', link }) => {
+const Button = ({ type, clicked, title = '', className = '', href, link = '' }) => {
 
   let watchBtn = (
-    <button className={`${s.Btn} ${s.WatchBtn} ${s.Quad} ${className}`} onClick={clicked}>
-      <div className={`${s.Icon}`}><PlayArrow /></div>
-      <div className={s.Title}>Watch</div>
+    <button className={`${s.Btn} ${s.WatchBtn} ${className}`} onClick={clicked}>
+      <Link to={link}>
+        <div className={`${s.Icon}`}><PlayArrow /></div>
+        <div className={s.Title}>Watch</div>
+      </Link>
     </button>
   );
 
@@ -24,18 +27,22 @@ const Button = ({ type, clicked, title = '', className = '', link }) => {
 
   let playBtn = (
     <button className={`${s.Btn} ${s.PlayBtn} ${s.Quad} ${className}`} onClick={clicked}>
-      <div className={`${s.Icon}`}><PlayArrow /></div>
+      <Link to={link}>
+        <div className={`${s.Icon}`}><PlayArrow /></div>
+      </Link>
     </button>
   );
 
   let playBtnRound = (
     <button className={`${s.Btn} ${s.PlayBtn} ${s.Round} ${className}`} onClick={clicked}>
-      <div className={`${s.Icon}`}><PlayArrow /></div>
+      <Link to={link}>
+        <div className={`${s.Icon}`}><PlayArrow /></div>
+      </Link>
     </button>
   );
 
-  let watchBtnRound = (
-    <button className={`${s.Btn} ${s.WatchBtn} ${s.Round} ${className}`} onClick={clicked}>
+  let watchlistBtnRound = (
+    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Round} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
     </button>
   );
@@ -53,7 +60,7 @@ const Button = ({ type, clicked, title = '', className = '', link }) => {
   );
 
   let textBtn = (
-    <a target='_blank' href={link} className={`${s.Btn} ${s.TextBtn} ${s.Quad} ${className}`} onClick={clicked}>
+    <a target='_blank' href={href} className={`${s.Btn} ${s.TextBtn} ${s.Quad} ${className}`} onClick={clicked}>
       <p className={`${s.BtnText}`}>{title}</p>
     </a>
   );
@@ -68,7 +75,7 @@ const Button = ({ type, clicked, title = '', className = '', link }) => {
     case 'play-round':
       return playBtnRound;
     case 'add-to-watchlist-round':
-      return watchBtnRound;
+      return watchlistBtnRound;
     case 'remove':
       return removeBtn;
     case 'remove-round':

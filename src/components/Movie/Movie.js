@@ -3,35 +3,26 @@ import React from 'react';
 import MovieControls from './MovieControls/MovieControls';
 import { 
   getYearString,
-  getMovieCertification,
   getFilteredGenreByIDs
 } from '../../common/utils';
 import Image from '../../components/Image/Image';
 import s from './Movie.module.css';
 
-const Movie = (props) => {
+const Movie = ({ data }) => {
 
   const {  
-    poster_path, 
-    vote_average, 
-    title, 
-    genres,
-    genre_ids,
-    release_date,
-    release_dates 
-  } = props.data;
+    poster_path, vote_average, 
+    title, genres, genre_ids,
+    release_date, id
+  } = data;
 
   let genre = '';
-  let certification = '';
 
   if(genres) {
     genre = genres[0].name;
   }
   if(genre_ids) {
     genre = getFilteredGenreByIDs(genre_ids)[0];
-  }
-  if(release_dates) {
-    certification = getMovieCertification(release_dates.results);
   }
 
   return (
@@ -46,7 +37,9 @@ const Movie = (props) => {
             <div>{vote_average.toFixed(1)}</div>
           </div>
           <div className={s.MovieControls}>
-            <MovieControls />
+            <MovieControls 
+              onPlayLink={`/movie/${id}`} 
+            />
           </div>
         </div>
         <h3 className={s.MovieTitle}>{title}</h3>
@@ -54,8 +47,6 @@ const Movie = (props) => {
           <div className={s.MovieGenre}>{genre}</div>
           <div className={s.DotDivider}></div>
           <div className={s.MovieDate}>{getYearString(release_date)}</div>
-          <div className={s.DotDivider}></div>
-          <div className={s.MovieCertification}>{certification}</div>
         </div>
       </div>
     </article>

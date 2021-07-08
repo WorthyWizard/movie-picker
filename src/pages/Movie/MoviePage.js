@@ -22,11 +22,12 @@ import Loader from '../../components/UI/Loader/Loader';
 const MoviePage = ({ match }) => {
 
   const dispatch = useDispatch();
+  const id = match.params.id;
 
   useEffect(() => {
-    const id = match.params.id;
+    
     dispatch(actions.getMovie(id));
-  }, [dispatch]);
+  }, [id]);
   
   const singleMovie = useSelector((state) => state.movie.singleMovie);
 
@@ -107,13 +108,13 @@ const MoviePage = ({ match }) => {
             <Gallery images={images.backdrops} />
             <div className={s.TrailerWrapper}>
               <h2 className={`main-heading`}>Trailer</h2>
-              <Video path={videos.results[0].key} width={1000} />
+              <Video path={ videos.length > 0 && videos.results[0].key ? videos.results[0].key : ''} width={1000} />
             </div>
           </div>
         </div>
         <WatchProviders data={providers} />
         <SliderBlock 
-          id={1} 
+          id={2} 
           className={s.Container}
           slidesPerView={4}
           title='Checkout this similar movies'
