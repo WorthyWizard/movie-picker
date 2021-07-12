@@ -12,13 +12,9 @@ import s from './WatchlistMovie.module.css';
 const WatchlistMovie = (props) => {
 
   const { 
-    backdrop_path,
-    vote_average,
-    title,
-    genres, 
-    runtime, 
-    overview,
-    release_dates
+    backdrop_path, vote_average,
+    title, genres, runtime, id,
+    overview, release_dates
   } = props.data;
 
   return (
@@ -38,7 +34,7 @@ const WatchlistMovie = (props) => {
         </div>
         <div className={s.MovieButtons}>
           <div className={s.MovieWatchBtn}>
-            <Button type='play' />
+            <Button type='play' link={`/movie/${id}`} />
           </div>
           <div className={s.MovieRemoveBtn}>
             <Button type='remove' />

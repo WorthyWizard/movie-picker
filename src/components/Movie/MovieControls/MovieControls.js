@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Button from '../../UI/Button/Button';
- 
 import s from './MovieControls.module.css';
 
 const MovieControls = ({ type, onPlay, onPlayLink, onAddToWatchlist, onRemove }) => {
@@ -15,7 +14,14 @@ const MovieControls = ({ type, onPlay, onPlayLink, onAddToWatchlist, onRemove })
     </div>
   );
 
-  let regular = (
+  let restricted = (
+    <div className={`${s.ControlsWrapper} ${s.WatchlistMovieControls}`}>
+      <div className={s.AddToWatchlist}><Button clicked={onAddToWatchlist} type='add-to-watchlist-round'/></div>
+      <div className={s.GoToMoviePage}><Button clicked={onPlay} type='play-round' link={onPlayLink} /></div>
+    </div>
+  );
+
+  let full = (
     <div className={s.ControlsWrapper}>
       <div className={s.AddToWatchlist}><Button clicked={onAddToWatchlist} type='add-to-watchlist-round'/></div>
       <div className={s.GoToMoviePage}><Button clicked={onPlay} type='play-round' link={onPlayLink} /></div>
@@ -27,8 +33,11 @@ const MovieControls = ({ type, onPlay, onPlayLink, onAddToWatchlist, onRemove })
     case 'watchlist':
       controls = watchlist;
       break;
+    case 'restricted':
+      controls = restricted;
+      break;
     default:
-      controls = regular;
+      controls = full;
   }
 
   return controls;

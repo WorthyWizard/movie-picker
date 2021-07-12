@@ -3,7 +3,9 @@ import React from 'react';
 import MovieControls from './MovieControls/MovieControls';
 import { 
   getYearString,
-  getFilteredGenreByIDs
+  getFilteredGenre,
+  getFilteredGenreByIDs,
+  getGenreString
 } from '../../common/utils';
 import Image from '../../components/Image/Image';
 import s from './Movie.module.css';
@@ -19,10 +21,10 @@ const Movie = ({ data }) => {
   let genre = '';
 
   if(genres) {
-    genre = genres[0].name;
+    genre = getFilteredGenre(genres).slice(0, 2).join(', ');
   }
   if(genre_ids) {
-    genre = getFilteredGenreByIDs(genre_ids)[0];
+    genre = getFilteredGenreByIDs(genre_ids).slice(0, 2).join(', ');
   }
 
   return (

@@ -24,6 +24,9 @@ export const update = (oldObject, updatedProperties) => {
   return { ...oldObject, ...updatedProperties }
 } 
 
+
+export const getFilteredGenre = (genres) => genres.map(genre => genre.name);
+
 export const getGenreString = (genres) => genres.map(genre => genre.name).join(', ');
 
 export const getYearString = (fullDate) => fullDate.split('-')[0];
@@ -36,7 +39,7 @@ export const getRuntimeString = (time) => {
 
 export const getLanguageString = (langs) => langs.map(genre => genre.english_name).join(', ');
 
-export const getReleaseString = (release) => release.split('-').join('/');
+export const getReleaseString = (release) => release.split('-').join('.');
 
 export const formatNumber = (number, divider) => {
   let num = number.toString();
@@ -56,7 +59,7 @@ export const formatNumber = (number, divider) => {
   return start + hundreds.reverse().join(divider);
 };
 
-export const getFilteredCast = (dataArray, count) => {
+export const getFilteredCast = (dataArray, count = 10) => {
   return dataArray.slice(0, count);
 }
 
@@ -110,11 +113,11 @@ export const getMovieCertification = (dataArray) => {
 }
 
 export const getFilteredImages = (dataArray) => {
-  return dataArray.filter(image => image.vote_average > 0).sort((a, b) => b.vote_average - a.vote_average);
+  return dataArray.sort((a, b) => b.vote_average - a.vote_average);
 }
 
 export const getFilteredWatchProviders = (dataObject) => {
-  return dataObject['results']['US'] ? dataObject['results']['US'] : [];
+  return dataObject['results']['US'] ? dataObject['results']['US'] : null;
 }
 
 export const getFilteredGenreByIDs = (dataArray) => {
@@ -200,4 +203,8 @@ export const getFilteredGenreByIDs = (dataArray) => {
   const allGenreObj = allGenre.reduce((acc, value) => Object.assign(acc, {[value.id]: value.name}), {});
 
   return dataArray.map(genreID => allGenreObj[genreID]);
+}
+
+export const getFilteredVideos = (dataArray) => {
+  return dataArray.filter(video => video.type.toLowerCase() === 'trailer' && video.site.toLowerCase() === 'youtube' && video.key)
 }

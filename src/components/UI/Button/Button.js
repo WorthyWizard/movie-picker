@@ -20,7 +20,7 @@ const Button = ({ type, clicked, title = '', className = '', href, link = '' }) 
   );
 
   let watchlistBtn = (
-    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Quad} ${className}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Box} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
     </button>
   );
@@ -48,7 +48,7 @@ const Button = ({ type, clicked, title = '', className = '', href, link = '' }) 
   );
 
   let removeBtn = (
-    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Quad} ${className}`} onClick={clicked}>
+    <button className={`${s.Btn} ${s.RemoveBtn} ${s.Box} ${className}`} onClick={clicked}>
       <div className={`${s.Icon}`}><Clear /></div>
     </button>
   );
@@ -60,7 +60,7 @@ const Button = ({ type, clicked, title = '', className = '', href, link = '' }) 
   );
 
   let textBtn = (
-    <a target='_blank' href={href} className={`${s.Btn} ${s.TextBtn} ${s.Quad} ${className}`} onClick={clicked}>
+    <a target='_blank' href={href} className={`${s.Btn} ${s.TextBtn} ${s.Box} ${className}`} onClick={clicked}>
       <p className={`${s.BtnText}`}>{title}</p>
     </a>
   );

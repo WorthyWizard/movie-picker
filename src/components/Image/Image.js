@@ -1,12 +1,16 @@
 import React from 'react';
 
 import { ImagesEndpoints } from '../../common/utils';
- 
+import ImagePlaceholder from './ImagePlaceholder';
 import s from './Image.module.css';
 
 const Image = ({ path = '', type, alt = '', style = {} }) => {
   
   let src = null;
+
+  if(!path) {
+    return <ImagePlaceholder type={type} />;
+  }
 
   switch(type) {
     case 'backdrop':

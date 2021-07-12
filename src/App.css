@@ -58,7 +58,7 @@ body, input {
 
 main {
   color: var(--text-light);
-  min-height: calc(100vh - 190px);
+  min-height: calc(100vh - 90px);
 }
 
 .MuiSvgIcon-root {

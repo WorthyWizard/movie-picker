@@ -7,9 +7,7 @@ import s from './Person.module.css';
 const Person = ({ data }) => {
 
   const {  
-    profile_path, 
-    name,
-    character 
+    profile_path, name, character 
   } = data;
 
   return (

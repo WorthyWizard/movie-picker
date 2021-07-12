@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from '../../store/actions/movie';
 
+import * as actions from '../../store/actions/movie';
 import s from './MoviePage.module.css';
 import SliderBlock from '../../components/Slider/SliderBlock';
 import Person from '../../components/Person/Person';
@@ -10,7 +10,8 @@ import {
   getReleaseString,
   formatNumber,
   getFilteredCast,
-  getFilteredCrew
+  getFilteredCrew,
+  getFilteredVideos
 } from '../../common/utils';
 import Movie from '../../components/Movie/Movie';
 import FullsizeMovie from "../../components/Movie/FullsizeMovie";
@@ -20,30 +21,43 @@ import WatchProviders from '../../components/WatchProviders/WatchProviders';
 import Loader from '../../components/UI/Loader/Loader';
 
 const MoviePage = ({ match }) => {
+  
+  const movieID = match.params.id;
 
   const dispatch = useDispatch();
-  const id = match.params.id;
+  const singleMovie = useSelector((state) => state.movie.singleMovie);
+  const isLoading = useSelector((state) => state.movie.singleMovieLoading);
 
   useEffect(() => {
-    
-    dispatch(actions.getMovie(id));
-  }, [id]);
-  
-  const singleMovie = useSelector((state) => state.movie.singleMovie);
+    window.scrollTo(0, 0);
+    dispatch(actions.getMovie(movieID));
+  }, [movieID]);
 
-  if(!singleMovie) return <Loader/>;
+  if(isLoading || !singleMovie) return <Loader/>;
 
   const {
     spoken_languages, release_date, 
-    budget, revenue, credits,
+    budget, revenue, credits: {cast, crew},
     production_companies,
     images, videos,
     ['watch/providers']: providers
   } = singleMovie;
   
-  const actors = getFilteredCast(credits.cast, 10).map(person => <Person key={person.id} data={person} />);
-  const crew = getFilteredCrew(credits.crew);
+  const actors = getFilteredCast(cast).map(person => <Person key={person.id} data={person} />);
+  const filteredCrew = getFilteredCrew(crew);
   const similarMovies = singleMovie.similar.results.map((movie, i) => <Movie key={movie.id} data={movie} />);
+
+  let trailer = '';
+  const filteredVideos = getFilteredVideos(videos.results);
+  
+  if(filteredVideos.length > 0) {
+    trailer = (
+      <div className={s.TrailerWrapper}>
+        <h2 className={`main-heading`}>Trailer</h2>
+        <Video path={filteredVideos[0].key} width={1000} />
+      </div>
+    );
+  }
 
   let details = (
     <div className={`${s.DetailsWrapper} ${s.Container}`}>
@@ -76,14 +90,14 @@ const MoviePage = ({ match }) => {
           <p className={s.DetailValue}>{production_companies[0].name}</p>
         </div>
         <div className={s.Detail}>
-          <p className={s.DetailTitle}>Director{`${crew.directors.length > 1 ? 's' : ''}`}</p>
+          <p className={s.DetailTitle}>Director{`${filteredCrew.directors.length > 1 ? 's' : ''}`}</p>
           <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{`${crew.directors.join(', ')}`}</p>
+          <p className={s.DetailValue}>{`${filteredCrew.directors.join(', ')}`}</p>
         </div>
         <div className={s.Detail}>
-          <p className={s.DetailTitle}>Writer{`${crew.writers.length > 1 ? 's' : ''}`}</p>
+          <p className={s.DetailTitle}>Writer{`${filteredCrew.writers.length > 1 ? 's' : ''}`}</p>
           <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{`${crew.writers.join(', ')}`}</p>
+          <p className={s.DetailValue}>{`${filteredCrew.writers.join(', ')}`}</p>
         </div>
       </div>  
     </div>
@@ -105,11 +119,8 @@ const MoviePage = ({ match }) => {
         <div className={s.MediaWrapper}>
           <div className={s.Container}>
             <h2 className={`main-heading`}>Media</h2>
-            <Gallery images={images.backdrops} />
-            <div className={s.TrailerWrapper}>
-              <h2 className={`main-heading`}>Trailer</h2>
-              <Video path={ videos.length > 0 && videos.results[0].key ? videos.results[0].key : ''} width={1000} />
-            </div>
+            { images.backdrops && images.backdrops.length > 0 && <Gallery images={images.backdrops} /> }
+            { trailer }
           </div>
         </div>
         <WatchProviders data={providers} />
