@@ -1,22 +1,33 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import MovieControls from './MovieControls/MovieControls';
 import { 
   getYearString,
   getFilteredGenre,
-  getFilteredGenreByIDs,
-  getGenreString
+  getFilteredGenreByIDs
 } from '../../common/utils';
 import Image from '../../components/Image/Image';
 import s from './Movie.module.css';
+import * as actions from '../../store/actions/movie';
 
 const Movie = ({ data }) => {
+
+  const dispatch = useDispatch();
 
   const {  
     poster_path, vote_average, 
     title, genres, genre_ids,
-    release_date, id
+    release_date, id, overview,
+    runtime, backdrop_path
   } = data;
+
+  const watchlistData = {
+    backdrop_path, vote_average, 
+    title, genres, genre_ids,
+    release_date, id, overview,
+    runtime
+  }
 
   let genre = '';
 
@@ -40,7 +51,8 @@ const Movie = ({ data }) => {
           </div>
           <div className={s.MovieControls}>
             <MovieControls 
-              onPlayLink={`/movie/${id}`} 
+              onPlayLink={`/movie/${id}`}
+              onAddToWatchlist={() => dispatch(actions.postWatchlistMovie(watchlistData))} 
             />
           </div>
         </div>

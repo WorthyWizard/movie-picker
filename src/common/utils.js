@@ -208,3 +208,11 @@ export const getFilteredGenreByIDs = (dataArray) => {
 export const getFilteredVideos = (dataArray) => {
   return dataArray.filter(video => video.type.toLowerCase() === 'trailer' && video.site.toLowerCase() === 'youtube' && video.key)
 }
+
+export const objectToArray = (obj) => {
+  const resultArray = [];
+  for(let key in obj) {
+    resultArray.push(obj[key]);
+  }
+  return resultArray;
+}

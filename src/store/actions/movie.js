@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 import TMDB from '../../api/TMDB';
+import Database from '../../api/database';
+import { objectToArray } from '../../common/utils';
 
 export const setSingleMovie = (movie) => {
   return {
@@ -46,10 +48,35 @@ export const getMovie = (id) => {
   }
 }
 
+/*
 export const getSimilarMovies = (id, page) => {
   return dispatch => {
     TMDB.getSimilarMovies(id, page).then(response => {
       dispatch(setSimilarMovies(response.data.results));
+    })
+  }
+}
+*/
+
+export const setWatchlistMovies = (movies) => {
+  return {
+    type: actionTypes.SET_WATCHLIST_MOVIES,
+    movies
+  }
+}
+
+export const postWatchlistMovie = (data) => {
+  return dispatch => {
+    Database.postWatchlistMovie(data).then(res => {
+      console.log(res);
+    })
+  }
+}
+
+export const getWatchlistMovies = () => {
+  return dispatch => {
+    Database.getWatchlistMovies().then(res => {
+      dispatch(setWatchlistMovies(objectToArray(res.data)));
     })
   }
 }

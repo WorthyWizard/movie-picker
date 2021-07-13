@@ -17,10 +17,6 @@ const setSingleMovie = (state, action) => {
   return update(state, { singleMovie: action.movie })
 }
 
-const setSimilarMovies = (state, action) => {
-  return update(state, { similarMovies: action.movies })
-}
-
 const singleMovieFetchStart = (state) => {
   return update(state, { singleMovieLoading: true })
 }
@@ -33,6 +29,14 @@ const singleMovieFetchError = (state, action) => {
   return update(state, { singleMovieError: action.error })
 }
 
+const setSimilarMovies = (state, action) => {
+  return update(state, { similarMovies: action.movies })
+}
+
+const setWatchlistMovies = (state, action) => {
+  return update(state, { watchlistMovies: action.movies })
+}
+
 const movieReducer = (state = initialState, action) => {
   switch(action.type) {
     case actionTypes.SET_SINGLE_MOVIE: return setSingleMovie(state, action);
@@ -40,6 +44,7 @@ const movieReducer = (state = initialState, action) => {
     case actionTypes.SINGLE_MOVIE_FETCH_SUCCESS: return singleMovieFetchSuccess(state);
     case actionTypes.SINGLE_MOVIE_FETCH_ERROR: return singleMovieFetchError(state, action);
     case actionTypes.SET_SIMILAR_MOVIES: return setSimilarMovies(state, action);
+    case actionTypes.SET_WATCHLIST_MOVIES: return setWatchlistMovies(state, action);
     default: return state;
   }
 }

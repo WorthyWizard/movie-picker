@@ -3,19 +3,18 @@ import React from 'react';
 import {
   ImagesEndpoints,
   getGenreString, 
-  getRuntimeString,
-  getMovieCertification
+  getRuntimeString
 } from '../../common/utils';
 import Button from '../UI/Button/Button';
 import s from './WatchlistMovie.module.css';
 
-const WatchlistMovie = (props) => {
+const WatchlistMovie = ({ data }) => {
 
   const { 
     backdrop_path, vote_average,
     title, genres, runtime, id,
-    overview, release_dates
-  } = props.data;
+    overview
+  } = data;
 
   return (
     <article className={s.WatchlistMovie} style={{ background: `url(${ImagesEndpoints.backdrop + backdrop_path})` }}>
@@ -28,7 +27,6 @@ const WatchlistMovie = (props) => {
           <div className={s.MovieFactsWrapper}>
             <div className={s.MovieGenre}>{getGenreString(genres)}</div>
             <div className={s.MovieRuntime}>{getRuntimeString(runtime)}</div>
-            <div className={s.MoviePG}>{getMovieCertification(release_dates.results)}</div>
           </div>
           <p className={s.MovieOverview}>{overview}</p>
         </div>
