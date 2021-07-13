@@ -12,7 +12,9 @@ let config = {
   },
   devServer: {
     overlay: true,
-    port: 3000
+    port: 3000,
+    hot: true,
+    historyApiFallback: true
   },
   module: {
     rules: [

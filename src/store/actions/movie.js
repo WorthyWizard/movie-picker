@@ -65,18 +65,52 @@ export const setWatchlistMovies = (movies) => {
   }
 }
 
+export const setWatchlistMovie = (movie) => {
+  return {
+    type: actionTypes.SET_WATCHLIST_MOVIE,
+    movie
+  }
+}
+
 export const postWatchlistMovie = (data) => {
   return dispatch => {
     Database.postWatchlistMovie(data).then(res => {
-      console.log(res);
-    })
+      dispatch(setWatchlistMovie({
+        ...data,
+        dbID: res.data.name
+      }))
+    });
   }
 }
 
 export const getWatchlistMovies = () => {
   return dispatch => {
-    Database.getWatchlistMovies().then(res => {
-      dispatch(setWatchlistMovies(objectToArray(res.data)));
+    // Database.getWatchlistMovies().then(res => {
+    //   const data = [];
+    //   for(let key in res.data) {
+    //     data.push({
+    //       ...res.data[key],
+    //       dbID: key
+    //     });
+    //   }
+    //   dispatch(setWatchlistMovies(data));
+    // })
+  }
+}
+
+export const removeWatchlistMovie = (dbID) => {
+  return {
+    type: actionTypes.DELETE_WATCHLIST_MOVIE,
+    dbID
+  }
+}
+
+export const deleteWatchlistMovie = (id) => {
+  return dispatch => {
+    Database.deleteWatchlistMovie(id).then(res => {
+      dispatch(removeWatchlistMovie());
     })
   }
 }
+
+

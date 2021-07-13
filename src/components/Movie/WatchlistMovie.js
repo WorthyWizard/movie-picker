@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   ImagesEndpoints,
-  getGenreString, 
+  getFilteredGenre,
+  getFilteredGenreByIDs,
   getRuntimeString
 } from '../../common/utils';
 import Button from '../UI/Button/Button';
@@ -12,9 +13,17 @@ const WatchlistMovie = ({ data }) => {
 
   const { 
     backdrop_path, vote_average,
-    title, genres, runtime, id,
-    overview
+    title, genres, genre_ids, 
+    runtime, id, overview,
   } = data;
+
+  let genre = '';
+
+  if(genres) {
+    genre = getFilteredGenre(genres).join(', ');
+  } else if(genre_ids) {
+    genre = getFilteredGenreByIDs(genre_ids).join(', ');
+  }
 
   return (
     <article className={s.WatchlistMovie} style={{ background: `url(${ImagesEndpoints.backdrop + backdrop_path})` }}>
@@ -25,7 +34,7 @@ const WatchlistMovie = ({ data }) => {
         <div className={s.MovieInfo}>
           <h2 className={s.MovieTitle}>{title}</h2>
           <div className={s.MovieFactsWrapper}>
-            <div className={s.MovieGenre}>{getGenreString(genres)}</div>
+            <div className={s.MovieGenre}>{genre}</div>
             <div className={s.MovieRuntime}>{getRuntimeString(runtime)}</div>
           </div>
           <p className={s.MovieOverview}>{overview}</p>

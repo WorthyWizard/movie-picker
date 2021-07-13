@@ -20,6 +20,89 @@ export class ImagesEndpoints {
   }
 }
 
+class LocalStorage {
+  constructor() {
+    this.initialized = false;
+  }
+
+  add(data) {
+    this.checkInitialization();
+    const storageItem = this.get();
+    if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
+      const filteredItem = storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data));
+      if(filteredItem.length > 0) {
+        return;
+      } else {
+        storageItem.push(data);
+        localStorage.setItem(this.item, JSON.stringify(storageItem));
+      }
+    }
+  }
+
+  get() {
+    this.checkInitialization();
+    return JSON.parse(localStorage.getItem(this.item));
+  }
+
+  remove(data) {
+    this.checkInitialization();
+    const storageItem = this.get();
+    const filteredItem = storageItem.filter(el => JSON.stringify(el) !== JSON.stringify(data));
+    localStorage.setItem(this.item, JSON.stringify(filteredItem));
+  }
+
+  clear() {
+    this.checkInitialization();
+    localStorage.clear();
+  }
+  
+  toggle(data) {
+    this.checkInitialization();
+    const storageItem = this.get();
+    if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
+      const filteredItem = storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data));
+      if(filteredItem.length > 0) {
+        this.remove(data)
+      } else {
+        this.add(data)
+      }
+    }
+  }
+
+  has(data) {
+    this.checkInitialization();
+    const storageItem = this.get();
+    if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
+      return storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data)).length > 0;
+    }
+  }
+
+  isEmpty() {
+    const storageItem = this.get();
+    return !storageItem || storageItem.length === 0;
+  }
+
+  checkInitialization() {
+    if(!this.initialized) throw new Error('You must initialize the storage item first, call init(this.item, type) method');
+  }
+}
+
+export class LocalStorageItem extends LocalStorage {
+  constructor() {
+    super();
+  }
+
+  init(item, type = []) {
+    this.type = type;
+    this.item = item;
+    this.storageItem = JSON.parse(localStorage.getItem(this.item));
+    if(!this.initialized && !this.storageItem) {
+      localStorage.setItem(this.item, JSON.stringify(this.type));
+    }
+    this.initialized = true;
+  }
+}
+
 export const update = (oldObject, updatedProperties) => {
   return { ...oldObject, ...updatedProperties }
 } 

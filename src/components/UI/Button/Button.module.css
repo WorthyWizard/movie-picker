@@ -33,6 +33,14 @@
   border-radius: 10px;
 }
 
+.Btn.Active .Icon {
+  color: var(--accent);
+}
+
+.Btn.Active:hover {
+  background-color: var(--text-light);
+}
+
 .Btn .Title {
   transition: color 0.3s;
 }

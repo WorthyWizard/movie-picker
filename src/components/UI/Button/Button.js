@@ -5,10 +5,11 @@ import s from './Button.module.css';
 import { 
   PlayArrow, 
   Clear, 
-  FavoriteBorderOutlined 
+  Favorite,
+  FavoriteBorder 
 } from '@material-ui/icons';
 
-const Button = ({ type, clicked, title = '', className = '', href, link = '' }) => {
+const Button = ({ type, clicked, title = '', className = '', href, link = '', isActive = false }) => {
 
   let watchBtn = (
     <button className={`${s.Btn} ${s.WatchBtn} ${className}`} onClick={clicked}>
@@ -21,7 +22,7 @@ const Button = ({ type, clicked, title = '', className = '', href, link = '' }) 
 
   let watchlistBtn = (
     <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Box} ${className}`} onClick={clicked}>
-      <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
+      <div className={`${s.Icon}`}><FavoriteBorder /></div>
     </button>
   );
 
@@ -42,8 +43,8 @@ const Button = ({ type, clicked, title = '', className = '', href, link = '' }) 
   );
 
   let watchlistBtnRound = (
-    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Round} ${className}`} onClick={clicked}>
-      <div className={`${s.Icon}`}><FavoriteBorderOutlined /></div>
+    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Round} ${className} ${isActive ? s.Active : ''}`} onClick={clicked}>
+      <div className={`${s.Icon}`}>{ isActive ? <Favorite/> : <FavoriteBorder /> }</div>
     </button>
   );
 

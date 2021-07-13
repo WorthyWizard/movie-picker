@@ -7,7 +7,7 @@ let initialState = {
   singleMovieError: null,
   similarMovies: null,
   recommendedMovies: null,
-  watchlistMovies: null,
+  watchlistMovies: [],
   trendingMovies: null,
   topRatedMovies: null,
   searchMovies: null
@@ -33,6 +33,10 @@ const setSimilarMovies = (state, action) => {
   return update(state, { similarMovies: action.movies })
 }
 
+const setWatchlistMovie = (state, action) => {
+  return update(state, { watchlistMovies: [...state.watchlistMovies, action.movie] })
+}
+
 const setWatchlistMovies = (state, action) => {
   return update(state, { watchlistMovies: action.movies })
 }
@@ -44,6 +48,7 @@ const movieReducer = (state = initialState, action) => {
     case actionTypes.SINGLE_MOVIE_FETCH_SUCCESS: return singleMovieFetchSuccess(state);
     case actionTypes.SINGLE_MOVIE_FETCH_ERROR: return singleMovieFetchError(state, action);
     case actionTypes.SET_SIMILAR_MOVIES: return setSimilarMovies(state, action);
+    case actionTypes.SET_WATCHLIST_MOVIE: return setWatchlistMovie(state, action);
     case actionTypes.SET_WATCHLIST_MOVIES: return setWatchlistMovies(state, action);
     default: return state;
   }

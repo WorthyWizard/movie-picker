@@ -1,8 +1,9 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MovieControls from './MovieControls/MovieControls';
-import { 
+import {
+  LocalStorageItem, 
   getYearString,
   getFilteredGenre,
   getFilteredGenreByIDs
@@ -13,14 +14,19 @@ import * as actions from '../../store/actions/movie';
 
 const Movie = ({ data }) => {
 
-  const dispatch = useDispatch();
-
   const {  
     poster_path, vote_average, 
     title, genres, genre_ids,
     release_date, id, overview,
     runtime, backdrop_path
   } = data;
+
+  const ls = new LocalStorageItem();
+  ls.init('watchlistMovies', []);
+
+  const dispatch = useDispatch();
+  const [hasItem, setHasItem] = useState(ls.has(id));
+  const watchlistMovies = useSelector((state) => state.movie.watchlistMovies);
 
   const watchlistData = {
     backdrop_path, vote_average, 
@@ -33,9 +39,22 @@ const Movie = ({ data }) => {
 
   if(genres) {
     genre = getFilteredGenre(genres).slice(0, 2).join(', ');
-  }
-  if(genre_ids) {
+  } else if(genre_ids) {
     genre = getFilteredGenreByIDs(genre_ids).slice(0, 2).join(', ');
+  }
+
+  const postWatchlistMovie = (data) => {
+    ls.toggle(id);
+    const hasItem = ls.has(id);
+    setHasItem(hasItem);
+    if(hasItem) {
+      dispatch(actions.postWatchlistMovie(data))
+    } else {
+      const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
+      if(filteredMovie.length > 0) {
+        dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID))
+      }
+    }
   }
 
   return (
@@ -52,7 +71,8 @@ const Movie = ({ data }) => {
           <div className={s.MovieControls}>
             <MovieControls 
               onPlayLink={`/movie/${id}`}
-              onAddToWatchlist={() => dispatch(actions.postWatchlistMovie(watchlistData))} 
+              onAddToWatchlist={() => postWatchlistMovie(watchlistData)} 
+              addToWatchlistActive={hasItem}
             />
           </div>
         </div>
