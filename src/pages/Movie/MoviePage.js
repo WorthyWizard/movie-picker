@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 
-import * as actions from '../../store/actions/movie';
+import * as actions from '../../store/actions';
 import s from './MoviePage.module.css';
 import SliderBlock from '../../components/Slider/SliderBlock';
 import Person from '../../components/Person/Person';
@@ -25,8 +25,8 @@ const MoviePage = ({ match }) => {
   const movieID = match.params.id;
 
   const dispatch = useDispatch();
-  const singleMovie = useSelector((state) => state.movie.singleMovie);
-  const isLoading = useSelector((state) => state.movie.singleMovieLoading);
+  const singleMovie = useSelector(state => state.singleMovie.movie);
+  const isLoading = useSelector(state => state.singleMovie.isLoading);
 
   useEffect(() => {
     window.scrollTo(0, 0);

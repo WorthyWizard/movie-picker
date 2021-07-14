@@ -21,12 +21,7 @@ export class ImagesEndpoints {
 }
 
 class LocalStorage {
-  constructor() {
-    this.initialized = false;
-  }
-
   add(data) {
-    this.checkInitialization();
     const storageItem = this.get();
     if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
       const filteredItem = storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data));
@@ -40,24 +35,21 @@ class LocalStorage {
   }
 
   get() {
-    this.checkInitialization();
-    return JSON.parse(localStorage.getItem(this.item));
+    return JSON.parse(localStorage.getItem(this.item))
   }
 
   remove(data) {
-    this.checkInitialization();
     const storageItem = this.get();
-    const filteredItem = storageItem.filter(el => JSON.stringify(el) !== JSON.stringify(data));
-    localStorage.setItem(this.item, JSON.stringify(filteredItem));
+    const filteredItems = storageItem.filter(el => JSON.stringify(el) !== JSON.stringify(data));
+    console.log(filteredItems);
+    localStorage.setItem(this.item, JSON.stringify(filteredItems));
   }
 
   clear() {
-    this.checkInitialization();
     localStorage.clear();
   }
   
   toggle(data) {
-    this.checkInitialization();
     const storageItem = this.get();
     if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
       const filteredItem = storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data));
@@ -70,7 +62,6 @@ class LocalStorage {
   }
 
   has(data) {
-    this.checkInitialization();
     const storageItem = this.get();
     if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
       return storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data)).length > 0;
@@ -82,24 +73,44 @@ class LocalStorage {
     return !storageItem || storageItem.length === 0;
   }
 
-  checkInitialization() {
-    if(!this.initialized) throw new Error('You must initialize the storage item first, call init(this.item, type) method');
+  validation(item, type) {
+
+    if(!item && !type) {
+      throw new Error('You must create the storage item first, call create(item, type) method');
+    }
+
+    switch(true) {
+      case !item:
+        throw new Error('Local storage item must not be empty');
+      case typeof item !== 'string':
+        throw new Error('Local storage item must have name which is type of "string"');
+    }
+
+    switch(true) {
+      case type === 'empty':
+        throw new Error('Local storage type must be specified and not be empty. This are allowed types: [], {}, empty string and numbers.');
+      case typeof type === 'string' && type.trim() === '':
+        this.type = '';
+      case type === null || type === undefined || (typeof type !== 'object' && typeof type !== 'number') || typeof type === 'string':
+        throw new Error('Local storage has got a wrong type value. This are allowed types: [], {}, "" and numbers.');
+      default:
+        this.type = JSON.stringify(type);
+    }
+
   }
 }
 
 export class LocalStorageItem extends LocalStorage {
-  constructor() {
+  constructor(item, type = 'empty') {
     super();
-  }
-
-  init(item, type = []) {
-    this.type = type;
     this.item = item;
-    this.storageItem = JSON.parse(localStorage.getItem(this.item));
-    if(!this.initialized && !this.storageItem) {
-      localStorage.setItem(this.item, JSON.stringify(this.type));
+    this.type = type;
+    this.validation(this.item, this.type);
+
+    const storageItem = this.get();
+    if(!storageItem) {
+      localStorage.setItem(this.item, this.type);
     }
-    this.initialized = true;
   }
 }
 

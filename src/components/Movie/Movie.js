@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MovieControls from './MovieControls/MovieControls';
 import {
-  LocalStorageItem, 
   getYearString,
   getFilteredGenre,
   getFilteredGenreByIDs
 } from '../../common/utils';
 import Image from '../../components/Image/Image';
 import s from './Movie.module.css';
-import * as actions from '../../store/actions/movie';
+import * as actions from '../../store/actions';
+import { LocalStorageContext } from '../../context/localStorage';
 
 const Movie = ({ data }) => {
 
@@ -21,12 +21,11 @@ const Movie = ({ data }) => {
     runtime, backdrop_path
   } = data;
 
-  const ls = new LocalStorageItem();
-  ls.init('watchlistMovies', []);
-
+  const { watchlist } = useContext(LocalStorageContext);
   const dispatch = useDispatch();
-  const [hasItem, setHasItem] = useState(ls.has(id));
-  const watchlistMovies = useSelector((state) => state.movie.watchlistMovies);
+  const [isBtnActive, setIsBtnActive] = useState(watchlist.has(id));
+  const watchlistMovies = useSelector(state => state.watchlist.movies);
+  const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
 
   const watchlistData = {
     backdrop_path, vote_average, 
@@ -44,15 +43,15 @@ const Movie = ({ data }) => {
   }
 
   const postWatchlistMovie = (data) => {
-    ls.toggle(id);
-    const hasItem = ls.has(id);
-    setHasItem(hasItem);
-    if(hasItem) {
-      dispatch(actions.postWatchlistMovie(data))
-    } else {
-      const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
-      if(filteredMovie.length > 0) {
-        dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID))
+    if(!isMovieLoading) {
+      const hasItem = watchlist.has(id);
+      if(!hasItem) {
+        dispatch(actions.postWatchlistMovie(data, watchlist, setIsBtnActive))
+      } else {
+        const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
+        if(filteredMovie.length > 0) {
+          dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID, watchlist, setIsBtnActive))
+        }
       }
     }
   }
@@ -72,7 +71,7 @@ const Movie = ({ data }) => {
             <MovieControls 
               onPlayLink={`/movie/${id}`}
               onAddToWatchlist={() => postWatchlistMovie(watchlistData)} 
-              addToWatchlistActive={hasItem}
+              addToWatchlistActive={isBtnActive}
             />
           </div>
         </div>
