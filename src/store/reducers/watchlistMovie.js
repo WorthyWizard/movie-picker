@@ -1,7 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
 import { update } from '../../common/utils';
-import { LocalStorageItem } from '../../common/utils';
-
 let initialState = {
   movies: [],
   isLoading: false,
@@ -19,7 +17,6 @@ const setMovies = (state, action) => {
 }
 
 const deleteWatchlistMovie = (state, action) => {
-  console.log(state.movies);
   const newMovies = state.movies.filter(movie => movie.dbID !== action.dbID)
   return update(state, { movies: [...newMovies] })
 }

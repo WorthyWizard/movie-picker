@@ -3,13 +3,6 @@ import * as actionTypes from './actionTypes';
 import TMDB from '../../api/TMDB';
 import Database from '../../api/database';
 
-const setWatchlistMovie = (movie) => {
-  return {
-    type: actionTypes.SET_WATCHLIST_MOVIE,
-    movie
-  }
-}
-
 const watchlistMoviePostStart = () => {
   return {
     type: actionTypes.WATCHLIST_MOVIE_POST_START,
@@ -63,6 +56,20 @@ const moviesFetchFail = (error) => {
   }
 }
 
+const setWatchlistMovie = (movie) => {
+  return {
+    type: actionTypes.SET_WATCHLIST_MOVIE,
+    movie
+  }
+}
+
+const setWatchlistMovies = (movies) => {
+  return {
+    type: actionTypes.SET_WATCHLIST_MOVIES,
+    movies
+  }
+}
+
 export const getWatchlistMovies = () => {
   return dispatch => {
     dispatch(moviesFetchStart());
@@ -90,12 +97,12 @@ const removeWatchlistMovie = (dbID) => {
   }
 }
 
-export const deleteWatchlistMovie = (id, watchlist, setIsBtnActive) => {
+export const deleteWatchlistMovie = (dbID, movieID, watchlist, setIsBtnActive) => {
   return dispatch => {
-    Database.deleteWatchlistMovie(id).then(res => {
-      watchlist.remove(id);
+    Database.deleteWatchlistMovie(dbID).then(res => {
+      watchlist.remove(movieID);
       setIsBtnActive(false);
-      dispatch(removeWatchlistMovie(id));
+      dispatch(removeWatchlistMovie(dbID));
     })
   }
 }

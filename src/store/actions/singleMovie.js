@@ -30,8 +30,8 @@ const singleMovieFetchError = (error) => {
 export const getMovie = (id) => {
   return dispatch => {
     dispatch(singleMovieFetchStart());
-    TMDB.getFullMovieData(id).then(response => {
-      dispatch(setSingleMovie(response.data));
+    TMDB.getMovieFullData(id).then(data => {
+      dispatch(setSingleMovie(data));
       dispatch(singleMovieFetchSuccess());
     }).catch(error => {
       dispatch(singleMovieFetchError(error));

@@ -8,8 +8,8 @@ const Search = ({ onSearch }) => {
   const [searchText, onSearchTextChange] = useState('');
 
   useEffect(() => {
-    if(searchText.length >= 3) {
-      console.log(searchText);
+    if(searchText && searchText.length >= 3) {
+      
     }
   }, [searchText])
 

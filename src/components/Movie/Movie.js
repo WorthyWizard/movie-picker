@@ -21,8 +21,8 @@ const Movie = ({ data }) => {
     runtime, backdrop_path
   } = data;
 
-  const { watchlist } = useContext(LocalStorageContext);
   const dispatch = useDispatch();
+  const { watchlist } = useContext(LocalStorageContext);
   const [isBtnActive, setIsBtnActive] = useState(watchlist.has(id));
   const watchlistMovies = useSelector(state => state.watchlist.movies);
   const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
@@ -46,11 +46,11 @@ const Movie = ({ data }) => {
     if(!isMovieLoading) {
       const hasItem = watchlist.has(id);
       if(!hasItem) {
-        dispatch(actions.postWatchlistMovie(data, watchlist, setIsBtnActive))
+        dispatch(actions.postWatchlistMovie(data, watchlist, setIsBtnActive));
       } else {
         const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
         if(filteredMovie.length > 0) {
-          dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID, watchlist, setIsBtnActive))
+          dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID, id, watchlist, setIsBtnActive));
         }
       }
     }

@@ -12,8 +12,6 @@ import watchlistReducer from "./store/reducers/watchlistMovie";
 
 import App from "./App";
 import LocalStorageProvider from './context/localStorage';
-import "./index.css";
-
 
 const rootReducer = combineReducers({
   movie: movieReducer,

@@ -5,7 +5,7 @@ import s from './WatchlistPage.module.css';
 import Hero from '../../components/Hero/Hero';
 import WatchlistMovie from '../../components/Movie/WatchlistMovie';
 import * as actions from '../../store/actions';
-import Loader from "../../components/UI/Loader/Loader";
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const WatchlistPage = () => {
 
@@ -17,16 +17,33 @@ const WatchlistPage = () => {
     dispatch(actions.getWatchlistMovies());
   }, [dispatch]);
 
-  // if(isLoading && watchlistMovies.length !== 0) return <Loader />;
-
+  let content = null;
   const movies = watchlistMovies.map(movie => <WatchlistMovie key={movie.id} data={movie} />);
+
+  if(isLoading) {
+    content = <Spinner />;
+  } else {
+    content = (
+      <div className={s.WatchlistContent}>
+        {movies}
+      </div>
+    );
+  }
+
+  // if(!isLoading && watchlistMovies.length > 0) {
+  //   content = (
+  //     <div className={s.WatchlistContent}>
+  //       {movies}
+  //     </div>
+  //   );
+  // } else {
+  //   content = <Spinner />;
+  // }
 
   return (
     <div className={s.WatchlistPage}>
       <Hero text='Your nice watchlist, enjoy!'/>
-      <div className={s.WatchlistContent}>
-        {movies}
-      </div>
+      {content}
     </div>
   );
 };
