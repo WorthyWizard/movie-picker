@@ -6,9 +6,13 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 
-import movieReducer from "./store/reducers/movie";
+import movieReducer from "./store/reducers/movies";
 import singleMovieReducer from "./store/reducers/singleMovie";
-import watchlistReducer from "./store/reducers/watchlistMovie";
+import watchlistReducer from "./store/reducers/watchlist";
+import searchReducer from "./store/reducers/search";
+import recommendedReducer from "./store/reducers/recommended";
+import popularReducer from "./store/reducers/popular";
+import topRatedReducer from "./store/reducers/topRated";
 
 import App from "./App";
 import LocalStorageProvider from './context/localStorage';
@@ -16,14 +20,22 @@ import LocalStorageProvider from './context/localStorage';
 const rootReducer = combineReducers({
   movie: movieReducer,
   singleMovie: singleMovieReducer,
-  watchlist: watchlistReducer
+  watchlist: watchlistReducer,
+  search: searchReducer,
+  recommended: recommendedReducer,
+  popular: popularReducer,
+  topRated: topRatedReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const middleware = process.env.NODE_ENV !== 'production' ? 
+  [require('redux-immutable-state-invariant').default(), thunk] : 
+  [thunk];
+
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(...middleware))
 );
 
 const application = (

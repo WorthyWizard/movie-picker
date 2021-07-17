@@ -16,7 +16,7 @@
 }
 
 .MoviePage {
-  background-color: var(--darker);
+  background: linear-gradient(180deg, var(--darker) 0%, rgba(82,0,223,0.2) 50%, var(--dark) 100%);
 }
 
 .MoviePage .FullsizeMovieInner {

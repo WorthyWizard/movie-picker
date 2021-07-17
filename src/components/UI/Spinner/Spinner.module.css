@@ -1,7 +1,6 @@
 .Spinner {
   width: 100%;
-  height: calc(100vh - 90px);
-  background-color: var(--dark);
+  height: 300px;
 }
 
 .SpinnerInner {

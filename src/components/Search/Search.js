@@ -9,7 +9,12 @@ const Search = ({ onSearch }) => {
 
   useEffect(() => {
     if(searchText && searchText.length >= 3) {
-      
+      onSearch(searchText);
+    }
+    return () => {
+      if(timeout) {
+        clearTimeout(timeout);
+      }
     }
   }, [searchText])
 
@@ -17,14 +22,14 @@ const Search = ({ onSearch }) => {
     if(timeout) {
       clearTimeout(timeout);
     }
-    timeout = setTimeout(() => onSearchTextChange(text), 700);
+    timeout = setTimeout(() => onSearchTextChange(text.toLowerCase()), 700);
   }
 
   return (
     <div className={s.SearchInputWrapper}>
       <input 
         type="text" 
-        placeholder="Movie title"
+        placeholder="Type at least 3 characters"
         onChange={(e) => setTextWithTimeout(e.target.value)}
       ></input>
     </div>

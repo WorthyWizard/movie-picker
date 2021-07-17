@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import * as actionTypes from './actionTypes';
-import TMDB from '../../api/TMDB';
 import Database from '../../api/database';
 
 const watchlistMoviePostStart = () => {
@@ -19,6 +17,13 @@ const watchlistMoviePostFail = (error) => {
   return {
     type: actionTypes.WATCHLIST_MOVIE_POST_FAIL,
     error
+  }
+}
+
+const setWatchlistMovie = (movie) => {
+  return {
+    type: actionTypes.SET_WATCHLIST_MOVIE,
+    movie
   }
 }
 
@@ -53,13 +58,6 @@ const moviesFetchFail = (error) => {
   return {
     type: actionTypes.WATCHLIST_MOVIES_FETCH_FAIL,
     error
-  }
-}
-
-const setWatchlistMovie = (movie) => {
-  return {
-    type: actionTypes.SET_WATCHLIST_MOVIE,
-    movie
   }
 }
 

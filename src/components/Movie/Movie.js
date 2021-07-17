@@ -18,7 +18,7 @@ const Movie = ({ data }) => {
     poster_path, vote_average, 
     title, genres, genre_ids,
     release_date, id, overview,
-    runtime, backdrop_path
+    backdrop_path
   } = data;
 
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const Movie = ({ data }) => {
   const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
 
   const watchlistData = {
-    backdrop_path, vote_average, 
-    title, genres, genre_ids,
-    release_date, id, overview,
-    runtime
+    poster_path, backdrop_path, 
+    vote_average, title, genres, 
+    genre_ids, release_date, id, 
+    overview
   }
 
   let genre = '';
@@ -77,9 +77,10 @@ const Movie = ({ data }) => {
         </div>
         <h3 className={s.MovieTitle}>{title}</h3>
         <div className={s.MovieFactsWrapper}>
-          <div className={s.MovieGenre}>{genre}</div>
-          <div className={s.DotDivider}></div>
-          <div className={s.MovieDate}>{getYearString(release_date)}</div>
+          { genre && <div className={s.MovieGenre}>{genre}</div> }
+          { genre && <div className={s.DotDivider}></div> }
+          { release_date &&
+            <div className={s.MovieDate}>{getYearString(release_date)}</div> }
         </div>
       </div>
     </article>

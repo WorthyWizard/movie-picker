@@ -11,7 +11,9 @@ import {
   formatNumber,
   getFilteredCast,
   getFilteredCrew,
-  getFilteredVideos
+  getFilteredVideos,
+  getFilteredCompanies,
+  getFilteredMovies
 } from '../../common/utils';
 import Movie from '../../components/Movie/Movie';
 import FullsizeMovie from "../../components/Movie/FullsizeMovie";
@@ -19,6 +21,18 @@ import Gallery from "../../components/Gallery/Gallery";
 import Video from '../../components/Video/Video';
 import WatchProviders from '../../components/WatchProviders/WatchProviders';
 import Loader from '../../components/UI/Loader/Loader';
+
+const MovieDetail = ({ title, value }) => {
+  return (
+    <div className={s.Detail}>
+      <div className={s.DetailTitleWrapper}>
+        <p className={s.DetailTitle}>{title}</p>
+        <div className={s.DotDivider}></div>
+      </div>
+      <p className={s.DetailValue}>{value}</p>
+    </div>
+  );
+}
 
 const MoviePage = ({ match }) => {
   
@@ -39,13 +53,14 @@ const MoviePage = ({ match }) => {
     spoken_languages, release_date, 
     budget, revenue, credits: {cast, crew},
     production_companies,
-    images, videos,
+    images, videos, similar,
     ['watch/providers']: providers
   } = singleMovie;
   
   const actors = getFilteredCast(cast).map(person => <Person key={person.id} data={person} />);
   const filteredCrew = getFilteredCrew(crew);
-  const similarMovies = singleMovie.similar.results.map((movie, i) => <Movie key={movie.id} data={movie} />);
+  const filteredSimilar = getFilteredMovies(similar.results);
+  const similarMovies = filteredSimilar.map(movie => <Movie key={movie.id} data={movie} />);
 
   let trailer = '';
   const filteredVideos = getFilteredVideos(videos.results);
@@ -59,46 +74,46 @@ const MoviePage = ({ match }) => {
     );
   }
 
-  let details = (
+  const details = (
     <div className={`${s.DetailsWrapper} ${s.Container}`}>
       <div className={s.Column}>
-        <div className={s.Detail}>
-          <p className={s.DetailTitle}>Languages</p>
-          <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{getLanguageString(spoken_languages)}</p>
-        </div>
-        <div className={s.Detail}>
-          <p className={s.DetailTitle}>Release</p>
-          <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{getReleaseString(release_date)}</p>
-        </div>
-        <div className={s.Detail}>
-          <p className={s.DetailTitle}>Budget</p>
-          <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{`${formatNumber(budget, ' ')}$`}</p>
-        </div>
-        <div className={s.Detail}>
-          <p className={s.DetailTitle}>Revenue</p>
-          <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{`${formatNumber(revenue, ' ')}$`}</p>
-        </div>
+        { spoken_languages.length > 0 &&
+        <MovieDetail 
+          title='Languages' 
+          value={getLanguageString(spoken_languages)} 
+        /> }
+        { release_date &&
+        <MovieDetail 
+          title='Release' 
+          value={getReleaseString(release_date)} 
+        /> }
+        { budget > 0 &&
+        <MovieDetail 
+          title='Budget' 
+          value={`${formatNumber(budget, ' ')}$`} 
+        /> }
+        { revenue > 0 &&
+        <MovieDetail 
+          title='Revenue' 
+          value={`${formatNumber(revenue, ' ')}$`} 
+        /> }
       </div>
       <div className={s.Column}>
-        <div className={s.Detail}>
-          <p className={s.DetailTitle}>Company</p>
-          <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{production_companies[0].name}</p>
-        </div>
-        <div className={s.Detail}>
-          <p className={s.DetailTitle}>Director{`${filteredCrew.directors.length > 1 ? 's' : ''}`}</p>
-          <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{`${filteredCrew.directors.join(', ')}`}</p>
-        </div>
-        <div className={s.Detail}>
-          <p className={s.DetailTitle}>Writer{`${filteredCrew.writers.length > 1 ? 's' : ''}`}</p>
-          <div className={s.DotDivider}></div>
-          <p className={s.DetailValue}>{`${filteredCrew.writers.join(', ')}`}</p>
-        </div>
+        { production_companies.length > 0 && 
+        <MovieDetail 
+          title='Company' 
+          value={getFilteredCompanies(production_companies).slice(0, 2).join(', ')} 
+        /> }
+        { filteredCrew.directors.length > 0 &&
+        <MovieDetail 
+          title={`Director${filteredCrew.directors.length > 1 ? 's' : ''}`} 
+          value={`${filteredCrew.directors.join(', ')}`} 
+        /> }
+        { filteredCrew.writers.length > 0 &&
+        <MovieDetail 
+          title={`Writer${filteredCrew.writers.length > 1 ? 's' : ''}`} 
+          value={`${filteredCrew.writers.join(', ')}`} 
+        /> }
       </div>  
     </div>
   );
@@ -108,7 +123,7 @@ const MoviePage = ({ match }) => {
       <FullsizeMovie data={singleMovie} type='movie-page' />
       <section className={`${s.DetailsBlock}`}>
         <h2 className={`main-heading`}>Details</h2>
-        {details}
+        { details }
         <SliderBlock 
           id={1} 
           className={s.Container}

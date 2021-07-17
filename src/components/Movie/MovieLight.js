@@ -7,10 +7,7 @@ import s from './Movie.module.css';
 
 const MovieLight = ({ data }) => {
 
-  const {
-    poster_path, 
-    title, id
-  } = data;
+  const { poster_path, title, id } = data;
 
   return (
     <article className={s.Movie}>

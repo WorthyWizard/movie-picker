@@ -20,7 +20,7 @@ const Slider = ({ data, id, slidesPerView = 5 }) => {
           nextEl: `#${s.SliderNext}-${id}`,
         }}
       >
-        { data.map(((slide, i) => <SwiperSlide key={slide.id || `slide-${i}`}>{slide}</SwiperSlide>)) }
+        { data.map((slide, i) => <SwiperSlide key={slide.id || `slide-${i}`}>{slide}</SwiperSlide>) }
       </Swiper>
       <div id={`${s.SliderPrev}-${id}`} className={`swiper-button-prev ${s.SliderPrev}`}></div>
       <div id={`${s.SliderNext}-${id}`} className={`swiper-button-next ${s.SliderNext}`}></div>

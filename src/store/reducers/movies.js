@@ -1,12 +1,14 @@
 import * as actionTypes from '../actions/actionTypes';
 import { update } from '../../common/utils';
-import { LocalStorageItem } from '../../common/utils';
 
 let initialState = {
+  latest: null,
   similar: [],
   recommended: [],
   trending: [],
-  topRated: []
+  topRated: [],
+  upcoming: [],
+  nowPlaying: []
 }
 
 const setSimilar = (state, action) => {

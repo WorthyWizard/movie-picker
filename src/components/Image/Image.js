@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ImagesEndpoints } from '../../common/utils';
 import ImagePlaceholder from './ImagePlaceholder';
 import s from './Image.module.css';
 
 const Image = ({ path = '', type, alt = '', style = {} }) => {
+
+  const [ isLoaded, setIsLoaded ] = useState(false);
   
   let src = null;
 
@@ -28,8 +30,13 @@ const Image = ({ path = '', type, alt = '', style = {} }) => {
     default:
       src = path;
   }
-
-  return <img className={s.Image} src={src} alt={alt} style={{...style}} draggable='false' />;
+  
+  return (
+    <>
+      { !isLoaded && <div className={s.ImagePreloader}><div></div></div> }
+      <img className={s.Image} onLoad={() => setIsLoaded(true)} src={src} alt={alt} style={{...style}} draggable='false' />
+    </>
+  );
 };
 
 export default Image;

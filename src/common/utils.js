@@ -118,7 +118,6 @@ export const update = (oldObject, updatedProperties) => {
   return { ...oldObject, ...updatedProperties }
 } 
 
-
 export const getFilteredGenre = (genres) => genres.map(genre => genre.name);
 
 export const getGenreString = (genres) => genres.map(genre => genre.name).join(', ');
@@ -310,3 +309,9 @@ export const objectToArray = (obj) => {
   }
   return resultArray;
 }
+
+export const getFilteredMovies = (dataArray) => {
+  return dataArray.filter(movie => !movie.adult);
+}
+
+export const getFilteredCompanies = (companies) => companies.map(company => company.name);

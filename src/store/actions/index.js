@@ -1,6 +1,6 @@
 export {
   
-} from './movie';
+} from './movies';
 
 export {
   getMovie
@@ -10,4 +10,21 @@ export {
   postWatchlistMovie,
   getWatchlistMovies,
   deleteWatchlistMovie
-} from './watchlistMovie';
+} from './watchlist';
+
+export {
+  searchMovies
+} from './search';
+
+export {
+  getRecommendedMovies
+} from './recommended';
+
+export {
+  getPopularMovies
+} from './popular';
+
+export {
+  getTopRatedMovies
+} from './topRated';
+

@@ -13,6 +13,11 @@ const Gallery = ({ images }) => {
   switch(length) {
     case 1:
       filteredImages = <Image path={images[0].file_path} type='backdrop' />;
+      styles = {
+        gridTemplateColumns: 'unset',
+        gridTemplateRows: 'unset',
+        gridTemplateAreas: "unset"
+      }
       break;
     case 2:
       styles = {

@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import s from './DiscoverPage.module.css';
 import Movie from '../../components/Movie/Movie';
 import SliderBlock from '../../components/Slider/SliderBlock';
 import background from '../../assets/Hero-image.jpg';
+import * as actions from '../../store/actions';
 
 import Hero from '../../components/Hero/Hero';
 
-import { getMoviesSample } from '../../common/moviesSample';
+const DiscoverPage = () => {
 
-const DiscoverPage = ({ }) => {
-  
-  const movies = getMoviesSample().map((movie, i) => <Movie key={movie.id + `-${i}`} data={movie} />);
+  const dispatch = useDispatch();
+  const popular = useSelector(state => state.popular.movies);
+  const isPopularLoading = useSelector(state => state.popular.isLoading);
+  const topRated = useSelector(state => state.topRated.movies);
+  const isTopRatedLoading = useSelector(state => state.topRated.isLoading);
+
+  useEffect(() => {
+    dispatch(actions.getPopularMovies());
+    dispatch(actions.getTopRatedMovies());
+  }, [dispatch]);
+
+  const popularMovies = popular.map(movie => <Movie key={movie.id} data={movie} />);
+  const topRatedMovies = topRated.map(movie => <Movie key={movie.id} data={movie} />);
 
   return (
     <div className={s.Homepage}>
@@ -19,13 +31,15 @@ const DiscoverPage = ({ }) => {
       <SliderBlock 
         id={1} 
         title='Check out this trending titles' 
-        data={movies} 
+        data={popularMovies}
+        isLoading={isPopularLoading} 
       />
       <SliderBlock 
         id={2} 
         className={s.WatchlistBlock}
         title='Top rated movies just for you'
-        data={movies}
+        data={topRatedMovies}
+        isLoading={isTopRatedLoading} 
       />
     </div>
   );

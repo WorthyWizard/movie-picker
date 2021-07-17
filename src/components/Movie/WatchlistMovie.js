@@ -13,8 +13,8 @@ const WatchlistMovie = ({ data }) => {
 
   const { 
     backdrop_path, vote_average,
-    title, genres, genre_ids, 
-    runtime, id, overview,
+    title, genres, genre_ids, id, 
+    overview,
   } = data;
 
   let genre = '';
@@ -35,7 +35,6 @@ const WatchlistMovie = ({ data }) => {
           <h2 className={s.MovieTitle}>{title}</h2>
           <div className={s.MovieFactsWrapper}>
             <div className={s.MovieGenre}>{genre}</div>
-            <div className={s.MovieRuntime}>{getRuntimeString(runtime)}</div>
           </div>
           <p className={s.MovieOverview}>{overview}</p>
         </div>

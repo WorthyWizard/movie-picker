@@ -44,6 +44,7 @@ const WatchProviders = ({ data }) => {
         { providersData.rent && providersData.rent.length > 0 ? <ProvidingType title='Rent' data={providersData.rent} /> : ''}
         { providersData.buy && providersData.buy.length > 0 ? <ProvidingType title='Buy' data={providersData.buy} /> : ''}
         { providersData.flatrate && providersData.flatrate.length > 0 ? <ProvidingType title='Stream' data={providersData.flatrate} /> : ''}
+        { providersData.flatrate_and_buy && providersData.flatrate_and_buy.length > 0 ? <ProvidingType title='Stream and buy' data={providersData.flatrate_and_buy} /> : ''}
         <div className={s.ButtonWrapper}>
           <Button href={providersData.link} type='text' title='Pick Provider' className={s.PickBtn} />
         </div>

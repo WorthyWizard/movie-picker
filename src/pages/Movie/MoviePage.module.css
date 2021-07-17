@@ -24,8 +24,13 @@
 
 .Detail {
   display: flex;
-  align-items: center;
   margin-bottom: 20px;
+}
+
+.DetailTitleWrapper {
+  height: fit-content;
+  display: flex;
+  align-items: center;
 }
 
 .DetailTitle {
