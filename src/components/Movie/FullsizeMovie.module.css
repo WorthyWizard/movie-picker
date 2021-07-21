@@ -16,7 +16,8 @@
 }
 
 .MoviePage {
-  background: linear-gradient(180deg, var(--darker) 0%, rgba(82,0,223,0.2) 50%, var(--dark) 100%);
+  
+  transition: all 1s;
 }
 
 .MoviePage .FullsizeMovieInner {
@@ -143,4 +144,20 @@
 
 .MoviePage .DarkBackdrop {
   display: none;
+}
+
+.MoviePage .BackgroundGradient {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+
+.MoviePage.GradientColor .BackgroundGradient {
+  opacity: 1;
+  background: linear-gradient(180deg, rgba(var(--movie-gradient), var(--movie-gradient-opacity)) 0%, var(--dark) 100%);
 }

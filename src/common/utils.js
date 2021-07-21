@@ -315,3 +315,19 @@ export const getFilteredMovies = (dataArray) => {
 }
 
 export const getFilteredCompanies = (companies) => companies.map(company => company.name);
+
+export const getAdjustedGradientOpacity = (colorsArray) => {
+  let opacity = 0;
+  const avg = Math.ceil(colorsArray.reduce((acc, val) => acc + val, 0) / 3);
+  if(avg <= 50) {
+    opacity = 0.6;
+  } else if (avg > 50 && avg <= 120) {
+    opacity = 0.35;
+  } else if (avg > 120 && avg <= 220) {
+    opacity = 0.25
+  } else if (avg < 220) {
+    opacity = 0.15
+  }
+  console.log(avg);
+  return opacity;
+}

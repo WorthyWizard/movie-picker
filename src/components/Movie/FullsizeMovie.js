@@ -1,10 +1,12 @@
 import React from 'react';
+import { useColor } from 'color-thief-react';
 
 import { 
   ImagesEndpoints, 
   getGenreString, 
   getRuntimeString,
-  getMovieCertification
+  getMovieCertification,
+  getAdjustedGradientOpacity
 } from '../../common/utils';
 import Button from '../UI/Button/Button';
 import Image from '../../components/Image/Image';
@@ -18,6 +20,14 @@ const FullsizeMovie = ({ data, type = '' }) => {
     genres, runtime, overview, 
     tagline, release_dates, id
   } = data;
+  
+  const { data: colorCode } = useColor(ImagesEndpoints.poster + poster_path, 'rgbArray', { crossOrigin: 'Anonymous' });
+
+  if(colorCode) {
+    const opacity = getAdjustedGradientOpacity(colorCode);
+    document.documentElement.style.setProperty('--movie-gradient-opacity', `${opacity}`);
+    document.documentElement.style.setProperty('--movie-gradient', colorCode.join(','));
+  }
 
   let rating = (
     <div className={`${s.Rating}`}>
@@ -35,10 +45,15 @@ const FullsizeMovie = ({ data, type = '' }) => {
     </div>
   );
 
-  let movieBackdrop = type != 'movie-page' ? { background: `url(${ImagesEndpoints.backdrop + backdrop_path})` } : {};
+  let movieBackdrop = type != 'movie-page' ? 
+    { background: `url(${ImagesEndpoints.backdrop + backdrop_path})` } : 
+    { };
+  
+  let sectionClass = type === 'movie-page' ? s.MoviePage : s.RegularPage;
 
   return (
-    <section className={`${s.FullsizeMovie} ${(type == 'movie-page' ? `${s.MoviePage}` : `${s.RegularPage}`)}`} style={movieBackdrop}>
+    <section 
+      className={`${s.FullsizeMovie} ${sectionClass} ${colorCode ? s.GradientColor : '' }`} style={movieBackdrop}>
       <div className={s.FullsizeMovieInner}>
         <div className={s.Poster}>
           <Image 
@@ -68,6 +83,7 @@ const FullsizeMovie = ({ data, type = '' }) => {
         </div>
       </div>
       <div className={s.DarkBackdrop}></div>
+      <div className={s.BackgroundGradient}></div>
     </section>
   );
 };
