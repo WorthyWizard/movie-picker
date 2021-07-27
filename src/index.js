@@ -13,9 +13,9 @@ import searchReducer from "./store/reducers/search";
 import recommendedReducer from "./store/reducers/recommended";
 import popularReducer from "./store/reducers/popular";
 import topRatedReducer from "./store/reducers/topRated";
+import FirebaseProvider from './context/firebase-context';
 
 import App from "./App";
-import LocalStorageProvider from './context/localStorage';
 
 const rootReducer = combineReducers({
   movie: movieReducer,
@@ -38,14 +38,14 @@ const store = createStore(
   composeEnhancers(applyMiddleware(...middleware))
 );
 
-const application = (
+const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <LocalStorageProvider>
+      <FirebaseProvider>
         <App />
-      </LocalStorageProvider>
+      </FirebaseProvider>
     </BrowserRouter>
   </Provider>
 );
 
-ReactDOM.render(application, document.getElementById("root"));
+ReactDOM.render(app, document.getElementById("root"));

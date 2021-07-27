@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MovieControls from './MovieControls/MovieControls';
@@ -10,39 +10,22 @@ import {
 import Image from '../../components/Image/Image';
 import s from './Movie.module.css';
 import * as actions from '../../store/actions';
-import { LocalStorageContext } from '../../context/localStorage';
+import { watchlist } from '../../common/localStorage';
 
 const Movie = ({ data }) => {
 
   const {  
     poster_path, vote_average, 
     title, genres, genre_ids,
-    release_date, id, overview,
-    backdrop_path
+    release_date, id
   } = data;
 
   const dispatch = useDispatch();
-  const { watchlist } = useContext(LocalStorageContext);
   const [isBtnActive, setIsBtnActive] = useState(watchlist.has(id));
   const watchlistMovies = useSelector(state => state.watchlist.movies);
   const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
 
-  const watchlistData = {
-    poster_path, backdrop_path, 
-    vote_average, title, genres, 
-    genre_ids, release_date, id, 
-    overview
-  }
-
-  let genre = '';
-
-  if(genres) {
-    genre = getFilteredGenre(genres).slice(0, 2).join(', ');
-  } else if(genre_ids) {
-    genre = getFilteredGenreByIDs(genre_ids).slice(0, 2).join(', ');
-  }
-
-  const postWatchlistMovie = (data) => {
+  const toggleWatchlistMovie = useCallback((data) => {
     if(!isMovieLoading) {
       const hasItem = watchlist.has(id);
       if(!hasItem) {
@@ -54,6 +37,14 @@ const Movie = ({ data }) => {
         }
       }
     }
+  }, []);
+
+  let genre = '';
+
+  if(genres) {
+    genre = getFilteredGenre(genres).slice(0, 2).join(', ');
+  } else if(genre_ids) {
+    genre = getFilteredGenreByIDs(genre_ids).slice(0, 2).join(', ');
   }
 
   return (
@@ -70,7 +61,7 @@ const Movie = ({ data }) => {
           <div className={s.MovieControls}>
             <MovieControls 
               onPlayLink={`/movie/${id}`}
-              onAddToWatchlist={() => postWatchlistMovie(watchlistData)} 
+              onAddToWatchlist={() => toggleWatchlistMovie(data)} 
               addToWatchlistActive={isBtnActive}
             />
           </div>

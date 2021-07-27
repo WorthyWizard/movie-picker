@@ -1,16 +1,19 @@
-import React from 'react';
-import { useColor } from 'color-thief-react';
+import React, { useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { usePalette } from 'color-thief-react';
 
 import { 
   ImagesEndpoints, 
   getGenreString, 
   getRuntimeString,
   getMovieCertification,
-  getAdjustedGradientOpacity
+  getAdjustedGradient
 } from '../../common/utils';
 import Button from '../UI/Button/Button';
 import Image from '../../components/Image/Image';
 import s from './FullsizeMovie.module.css';
+import * as actions from '../../store/actions';
+import { watchlist } from '../../common/localStorage';
 
 const FullsizeMovie = ({ data, type = '' }) => {
 
@@ -20,13 +23,25 @@ const FullsizeMovie = ({ data, type = '' }) => {
     genres, runtime, overview, 
     tagline, release_dates, id
   } = data;
-  
-  const { data: colorCode } = useColor(ImagesEndpoints.poster + poster_path, 'rgbArray', { crossOrigin: 'Anonymous' });
 
-  if(colorCode) {
-    const opacity = getAdjustedGradientOpacity(colorCode);
-    document.documentElement.style.setProperty('--movie-gradient-opacity', `${opacity}`);
-    document.documentElement.style.setProperty('--movie-gradient', colorCode.join(','));
+  const dispatch = useDispatch();
+  const [isBtnActive, setIsBtnActive] = useState(watchlist.has(id));
+  const watchlistMovies = useSelector(state => state.watchlist.movies);
+  const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
+
+  let gradientClassName = '';
+  let sectionClass = type === 'movie-page' ? s.MoviePage : s.RegularPage;
+  const certification = getMovieCertification(release_dates.results);
+
+  if(type === 'movie-page') {
+    const { data: colorCode } = usePalette(ImagesEndpoints.poster + poster_path, 2, 'rgbArray', { crossOrigin: 'Anonymous' });
+  
+    if(colorCode) {
+      const colorObject = getAdjustedGradient(colorCode);
+      document.documentElement.style.setProperty('--movie-gradient', colorObject.color);
+      document.documentElement.style.setProperty('--movie-gradient-opacity', `${colorObject.opacity}`);
+      gradientClassName = s.GradientColor;
+    }
   }
 
   let rating = (
@@ -48,12 +63,27 @@ const FullsizeMovie = ({ data, type = '' }) => {
   let movieBackdrop = type != 'movie-page' ? 
     { background: `url(${ImagesEndpoints.backdrop + backdrop_path})` } : 
     { };
-  
-  let sectionClass = type === 'movie-page' ? s.MoviePage : s.RegularPage;
+
+  const toggleWatchlistMovie = useCallback(data => {
+    if(!isMovieLoading) {
+      console.log('movie isnt loading');
+      const hasItem = watchlist.has(id);
+      console.log('has item?', hasItem);
+      if(!hasItem) {
+        dispatch(actions.postWatchlistMovie(data, watchlist, setIsBtnActive));
+      } else {
+        const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
+        console.log(filteredMovie)
+        if(filteredMovie.length > 0) {
+          dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID, id, watchlist, setIsBtnActive));
+        }
+      }
+    }
+  }, []);
 
   return (
     <section 
-      className={`${s.FullsizeMovie} ${sectionClass} ${colorCode ? s.GradientColor : '' }`} style={movieBackdrop}>
+      className={`${s.FullsizeMovie} ${sectionClass} ${gradientClassName}`} style={movieBackdrop}>
       <div className={s.FullsizeMovieInner}>
         <div className={s.Poster}>
           <Image 
@@ -71,13 +101,19 @@ const FullsizeMovie = ({ data, type = '' }) => {
           <div className={s.MovieFactsWrapper}>
             <div className={s.MovieGenre}>{getGenreString(genres)}</div>
             <div className={s.MovieRuntime}>{getRuntimeString(runtime)}</div>
-            <div className={s.MoviePG}>{getMovieCertification(release_dates.results)}</div>
+            { certification &&
+              <div className={s.MoviePG}>{certification}</div>
+            }
           </div>
           <p className={s.MovieOverview}>{overview}</p>
           <div className={s.MovieButtons}>
             {type != 'movie-page' ? watchBtn : null}
             <div className={s.MovieWatchlistBtn}>
-              <Button type='add-to-watchlist' />
+              <Button 
+                type='add-to-watchlist' 
+                clicked={() => toggleWatchlistMovie(data)} 
+                isActive={isBtnActive}
+              />
             </div>
           </div>
         </div>

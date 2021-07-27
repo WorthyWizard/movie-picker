@@ -31,7 +31,7 @@ export const postWatchlistMovie = (data, watchlist, setIsBtnActive) => {
   return dispatch => {
     dispatch(watchlistMoviePostStart());
     Database.postWatchlistMovie(data).then(res => {
-      watchlist.add(data.id);
+      watchlist.add({ [data.id]: res.data.name });
       setIsBtnActive(true);
       dispatch(watchlistMoviePostSuccess());
       dispatch(setWatchlistMovie({ ...data, dbID: res.data.name }))
@@ -97,8 +97,8 @@ const removeWatchlistMovie = (dbID) => {
 
 export const deleteWatchlistMovie = (dbID, movieID, watchlist, setIsBtnActive) => {
   return dispatch => {
-    Database.deleteWatchlistMovie(dbID).then(res => {
-      watchlist.remove(movieID);
+    Database.deleteWatchlistMovie(dbID).then(() => {
+      watchlist.remove({ [movieID]: dbID });
       setIsBtnActive(false);
       dispatch(removeWatchlistMovie(dbID));
     })

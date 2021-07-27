@@ -23,7 +23,7 @@ export class ImagesEndpoints {
 class LocalStorage {
   add(data) {
     const storageItem = this.get();
-    if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
+    if(Array.isArray(storageItem)) {
       const filteredItem = storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data));
       if(filteredItem.length > 0) {
         return;
@@ -51,7 +51,7 @@ class LocalStorage {
   
   toggle(data) {
     const storageItem = this.get();
-    if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
+    if(Array.isArray(storageItem)) {
       const filteredItem = storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data));
       if(filteredItem.length > 0) {
         this.remove(data)
@@ -63,7 +63,7 @@ class LocalStorage {
 
   has(data) {
     const storageItem = this.get();
-    if(typeof storageItem === 'object' && storageItem.hasOwnProperty('length')) {
+    if(Array.isArray(storageItem)) {
       return storageItem.filter(el => JSON.stringify(el) === JSON.stringify(data)).length > 0;
     }
   }
@@ -316,18 +316,42 @@ export const getFilteredMovies = (dataArray) => {
 
 export const getFilteredCompanies = (companies) => companies.map(company => company.name);
 
-export const getAdjustedGradientOpacity = (colorsArray) => {
-  let opacity = 0;
-  const avg = Math.ceil(colorsArray.reduce((acc, val) => acc + val, 0) / 3);
-  if(avg <= 50) {
-    opacity = 0.6;
-  } else if (avg > 50 && avg <= 120) {
-    opacity = 0.35;
-  } else if (avg > 120 && avg <= 220) {
-    opacity = 0.25
-  } else if (avg < 220) {
-    opacity = 0.15
+export const getAdjustedGradient = (colorsArray) => {
+
+  const getAdjustedOpacity = (average) => {
+    let opacity = 0;
+    if(average <= 50) {
+      opacity = 0.6;
+    } else if (average > 50 && average <= 120) {
+      opacity = 0.35;
+    } else if (average > 120 && average <= 220) {
+      opacity = 0.15
+    } else if (average > 220) {
+      opacity = 0.1
+    }
+    return opacity;
   }
-  console.log(avg);
-  return opacity;
+
+  const getAverageColorNum = (acc, cur) => {
+    let avg = Math.ceil(cur.reduce((acc, val) => acc + val, 0) / 3);
+    return Object.assign(acc, { [`${avg}`]: cur.join(',') });
+  }
+  
+  const colorsObject = colorsArray.reduce(getAverageColorNum, {});
+  const colorsAvg = Object.keys(colorsObject).sort((a, b) => b - a);
+  const minAvg = colorsAvg[colorsAvg.length - 1];
+  const maxAvg = colorsAvg[0];
+
+  if(minAvg < 50) {
+    return {
+      color: colorsObject[maxAvg],
+      opacity: getAdjustedOpacity(maxAvg)
+    }
+  } else {
+    return {
+      color: colorsObject[minAvg],
+      opacity: getAdjustedOpacity(minAvg)
+    }
+  }
+  
 }

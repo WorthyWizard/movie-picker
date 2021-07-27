@@ -9,7 +9,17 @@ import {
   FavoriteBorder 
 } from '@material-ui/icons';
 
-const Button = ({ type, clicked, title = '', className = '', href, link = '', isActive = false }) => {
+const Button = (props) => {
+
+  const { 
+    type, 
+    clicked, 
+    title = '', 
+    className = '',
+    href, 
+    link = '', 
+    isActive = false 
+  } = props;
 
   let watchBtn = (
     <button className={`${s.Btn} ${s.WatchBtn} ${className}`} onClick={clicked}>
@@ -21,8 +31,8 @@ const Button = ({ type, clicked, title = '', className = '', href, link = '', is
   );
 
   let watchlistBtn = (
-    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Box} ${className}`} onClick={clicked}>
-      <div className={`${s.Icon}`}><FavoriteBorder /></div>
+    <button className={`${s.Btn} ${s.WatchlistBtn} ${s.Box} ${className} ${isActive ? s.Active : ''}`} onClick={clicked}>
+      <div className={`${s.Icon}`}>{ isActive ? <Favorite/> : <FavoriteBorder /> }</div>
     </button>
   );
 
