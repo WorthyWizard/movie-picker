@@ -41,7 +41,6 @@ class LocalStorage {
   remove(data) {
     const storageItem = this.get();
     const filteredItems = storageItem.filter(el => JSON.stringify(el) !== JSON.stringify(data));
-    console.log(filteredItems);
     localStorage.setItem(this.item, JSON.stringify(filteredItems));
   }
 

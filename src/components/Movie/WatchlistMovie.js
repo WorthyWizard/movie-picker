@@ -6,17 +6,21 @@ import {
   getFilteredGenreByIDs,
   getRuntimeString
 } from '../../common/utils';
+import { useWatchlist } from '../../hooks/useWatchlist';
 import Button from '../UI/Button/Button';
 import s from './WatchlistMovie.module.css';
 
 const WatchlistMovie = ({ data }) => {
 
+  
   const { 
     backdrop_path, vote_average,
     title, genres, genre_ids, id, 
     overview,
   } = data;
 
+  const { removeWatchlistMovie } = useWatchlist(id);
+  
   let genre = '';
 
   if(genres) {
@@ -43,7 +47,7 @@ const WatchlistMovie = ({ data }) => {
             <Button type='play' link={`/movie/${id}`} />
           </div>
           <div className={s.MovieRemoveBtn}>
-            <Button type='remove' />
+            <Button type='remove' clicked={removeWatchlistMovie} />
           </div>
         </div>
       </div>

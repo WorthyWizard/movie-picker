@@ -2,12 +2,14 @@ import React from 'react';
 
 import Image from '../../components/Image/Image';
 import MovieControls from './MovieControls/MovieControls';
- 
+import { useWatchlist } from '../../hooks/useWatchlist';
 import s from './Movie.module.css';
 
 const MovieLight = ({ data }) => {
 
   const { poster_path, title, id } = data;
+
+  const { removeWatchlistMovie } = useWatchlist(id);
 
   return (
     <article className={s.Movie}>
@@ -19,8 +21,9 @@ const MovieLight = ({ data }) => {
           </div>
           <div className={s.MovieControls}>
             <MovieControls 
-              type='watchlist' 
-              onPlayLink={`/movie/${id}`}
+              type='watchlist'
+              movieID={id}
+              onRemove={removeWatchlistMovie}
             />
           </div>
         </div>

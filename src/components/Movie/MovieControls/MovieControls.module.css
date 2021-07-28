@@ -19,6 +19,8 @@
   height: 56px;
 }
 
+.RestrictedControls .GoToMoviePage button,
+.RestrictedControls .AddToWatchlist button,
 .WatchlistMovieControls .GoToMoviePage button,
 .WatchlistMovieControls .RemoveFromWatchlist button {
   width: 50px;

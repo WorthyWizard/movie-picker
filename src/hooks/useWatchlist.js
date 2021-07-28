@@ -1,32 +1,56 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { watchlist } from '../../common/localStorage';
-import * as actions from '../../store/actions';
+import { watchlist } from '../common/localStorage';
+import * as actions from '../store/actions';
 
-export const useWatchlist = () => {
+export const useWatchlist = (id, data = {}) => {
+
+  const getFilteredItem = useCallback(() => watchlist.get().filter(item => item.id === id), []);
+
+  let isInWatchlist = getFilteredItem().length !== 0;
+
   const dispatch = useDispatch();
-  const [hasItem, setHasItem] = useState(watchlist.has(id));
-  const watchlistMovies = useSelector(state => state.watchlist.movies);
+  const [ hasItem, setHasItem ] = useState(isInWatchlist);
   const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
   
-  const toggleWatchlistMovie = data => {
+  const toggleWatchlistMovie = useCallback(() => {
     if(!isMovieLoading) {
-      const hasItem = watchlist.has(id);
-      if(!hasItem) {
+      const filteredItem = getFilteredItem();
+      if(filteredItem.length === 0) {
         dispatch(actions.postWatchlistMovie(data, watchlist, setHasItem));
       } else {
-        const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
-        if(filteredMovie.length > 0) {
-          dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID, id, watchlist, setHasItem));
+        const dbID = filteredItem[0]?.dbID;
+        if(dbID) {
+          dispatch(actions.deleteWatchlistMovie(dbID, id, watchlist, setHasItem));
         }
       }
     }
-  };
+  }, []);
+
+  const addWatchlistMovie = useCallback(() => {
+    if(!isMovieLoading) {
+      const filteredItem = getFilteredItem(id);
+      if(filteredItem.length === 0) {
+        dispatch(actions.postWatchlistMovie(data, watchlist, setHasItem));
+      }
+    }
+  }, []);
+
+  const removeWatchlistMovie = useCallback(() => {
+    if(!isMovieLoading) {
+      const dbID = getFilteredItem()[0]?.dbID;
+      if(dbID) {
+        dispatch(actions.deleteWatchlistMovie(dbID, id, watchlist, setHasItem));
+      }
+    }
+  }, []);
 
   return {
     hasItem,
-    toggleWatchlistMovie
+    toggleWatchlistMovie,
+    addWatchlistMovie,
+    removeWatchlistMovie
   }
 
 }

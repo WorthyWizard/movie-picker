@@ -11,33 +11,24 @@ import Image from '../../components/Image/Image';
 import s from './Movie.module.css';
 import * as actions from '../../store/actions';
 import { watchlist } from '../../common/localStorage';
+import { useWatchlist } from '../../hooks/useWatchlist';
 
 const Movie = ({ data }) => {
 
   const {  
     poster_path, vote_average, 
     title, genres, genre_ids,
-    release_date, id
+    release_date, id, overview,
+    backdrop_path
   } = data;
 
-  const dispatch = useDispatch();
-  const [isBtnActive, setIsBtnActive] = useState(watchlist.has(id));
-  const watchlistMovies = useSelector(state => state.watchlist.movies);
-  const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
+  const watchlistData = {
+    backdrop_path, poster_path, 
+    vote_average, title, genres, 
+    genre_ids, id, overview
+  }
 
-  const toggleWatchlistMovie = useCallback((data) => {
-    if(!isMovieLoading) {
-      const hasItem = watchlist.has(id);
-      if(!hasItem) {
-        dispatch(actions.postWatchlistMovie(data, watchlist, setIsBtnActive));
-      } else {
-        const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
-        if(filteredMovie.length > 0) {
-          dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID, id, watchlist, setIsBtnActive));
-        }
-      }
-    }
-  }, []);
+  const { hasItem, toggleWatchlistMovie } = useWatchlist(id, watchlistData);
 
   let genre = '';
 
@@ -60,9 +51,9 @@ const Movie = ({ data }) => {
           </div>
           <div className={s.MovieControls}>
             <MovieControls 
-              onPlayLink={`/movie/${id}`}
-              onAddToWatchlist={() => toggleWatchlistMovie(data)} 
-              addToWatchlistActive={isBtnActive}
+              movieID={id}
+              active={hasItem}
+              onAddToWatchlist={toggleWatchlistMovie}
             />
           </div>
         </div>

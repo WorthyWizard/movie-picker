@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import { usePalette } from 'color-thief-react';
 
 import { 
@@ -12,22 +11,24 @@ import {
 import Button from '../UI/Button/Button';
 import Image from '../../components/Image/Image';
 import s from './FullsizeMovie.module.css';
-import * as actions from '../../store/actions';
-import { watchlist } from '../../common/localStorage';
+import { useWatchlist } from '../../hooks/useWatchlist';
 
 const FullsizeMovie = ({ data, type = '' }) => {
 
   const { 
     backdrop_path, poster_path, 
-    vote_average, title, 
+    vote_average, title, genre_ids,
     genres, runtime, overview, 
     tagline, release_dates, id
   } = data;
 
-  const dispatch = useDispatch();
-  const [isBtnActive, setIsBtnActive] = useState(watchlist.has(id));
-  const watchlistMovies = useSelector(state => state.watchlist.movies);
-  const isMovieLoading = useSelector(state => state.watchlist.isMovieLoading);
+  const watchlistData = {
+    backdrop_path, poster_path, 
+    vote_average, title, genres, 
+    genre_ids, id, overview
+  }
+
+  const { hasItem, toggleWatchlistMovie } = useWatchlist(id, watchlistData);
 
   let gradientClassName = '';
   let sectionClass = type === 'movie-page' ? s.MoviePage : s.RegularPage;
@@ -64,23 +65,6 @@ const FullsizeMovie = ({ data, type = '' }) => {
     { background: `url(${ImagesEndpoints.backdrop + backdrop_path})` } : 
     { };
 
-  const toggleWatchlistMovie = useCallback(data => {
-    if(!isMovieLoading) {
-      console.log('movie isnt loading');
-      const hasItem = watchlist.has(id);
-      console.log('has item?', hasItem);
-      if(!hasItem) {
-        dispatch(actions.postWatchlistMovie(data, watchlist, setIsBtnActive));
-      } else {
-        const filteredMovie = watchlistMovies.filter(movie => id === movie.id);
-        console.log(filteredMovie)
-        if(filteredMovie.length > 0) {
-          dispatch(actions.deleteWatchlistMovie(filteredMovie[0].dbID, id, watchlist, setIsBtnActive));
-        }
-      }
-    }
-  }, []);
-
   return (
     <section 
       className={`${s.FullsizeMovie} ${sectionClass} ${gradientClassName}`} style={movieBackdrop}>
@@ -111,8 +95,8 @@ const FullsizeMovie = ({ data, type = '' }) => {
             <div className={s.MovieWatchlistBtn}>
               <Button 
                 type='add-to-watchlist' 
-                clicked={() => toggleWatchlistMovie(data)} 
-                isActive={isBtnActive}
+                clicked={toggleWatchlistMovie} 
+                isActive={hasItem}
               />
             </div>
           </div>
