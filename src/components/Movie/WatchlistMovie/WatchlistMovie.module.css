@@ -1,0 +1,85 @@
+.WatchlistMovie {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  padding: 40px;
+  position: relative;
+  background-position: 0 25%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: var(--darker);
+}
+
+.WatchlistMovieInner {
+  flex: 1;
+  display: flex;
+  position: relative;
+  z-index: 2;
+}
+
+.Rating {
+  width: 100px;
+  height: 90px;
+  display: inline-block;
+  text-align: center;
+  padding: 16px 20px;
+  background-color: var(--accent);
+  border-radius: 5px;
+}
+
+.Rating > div {
+  font-size: 2.34rem;
+}
+
+.MovieInfo {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: 80px;
+}
+
+.MovieTitle {
+  font-size: 2.67rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.MovieFactsWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.MovieFactsWrapper > p {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.MovieFactsWrapper > p:not(:last-child) {
+  margin-right: 50px;
+}
+
+.MovieOverview {
+  font-size: 1.2rem;
+  text-overflow: ellipsis;
+}
+
+.MovieButtons {
+  display: flex;
+  margin-left: auto;
+  margin-top: auto;
+}
+
+.MovieWatchBtn {
+  margin-right: 40px;
+}
+
+.DarkBackdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+}

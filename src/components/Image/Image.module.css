@@ -14,7 +14,7 @@
 }
 
 .Placeholder svg {
-  font-size: 12rem;
+  font-size: 10rem;
   fill: var(--text-grey);
 }
 
@@ -34,8 +34,8 @@
 
 .ImagePreloader div::after {
   content: '';
-  width: 500px;
-  height: 500px;
+  /* width: 500px;
+  height: 500px; */
   position: absolute;
   top: 0;
   right: 0;

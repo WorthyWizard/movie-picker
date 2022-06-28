@@ -2,21 +2,22 @@
   max-width: 1700px;
   margin: 0 auto;
   position: relative;
+  user-select: none;
 }
 
 .SliderPrev {
-  color: var(--text-light);
-  left: -60px;
-  top: 44%;
+  color: var(--text-light) !important;
+  left: -60px !important;
+  top: 44% !important;
 }
 
 .SliderNext {
-  color: var(--text-light);
-  right: -60px;
-  top: 44%;
+  color: var(--text-light) !important;
+  right: -60px !important;
+  top: 44% !important;
 }
 
 .SliderNext::after, .SliderPrev::after {
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
 }
 

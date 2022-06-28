@@ -1,5 +1,5 @@
 .WatchProviders {
-
+  margin-bottom: 60px;
 }
 
 .InfoBlock {
@@ -8,7 +8,7 @@
 
 .InfoText {
   text-align: center;
-  font-size: 0.89rem;
+  font-size: 1rem;
 }
 
 .InfoLogos {
@@ -55,8 +55,4 @@
 
 .ButtonWrapper {
   text-align: center;
-}
-
-.PickBtn {
-  margin: 60px auto;
 }
