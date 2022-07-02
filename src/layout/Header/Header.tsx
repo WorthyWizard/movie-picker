@@ -9,7 +9,7 @@ import {
 import s from "./Header.module.css";
 
 const Header = () => {
-  const isUserAuth = true;
+  const isAuthenticated = false;
 
   const userAuth = (
     <>
@@ -73,13 +73,13 @@ const Header = () => {
   );
 
   return (
-    <header className={`${s.Header} ${!isUserAuth ? s.Guest : ""}`}>
+    <header className={`${s.Header} ${!isAuthenticated ? s.Guest : ""}`}>
       <div className={s.HeaderInner}>
         <div className={s.HeaderContent}>
           <h1 className={s.HeaderLogo}>
             <NavLink to="/">MoviePicker</NavLink>
           </h1>
-          {isUserAuth ? userAuth : ""}
+          {isAuthenticated ? userAuth : ""}
         </div>
       </div>
     </header>

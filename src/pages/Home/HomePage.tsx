@@ -12,7 +12,7 @@ import useWatchlistMovies from "@/services/hooks/useWatchlistMovies";
 
 const HomePage = () => {
   const { data: recommended, isLoading: isRecommendedLoading } =
-    movieAPI.useGetRecommendedMoviesQuery({ id: 157336 });
+    movieAPI.useGetRecommendedMoviesQuery({ id: 414906 });
 
   const {
     movies,

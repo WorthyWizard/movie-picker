@@ -1,23 +1,12 @@
-import { Route, Routes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 
 import { privateRoutes, publicRoutes } from "./routes";
 
 const Router = () => {
-  const isUserAuth = true;
-
-  return isUserAuth ? (
-    <Routes>
-      {privateRoutes.map(({ path, Component }) => (
-        <Route key={path} path={path} element={<Component />} />
-      ))}
-    </Routes>
-  ) : (
-    <Routes>
-      {publicRoutes.map(({ path, Component }) => (
-        <Route key={path} path={path} element={<Component />} />
-      ))}
-    </Routes>
-  );
+  const isAuthenticated = false;
+  const routes = isAuthenticated ? privateRoutes : publicRoutes;
+  const element = useRoutes(routes);
+  return element;
 };
 
 export default Router;
