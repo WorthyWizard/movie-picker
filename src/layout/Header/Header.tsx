@@ -7,9 +7,10 @@ import {
   MdOutlineAccountCircle,
 } from "react-icons/md";
 import s from "./Header.module.css";
+import { useAuthentication } from "@/features/firebase";
 
 const Header = () => {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useAuthentication();
 
   const userAuth = (
     <>

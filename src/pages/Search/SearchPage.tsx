@@ -8,6 +8,8 @@ import searchAPI from "@/services/SearchService";
 import { getFilteredMovies } from "@/utils/transform/movieData";
 import { useSearchParams } from "react-router-dom";
 import s from "./SearchPage.module.css";
+import { Motion } from "react-motion";
+import { slideLeft } from "@/animations";
 
 const SearchPage = () => {
   const [
@@ -52,13 +54,20 @@ const SearchPage = () => {
   }
 
   return (
-    <div className={s.Search}>
-      <Hero text="Go ahead and search" />
-      <section className={s.SearchContent}>
-        <Search onSearch={onMovieSearch} searchQueryParam={searchQuery ?? ""} />
-        <div className={s.SearchResult}>{content}</div>
-      </section>
-    </div>
+    <Motion defaultStyle={slideLeft.from} style={slideLeft.to}>
+      {(style) => (
+        <div className={s.Search} style={slideLeft.getStyle(style)}>
+          <Hero text="Go ahead and search" />
+          <section className={s.SearchContent}>
+            <Search
+              onSearch={onMovieSearch}
+              searchQueryParam={searchQuery ?? ""}
+            />
+            <div className={s.SearchResult}>{content}</div>
+          </section>
+        </div>
+      )}
+    </Motion>
   );
 };
 

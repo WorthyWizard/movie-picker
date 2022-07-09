@@ -9,7 +9,7 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { firestore } from "@/api/firebase";
+import { firestore } from "../init";
 import {
   SubscribeConnectCallback,
   SubscribeCompletionCallback,

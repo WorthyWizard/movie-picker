@@ -1,14 +1,13 @@
 .Spinner {
   width: 100%;
-  height: 300px;
-}
-
-.SpinnerInner {
-  width: 100%;
-  height: 100%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.SpinnerInner {
+  text-align: center;
 }
 
 .Spinner svg {

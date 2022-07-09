@@ -10,6 +10,8 @@ import s from "./Movie.module.css";
 import { MovieData } from "../../types/movie/rawTypes";
 import { useNavigate } from "react-router-dom";
 import useWatchlistActions from "@/services/hooks/useWatchlistActions";
+import { Motion } from "react-motion";
+import { slideUp } from "@/animations";
 
 interface MovieProps {
   movie: MovieData;
@@ -54,35 +56,39 @@ const Movie: FC<MovieProps> = (props) => {
   };
 
   return (
-    <article className={s.Movie}>
-      <div className={s.MovieInner}>
-        <div className={s.Poster}>
-          <div className={s.MoviePoster}>
-            <Image path={poster_path} alt={title} type="poster" />
-            <div className={s.DarkBackdrop}></div>
+    <Motion defaultStyle={slideUp.from} style={slideUp.to}>
+      {(style) => (
+        <article className={s.Movie} style={slideUp.getStyle(style)}>
+          <div className={s.MovieInner}>
+            <div className={s.Poster}>
+              <div className={s.MoviePoster}>
+                <Image path={poster_path} alt={title} type="poster" />
+                <div className={s.DarkBackdrop}></div>
+              </div>
+              <div className={s.Rating}>
+                <div>{vote_average.toFixed(1)}</div>
+              </div>
+              <div className={s.MovieControls}>
+                <MovieControls
+                  type="full"
+                  onPlay={goToMoviePage}
+                  isInWatchlist={isInWatchlist(id)}
+                  onAddToWatchlist={toggleMovieHandler}
+                />
+              </div>
+            </div>
+            <h3 className={s.MovieTitle}>{title}</h3>
+            <div className={s.MovieFactsWrapper}>
+              {genre && <div className={s.MovieGenre}>{genre}</div>}
+              {genre && <div className={s.DotDivider}></div>}
+              {release_date && (
+                <div className={s.MovieDate}>{getYearString(release_date)}</div>
+              )}
+            </div>
           </div>
-          <div className={s.Rating}>
-            <div>{vote_average.toFixed(1)}</div>
-          </div>
-          <div className={s.MovieControls}>
-            <MovieControls
-              type="full"
-              onPlay={goToMoviePage}
-              isInWatchlist={isInWatchlist(id)}
-              onAddToWatchlist={toggleMovieHandler}
-            />
-          </div>
-        </div>
-        <h3 className={s.MovieTitle}>{title}</h3>
-        <div className={s.MovieFactsWrapper}>
-          {genre && <div className={s.MovieGenre}>{genre}</div>}
-          {genre && <div className={s.DotDivider}></div>}
-          {release_date && (
-            <div className={s.MovieDate}>{getYearString(release_date)}</div>
-          )}
-        </div>
-      </div>
-    </article>
+        </article>
+      )}
+    </Motion>
   );
 };
 

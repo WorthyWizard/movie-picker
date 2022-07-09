@@ -20,6 +20,8 @@ import { getSliced, getUnitsFormatedNumber } from "@/utils/utils";
 import MovieDetail from "./MovieDetail";
 import movieAPI from "@/services/MovieService";
 import { useEffect } from "react";
+import { Motion } from "react-motion";
+import { slideUp } from "@/animations";
 
 const MoviePage = () => {
   const { movieId } = useParams();
@@ -129,43 +131,47 @@ const MoviePage = () => {
   );
 
   return (
-    <div className={s.MoviePage}>
-      <FullsizeMovie movie={singleMovie} type="movie-page" />
-      <section className={`${s.DetailsBlock}`}>
-        <h2 className={`main-heading`}>Details</h2>
-        {details}
-        <SliderBlock
-          title="Cast"
-          wrapperProps={{
-            className: s.Container,
-          }}
-          sliderProps={{
-            slides: actors,
-            slidesPerView: 4,
-          }}
-        />
-        <div className={s.MediaWrapper}>
-          <div className={s.Container}>
-            <h2 className={`main-heading`}>Media</h2>
-            {images.backdrops && images.backdrops.length > 0 && (
-              <Gallery images={images.backdrops} />
-            )}
-            {trailer}
-          </div>
+    <Motion defaultStyle={slideUp.from} style={slideUp.to}>
+      {(style) => (
+        <div className={s.MoviePage} style={slideUp.getStyle(style)}>
+          <FullsizeMovie movie={singleMovie} type="movie-page" />
+          <section className={`${s.DetailsBlock}`}>
+            <h2 className={`main-heading`}>Details</h2>
+            {details}
+            <SliderBlock
+              title="Cast"
+              wrapperProps={{
+                className: s.Container,
+              }}
+              sliderProps={{
+                slides: actors,
+                slidesPerView: 4,
+              }}
+            />
+            <div className={s.MediaWrapper}>
+              <div className={s.Container}>
+                <h2 className={`main-heading`}>Media</h2>
+                {images.backdrops && images.backdrops.length > 0 && (
+                  <Gallery images={images.backdrops} />
+                )}
+                {trailer}
+              </div>
+            </div>
+            <WatchProviders providers={providers} />
+            <SliderBlock
+              title="Checkout this similar movies"
+              wrapperProps={{
+                className: s.Container,
+              }}
+              sliderProps={{
+                slides: similarMovies,
+                slidesPerView: 4,
+              }}
+            />
+          </section>
         </div>
-        <WatchProviders providers={providers} />
-        <SliderBlock
-          title="Checkout this similar movies"
-          wrapperProps={{
-            className: s.Container,
-          }}
-          sliderProps={{
-            slides: similarMovies,
-            slidesPerView: 4,
-          }}
-        />
-      </section>
-    </div>
+      )}
+    </Motion>
   );
 };
 

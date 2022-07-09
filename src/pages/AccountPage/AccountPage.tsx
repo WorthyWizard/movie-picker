@@ -1,10 +1,16 @@
-import s from "./AccountPage.module.css";
+import { Button } from "@/components/UI";
+import { useSignOut } from "@/features/firebase";
+import { Stack } from "@mui/material";
 
 const AccountPage = () => {
+  const [signOut] = useSignOut();
+
   return (
-    <div>
-      <div className={s.AccountPage}>Account Page</div>
-    </div>
+    <Stack justifyContent="center" alignItems="center" flex={1}>
+      <Button variant="contained" onClick={signOut}>
+        Logout
+      </Button>
+    </Stack>
   );
 };
 

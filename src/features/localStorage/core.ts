@@ -20,7 +20,6 @@ class LocalStorageItem<V extends any, K extends string = string> {
 
   clear() {
     localStorage.clear();
-    localStorage;
   }
 }
 

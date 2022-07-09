@@ -9,6 +9,8 @@ import { movieSample } from "@/utils/moviesSample";
 import movieAPI from "@/services/MovieService";
 import { FullsizeMovieData } from "@/types/movie/transformed";
 import useWatchlistMovies from "@/services/hooks/useWatchlistMovies";
+import { Motion } from "react-motion";
+import { slideLeft } from "@/animations";
 
 const HomePage = () => {
   const { data: recommended, isLoading: isRecommendedLoading } =
@@ -28,35 +30,39 @@ const HomePage = () => {
   ));
 
   return (
-    <div className={s.Homepage}>
-      <FullsizeMovie
-        movie={movieSample as FullsizeMovieData}
-        type="regular-page"
-      />
-      <SliderBlock
-        title="Also recommended for you"
-        isLoading={isRecommendedLoading}
-        wrapperProps={{
-          className: s.WatchlistBlock,
-        }}
-        sliderProps={{
-          slides: recommendedMovies ?? [],
-          slidesPerView: 5,
-        }}
-      />
-      <SliderBlock
-        title="Your Watchlist"
-        isLoading={getWatchlistLoading}
-        message="Add your first movie to your watchlist!"
-        wrapperProps={{
-          className: s.WatchlistBlock,
-        }}
-        sliderProps={{
-          slides: watchlistMovies,
-          slidesPerView: 5,
-        }}
-      />
-    </div>
+    <Motion defaultStyle={slideLeft.from} style={slideLeft.to}>
+      {(style) => (
+        <div className={s.Homepage} style={slideLeft.getStyle(style)}>
+          <FullsizeMovie
+            movie={movieSample as FullsizeMovieData}
+            type="regular-page"
+          />
+          <SliderBlock
+            title="Also recommended for you"
+            isLoading={isRecommendedLoading}
+            wrapperProps={{
+              className: s.WatchlistBlock,
+            }}
+            sliderProps={{
+              slides: recommendedMovies ?? [],
+              slidesPerView: 5,
+            }}
+          />
+          <SliderBlock
+            title="Your Watchlist"
+            isLoading={getWatchlistLoading}
+            message="Add your first movie to your watchlist!"
+            wrapperProps={{
+              className: s.WatchlistBlock,
+            }}
+            sliderProps={{
+              slides: watchlistMovies,
+              slidesPerView: 5,
+            }}
+          />
+        </div>
+      )}
+    </Motion>
   );
 };
 

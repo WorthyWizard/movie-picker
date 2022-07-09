@@ -4,6 +4,8 @@ import background from "../../assets/Hero-image.jpg";
 import Hero from "../../components/Hero/Hero";
 import movieAPI from "@/services/MovieService";
 import s from "./DiscoverPage.module.css";
+import { Motion } from "react-motion";
+import { slideLeft } from "@/animations";
 
 const DiscoverPage = () => {
   const {
@@ -27,31 +29,35 @@ const DiscoverPage = () => {
   ));
 
   return (
-    <div className={s.Homepage}>
-      <Hero
-        text="Discover new awesome movies"
-        style={{ backgroundImage: `url(${background})` }}
-      />
-      <SliderBlock
-        title="Check out this trending titles"
-        isLoading={getPopularLoading}
-        sliderProps={{
-          slides: popularMovies ?? [],
-          slidesPerView: 5,
-        }}
-      />
-      <SliderBlock
-        title="Top rated movies just for you"
-        isLoading={getTopRatedLoading}
-        wrapperProps={{
-          className: s.WatchlistBlock,
-        }}
-        sliderProps={{
-          slides: topRatedMovies ?? [],
-          slidesPerView: 5,
-        }}
-      />
-    </div>
+    <Motion defaultStyle={slideLeft.from} style={slideLeft.to}>
+      {(style) => (
+        <div className={s.Homepage} style={slideLeft.getStyle(style)}>
+          <Hero
+            text="Discover new awesome movies"
+            style={{ backgroundImage: `url(${background})` }}
+          />
+          <SliderBlock
+            title="Check out this trending titles"
+            isLoading={getPopularLoading}
+            sliderProps={{
+              slides: popularMovies ?? [],
+              slidesPerView: 5,
+            }}
+          />
+          <SliderBlock
+            title="Top rated movies just for you"
+            isLoading={getTopRatedLoading}
+            wrapperProps={{
+              className: s.WatchlistBlock,
+            }}
+            sliderProps={{
+              slides: topRatedMovies ?? [],
+              slidesPerView: 5,
+            }}
+          />
+        </div>
+      )}
+    </Motion>
   );
 };
 

@@ -6,6 +6,8 @@ import useWatchlistMovies from "@/services/hooks/useWatchlistMovies";
 import useWatchlistActions from "@/services/hooks/useWatchlistActions";
 import Message from "@/components/UI/Message/Message";
 import { Stack } from "@mui/material";
+import { Motion } from "react-motion";
+import { slideLeft } from "@/animations";
 
 const WatchlistPage = () => {
   const {
@@ -15,7 +17,7 @@ const WatchlistPage = () => {
 
   const { isEmpty } = useWatchlistActions();
 
-  let content = null;
+  let content: JSX.Element | null = null;
 
   const isWatchlistIsEmpty = isEmpty();
   const movies = watchlistMovies.map((movie) => (
@@ -31,14 +33,22 @@ const WatchlistPage = () => {
   } else if (moviesLoading) {
     content = <Spinner />;
   } else {
-    content = <div className={s.WatchlistContent}>{movies}</div>;
+    content = (
+      <Stack>
+        <Hero text="Your nice watchlist, enjoy!" />
+        <div className={s.WatchlistContent}>{movies}</div>
+      </Stack>
+    );
   }
 
   return (
-    <Stack flex={1}>
-      <Hero text="Your nice watchlist, enjoy!" />
-      {content}
-    </Stack>
+    <Motion defaultStyle={slideLeft.from} style={slideLeft.to}>
+      {(style) => (
+        <Stack flex={1} style={slideLeft.getStyle(style)}>
+          {content}
+        </Stack>
+      )}
+    </Motion>
   );
 };
 
