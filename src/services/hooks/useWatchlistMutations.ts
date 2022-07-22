@@ -6,21 +6,24 @@ import {
 import { useCallback, useState } from "react";
 import { WatchlistActionsHookReturnType } from "./types";
 
-const useWatchlistActions = (): WatchlistActionsHookReturnType => {
+const useWatchlistMutations = (): WatchlistActionsHookReturnType => {
   const { watchlistDB, watchlistLS } = useGlobalContext();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const postMovieRequest = useCallback(async (movie: WatchlistMovieData) => {
     setIsLoading(true);
     try {
+      isSuccess && setIsSuccess(false);
       isError && setIsError(false);
-      const { id: dbId } = await watchlistDB.add(movie);
-      const watchlistLSMovies = watchlistLS.get();
-      watchlistLS.set([...watchlistLSMovies, { id: movie.id, dbId }]);
+      await watchlistDB.add(movie);
       setIsLoading(false);
+      setIsSuccess(true);
     } catch (e) {
+      setIsLoading(false);
+      setIsSuccess(false);
       setIsError(true);
       throw new Error("An error occured while adding the movie to watchlist");
     }
@@ -38,10 +41,6 @@ const useWatchlistActions = (): WatchlistActionsHookReturnType => {
     try {
       isError && setIsError(false);
       await watchlistDB.remove(movieLS.dbId);
-      const watchlistLSMovies = watchlistLS.get();
-      watchlistLS.set(
-        watchlistLSMovies.filter((movie) => movie.id !== movieLS.id)
-      );
       setIsLoading(false);
     } catch (e) {
       setIsLoading(false);
@@ -72,23 +71,18 @@ const useWatchlistActions = (): WatchlistActionsHookReturnType => {
     return Boolean(findMovieInWatchlist(id));
   }, []);
 
-  const isEmpty = useCallback(() => {
-    return watchlistLS.get().length === 0;
-  }, [watchlistLS]);
-
   function findMovieInWatchlist(id: number) {
     const watchlistLSMovies = watchlistLS.get();
     return watchlistLSMovies.find((watchlistMovie) => watchlistMovie.id === id);
   }
 
   return {
-    isEmpty,
     isInWatchlist,
     addMovieToWatchlist,
     removeMovieFromWatchlist,
     toggleWatchlistMovie,
-    watchlistState: { isLoading, isError },
+    watchlistState: { isLoading, isError, isSuccess },
   };
 };
 
-export default useWatchlistActions;
+export default useWatchlistMutations;

@@ -9,7 +9,7 @@ import Image from "../Image/Image";
 import s from "./Movie.module.css";
 import { MovieData } from "../../types/movie/rawTypes";
 import { useNavigate } from "react-router-dom";
-import useWatchlistActions from "@/services/hooks/useWatchlistActions";
+import useWatchlistMutations from "@/services/hooks/useWatchlistMutations";
 import { Motion } from "react-motion";
 import { slideUp } from "@/animations";
 
@@ -33,7 +33,7 @@ const Movie: FC<MovieProps> = (props) => {
 
   const navigate = useNavigate();
 
-  const { toggleWatchlistMovie, isInWatchlist } = useWatchlistActions();
+  const { toggleWatchlistMovie, isInWatchlist } = useWatchlistMutations();
 
   const toggleMovieHandler = () => {
     const genreString = getGenresNamesByIDs(genre_ids).join(", ");

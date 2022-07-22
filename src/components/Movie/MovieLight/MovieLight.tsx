@@ -5,7 +5,7 @@ import Image from "../../Image/Image";
 import MovieControls from "../MovieControls/MovieControls";
 import s from "../Movie.module.css";
 import { WatchlistMovieData } from "@/types/movie/transformed";
-import useWatchlistActions from "@/services/hooks/useWatchlistActions";
+import useWatchlistMutations from "@/services/hooks/useWatchlistMutations";
 
 interface MovieLightProps {
   movie: MovieData | WatchlistMovieData;
@@ -17,7 +17,7 @@ const MovieLight: FC<MovieLightProps> = (props) => {
 
   const navigate = useNavigate();
 
-  const { removeMovieFromWatchlist } = useWatchlistActions();
+  const { removeMovieFromWatchlist } = useWatchlistMutations();
 
   const removeMovieHandler = (id: number) => () => {
     removeMovieFromWatchlist(id);

@@ -14,7 +14,7 @@ const useSignUp = (): SignUpHookReturnValue => {
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-  const signOut = useCallback(({ email, password }: AuthCredentials) => {
+  const signUp = useCallback(({ email, password }: AuthCredentials) => {
     isError && setIsError(false);
     isSuccess && setIsSuccess(false);
     setIsLoading(true);
@@ -31,7 +31,7 @@ const useSignUp = (): SignUpHookReturnValue => {
       });
   }, []);
 
-  return [signOut, { isError, isLoading, isSuccess }];
+  return [signUp, { isError, isLoading, isSuccess }];
 };
 
 export default useSignUp;

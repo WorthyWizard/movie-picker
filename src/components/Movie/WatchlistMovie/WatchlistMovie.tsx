@@ -6,7 +6,7 @@ import { IconButton } from "@/components/UI";
 import { MdClear, MdPlayArrow } from "react-icons/md";
 import { Stack } from "@mui/material";
 import { formatText } from "@/utils/utils";
-import useWatchlistActions from "@/services/hooks/useWatchlistActions";
+import useWatchlistMutations from "@/services/hooks/useWatchlistMutations";
 import s from "./WatchlistMovie.module.css";
 
 interface WatchlistMovieProps {
@@ -18,7 +18,7 @@ const WatchlistMovie: FC<WatchlistMovieProps> = (props) => {
   const { backdrop_path, vote_average, title, genre, id, overview } = movie;
 
   const navigate = useNavigate();
-  const { removeMovieFromWatchlist } = useWatchlistActions();
+  const { removeMovieFromWatchlist } = useWatchlistMutations();
 
   const goToMoviePage = () => {
     navigate(`/movie/${id}`);

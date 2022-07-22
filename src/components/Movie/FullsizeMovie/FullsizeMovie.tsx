@@ -17,7 +17,7 @@ import {
   FullsizeMovieData,
   WatchlistMovieData,
 } from "@/types/movie/transformed";
-import useWatchlistActions from "@/services/hooks/useWatchlistActions";
+import useWatchlistMutations from "@/services/hooks/useWatchlistMutations";
 
 interface FullsizeMovieProps {
   movie: FullsizeMovieData;
@@ -45,7 +45,7 @@ const FullsizeMovie: FC<FullsizeMovieProps> = (props) => {
     toggleWatchlistMovie,
     isInWatchlist,
     watchlistState: { isLoading: watchlistLoading },
-  } = useWatchlistActions();
+  } = useWatchlistMutations();
 
   const gradientClassNameRef = useRef<string | null>(null);
 
