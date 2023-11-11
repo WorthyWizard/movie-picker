@@ -1,6 +1,6 @@
-import { alpha, Paper, Stack, styled } from "@mui/material";
+import { Paper, Stack, styled } from "@mui/material";
 
-export const AuthWrapper = styled(Stack)(({ theme }) => ({
+export const AuthWrapper = styled(Stack)(() => ({
   flex: 1,
   alignItems: "center",
   justifyContent: "center",

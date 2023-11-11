@@ -1,12 +1,13 @@
-import { FirebaseError } from "firebase/app";
-import { signOut as firebaseSignOut } from "firebase/auth";
 import { useCallback, useState } from "react";
+import { signOut as firebaseSignOut } from "firebase/auth";
+
 import { auth } from "../init";
+
 import { AuthStateFlags } from "./types";
 
 type SignOutHookReturnValue = [() => void, AuthStateFlags];
 
-const useSignOut = (): SignOutHookReturnValue => {
+export const useSignOut = (): SignOutHookReturnValue => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
@@ -21,7 +22,7 @@ const useSignOut = (): SignOutHookReturnValue => {
         setIsLoading(false);
         setIsSuccess(true);
       })
-      .catch((error: FirebaseError) => {
+      .catch(() => {
         setIsLoading(false);
         setIsSuccess(false);
         setIsError(true);
@@ -30,5 +31,3 @@ const useSignOut = (): SignOutHookReturnValue => {
 
   return [signOut, { isError, isLoading, isSuccess }];
 };
-
-export default useSignOut;

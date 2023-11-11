@@ -1,0 +1,53 @@
+.Spinner {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SpinnerInner {
+  text-align: center;
+}
+
+.Spinner svg {
+  transform: scale(0.3);
+  animation: pulse 2s infinite;
+}
+
+.SpinnerBorder {
+  outline: 1px solid transparent;
+  stroke: var(--text-light);
+}
+
+.Spinner .Reel {
+  animation: rotate 2.5s linear infinite;
+  transform-origin: center center;
+}
+
+.Spinner .Reel ellipse {
+  fill: var(--text-light);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.3);
+  }
+
+  50% {
+    transform: scale(0.4);
+  }
+
+  100% {
+    transform: scale(0.3);
+  }
+}

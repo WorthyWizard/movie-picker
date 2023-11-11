@@ -1,12 +1,14 @@
+import { useCallback, useState } from "react";
+
 import { useGlobalContext } from "@/context/GlobalContext";
 import {
   WatchlistLSMovie,
   WatchlistMovieData,
 } from "@/types/movie/transformed";
-import { useCallback, useState } from "react";
+
 import { WatchlistActionsHookReturnType } from "./types";
 
-const useWatchlistMutations = (): WatchlistActionsHookReturnType => {
+export const useWatchlistMutations = (): WatchlistActionsHookReturnType => {
   const { watchlistDB, watchlistLS } = useGlobalContext();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -84,5 +86,3 @@ const useWatchlistMutations = (): WatchlistActionsHookReturnType => {
     watchlistState: { isLoading, isError, isSuccess },
   };
 };
-
-export default useWatchlistMutations;

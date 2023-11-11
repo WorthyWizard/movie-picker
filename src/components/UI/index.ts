@@ -1,2 +1,5 @@
-export { default as Button } from "./Button/Button";
-export { default as IconButton } from "./IconButton/IconButton";
+export * from "./Button";
+export * from "./IconButton";
+export * from "./Loading";
+export * from "./Message";
+export * from "./Spinner";

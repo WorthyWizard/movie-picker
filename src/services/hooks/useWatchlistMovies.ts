@@ -1,12 +1,14 @@
+import { useEffect, useRef, useState } from "react";
+
 import { useGlobalContext } from "@/context/GlobalContext";
 import {
   WatchlistLSMovie,
   WatchlistMovieData,
 } from "@/types/movie/transformed";
-import { useEffect, useRef, useState } from "react";
+
 import { WatchlistMoviesHookReturnType } from "./types";
 
-const useWatchlistMovies = (): WatchlistMoviesHookReturnType => {
+export const useWatchlistMovies = (): WatchlistMoviesHookReturnType => {
   const { watchlistDB } = useGlobalContext();
 
   const unsubscribeRef = useRef(() => {});
@@ -59,5 +61,3 @@ const useWatchlistMovies = (): WatchlistMoviesHookReturnType => {
     moviesState: { isLoading, isError, isSuccess },
   };
 };
-
-export default useWatchlistMovies;

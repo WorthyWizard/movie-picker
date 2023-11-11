@@ -1,20 +1,21 @@
-import { FC } from "react";
-import { ProviderWatchOption } from "@/types/movie/rawTypes";
-import Image from "../Image/Image";
-import styles from "./WatchProviders.module.css";
+import { ProviderWatchOption } from "@/types/movie/data";
 
-interface ProvidingType {
+import { Image } from "../Image";
+
+import styles from "./styles.module.css";
+
+interface Props {
   title: string;
   watchOptions: ProviderWatchOption[];
 }
 
-const ProvidingType: FC<ProvidingType> = (props) => {
+export const ProvidingType = (props: Props) => {
   const { watchOptions, title } = props;
 
-  const images: JSX.Element[] = watchOptions.map((option, i) => {
+  const images: JSX.Element[] = watchOptions.map((option) => {
     return (
       <Image
-        key={i}
+        key={option.provider_id}
         type="logo"
         path={option.logo_path}
         alt={option.provider_name}
@@ -30,5 +31,3 @@ const ProvidingType: FC<ProvidingType> = (props) => {
     </div>
   );
 };
-
-export default ProvidingType;

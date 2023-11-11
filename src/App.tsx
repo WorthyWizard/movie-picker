@@ -1,14 +1,15 @@
-import Header from "./layout/Header/Header";
-import Footer from "./layout/Footer/Footer";
-import Router from "./router/Router";
-import "./App.css";
-import { Firebase, useAuthentication } from "./features/firebase";
 import { GlobalContextProvider } from "./context/GlobalContext";
+import { Firebase, useAuthentication } from "./features/firebase";
 import { LocalStorageItem } from "./features/localStorage";
+import { Footer } from "./layout/Footer";
+import { Header } from "./layout/Header";
 import { WatchlistLSMovie } from "./types/movie/transformed";
-import Initialization from "./components/Initialization";
+import { Initialization } from "./components";
+import { Router } from "./router";
 
-function App() {
+import "./App.css";
+
+export const App = () => {
   const { user, isAuthenticated } = useAuthentication();
 
   const watchlistLS = new LocalStorageItem<WatchlistLSMovie[]>("watchlist", []);
@@ -29,6 +30,4 @@ function App() {
       <Footer />
     </div>
   );
-}
-
-export default App;
+};

@@ -1,8 +1,9 @@
-import { useGlobalContext } from "@/context/GlobalContext";
-import useWatchlistMovies from "@/services/hooks/useWatchlistMovies";
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 
-const Initialization = () => {
+import { useGlobalContext } from "@/context/GlobalContext";
+import { useWatchlistMovies } from "@/services/hooks/useWatchlistMovies";
+
+export const Initialization = () => {
   const {
     lsMovies,
     moviesState: { isSuccess },
@@ -18,5 +19,3 @@ const Initialization = () => {
 
   return <></>;
 };
-
-export default Initialization;

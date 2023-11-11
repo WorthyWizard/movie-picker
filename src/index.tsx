@@ -1,11 +1,11 @@
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-
-import App from "./App";
-import { setupStore } from "./store/store";
+import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import themes from "./theme";
+
+import { App } from "./App";
+import { setupStore } from "./store";
+import { themes } from "./themes";
 
 const store = setupStore();
 
@@ -20,6 +20,4 @@ const app = (
   </ThemeProvider>
 );
 
-const root = createRoot(document.getElementById("root")!);
-
-root.render(app);
+createRoot(document.getElementById("root")!).render(app);

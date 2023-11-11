@@ -1,0 +1,53 @@
+.MoviePage {
+}
+
+.Container {
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+.DetailsBlock {
+}
+
+.DetailsWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4rem;
+}
+
+.Column {
+  width: 100%;
+  max-width: 600px;
+}
+
+.Detail {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.DetailTitleWrapper {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.DetailTitle {
+  width: 150px;
+}
+
+.DetailValue {
+  max-width: 250px;
+}
+
+.MediaWrapper {
+  padding-bottom: 60px;
+  background-color: var(--darker);
+}
+
+.DotDivider {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent-light);
+  margin: 0 40px;
+}
