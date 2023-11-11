@@ -1,22 +1,24 @@
 import {
   addDoc,
   collection,
-  getDocs,
+  deleteDoc,
   doc,
   getDoc,
-  deleteDoc,
+  getDocs,
   onSnapshot,
-  query,
   orderBy,
+  query,
 } from "firebase/firestore";
+
 import { firestore } from "../init";
+
 import {
-  SubscribeConnectCallback,
   SubscribeCompletionCallback,
+  SubscribeConnectCallback,
   SubscribeErrorCallback,
 } from "./types";
 
-class Firebase<P extends string = string> {
+export class Firebase<P extends string = string> {
   constructor(private path: P) {}
 
   async add(data: any, ...pathSegments: string[]) {
@@ -74,5 +76,3 @@ class Firebase<P extends string = string> {
     return onSnapshot(watchlistQuery, onConnect, onError, onCompletion);
   }
 }
-
-export default Firebase;

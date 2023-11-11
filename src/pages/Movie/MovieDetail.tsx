@@ -1,12 +1,12 @@
-import { FC } from "react";
-import styles from "./MoviePage.module.css";
+import styles from "./styles.module.css";
 
-interface MovieDetailsProps {
+interface Props {
   title: string;
   value: string;
 }
 
-const MovieDetail: FC<MovieDetailsProps> = ({ title, value }) => {
+export const MovieDetail = (props: Props) => {
+  const { title, value } = props;
   return (
     <div className={styles.Detail}>
       <div className={styles.DetailTitleWrapper}>
@@ -17,5 +17,3 @@ const MovieDetail: FC<MovieDetailsProps> = ({ title, value }) => {
     </div>
   );
 };
-
-export default MovieDetail;

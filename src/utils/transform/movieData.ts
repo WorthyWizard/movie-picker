@@ -8,7 +8,7 @@ import {
   SpokenLanguage,
   Video,
   WatchProvidersWithoutId,
-} from "../../types/movie/rawTypes";
+} from "../../types/movie/data";
 
 export const getGenresNames = (genres: Genre[]) =>
   genres.map((genre) => genre.name);
@@ -188,8 +188,10 @@ export const getFilteredVideos = (videos: Video[]) => {
   );
 };
 
-export const getFilteredMovies = (movies: MovieData[]) =>
-  movies.filter((movie) => !movie.adult);
+export const getSortedMovies = (movies: MovieData[]) =>
+  [...movies].sort(
+    (a, b) => b.popularity - a.popularity && b.vote_count - a.vote_count
+  );
 
 export const getFilteredCompanies = (companies: ProductionCompany[]) =>
   companies.map((company) => company.name);

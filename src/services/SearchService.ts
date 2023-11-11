@@ -1,14 +1,15 @@
-import apiEndpoint from "@/api/apiEndpoints";
-import { MoviesDataByPage } from "@/types/movie/rawTypes";
-import { MovieSearchParams } from "@/types/movie/requests";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+import { apiEndpoints } from "@/api/apiEndpoints";
+import { MoviesDataByPage } from "@/types/movie/data";
+import { MovieSearchParams } from "@/types/movie/mutations";
 
 const apiKey = import.meta.env.VITE_MOVIE_DB_API_KEY;
 
-const searchAPI = createApi({
+export const searchAPI = createApi({
   reducerPath: "searchAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: apiEndpoint.SEARCH_URL,
+    baseUrl: apiEndpoints.SEARCH_URL,
   }),
   endpoints: (builder) => ({
     searchMovie: builder.query<MoviesDataByPage, MovieSearchParams>({
@@ -22,5 +23,3 @@ const searchAPI = createApi({
     }),
   }),
 });
-
-export default searchAPI;

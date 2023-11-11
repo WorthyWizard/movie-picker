@@ -1,0 +1,13 @@
+.Grid {
+  width: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.GridInner {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-auto-rows: auto;
+  grid-gap: 50px;
+}

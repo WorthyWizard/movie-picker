@@ -1,0 +1,8 @@
+.Video {
+  display: flex;
+}
+
+.VideoFrame {
+  margin: 0 auto;
+  border: 0;
+}

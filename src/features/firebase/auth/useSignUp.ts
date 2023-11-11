@@ -1,15 +1,16 @@
-import { FirebaseError } from "firebase/app";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useCallback, useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import { auth } from "../init";
+
 import { AuthCredentials, AuthStateFlags } from "./types";
 
 type SignUpHookReturnValue = [
   (credentials: AuthCredentials) => void,
-  AuthStateFlags
+  AuthStateFlags,
 ];
 
-const useSignUp = (): SignUpHookReturnValue => {
+export const useSignUp = (): SignUpHookReturnValue => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
@@ -24,7 +25,7 @@ const useSignUp = (): SignUpHookReturnValue => {
         setIsSuccess(true);
         setIsLoading(false);
       })
-      .catch((error: FirebaseError) => {
+      .catch(() => {
         setIsLoading(false);
         setIsSuccess(false);
         setIsError(true);
@@ -33,5 +34,3 @@ const useSignUp = (): SignUpHookReturnValue => {
 
   return [signUp, { isError, isLoading, isSuccess }];
 };
-
-export default useSignUp;

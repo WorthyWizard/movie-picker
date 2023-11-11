@@ -1,15 +1,16 @@
-import apiEndpoint from "@/api/apiEndpoints";
-import { MovieData, MoviesDataByPage } from "@/types/movie/rawTypes";
-import { MovieQueryParams, MovieRequestData } from "@/types/movie/requests";
-import { MovieFullData } from "@/types/movie/transformed";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+import { apiEndpoints } from "@/api/apiEndpoints";
+import { MoviesDataByPage } from "@/types/movie/data";
+import { MovieQueryParams, MovieRequestData } from "@/types/movie/mutations";
+import { MovieFullData } from "@/types/movie/transformed";
 
 const apiKey = import.meta.env.VITE_MOVIE_DB_API_KEY;
 
-const movieAPI = createApi({
+export const movieAPI = createApi({
   reducerPath: "movieAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: apiEndpoint.MOVIE_URL,
+    baseUrl: apiEndpoints.MOVIE_URL,
   }),
   endpoints: (builder) => ({
     getMovieFullData: builder.query<MovieFullData, MovieRequestData>({
@@ -88,5 +89,3 @@ const movieAPI = createApi({
     }),
   }),
 });
-
-export default movieAPI;

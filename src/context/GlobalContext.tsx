@@ -1,4 +1,5 @@
 import { createContext, FC, ReactNode, useContext } from "react";
+
 import { GlobalContextValue } from "./types";
 
 interface ProviderProps extends GlobalContextValue {
@@ -11,6 +12,7 @@ export const GlobalContext = createContext<GlobalContextValue | undefined>(
 
 export const GlobalContextProvider: FC<ProviderProps> = (props) => {
   const { children, ...rest } = props;
+
   return (
     <GlobalContext.Provider value={rest}>{children}</GlobalContext.Provider>
   );

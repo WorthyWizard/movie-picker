@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const useLazyInput = <T extends string = "">(
+export const useLazyInput = <T extends string = string>(
   initialValue?: T,
   delay: number = 700
 ): [string, (value: string) => void, string] => {
@@ -38,5 +38,3 @@ const useLazyInput = <T extends string = "">(
 
   return [lazyInputValue, setInputValue, realtimeInputValue];
 };
-
-export default useLazyInput;

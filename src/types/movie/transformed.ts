@@ -1,7 +1,5 @@
 import {
   CreditsWithoutId,
-  Genre,
-  GenreId,
   ImagesWithoutId,
   MovieData,
   MoviesDataByPage,
@@ -9,7 +7,7 @@ import {
   ReleaseDatesWithoutId,
   VideosWithoutId,
   WatchProvidersWithoutId,
-} from "./rawTypes";
+} from "./data";
 
 export interface MovieFullData extends MovieWithDetails {
   images: ImagesWithoutId;

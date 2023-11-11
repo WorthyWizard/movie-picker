@@ -1,6 +1,8 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+
 import { auth } from "../init";
+
 import { AuthUser } from "./types";
 
 interface AuthenticationHookReturnValue {
@@ -9,7 +11,7 @@ interface AuthenticationHookReturnValue {
   initializing: boolean;
 }
 
-const useAuthentication = (): AuthenticationHookReturnValue => {
+export const useAuthentication = (): AuthenticationHookReturnValue => {
   const [user, setUser] = useState<AuthUser>(null);
   const [initializing, setInitializing] = useState<boolean>(true);
 
@@ -26,5 +28,3 @@ const useAuthentication = (): AuthenticationHookReturnValue => {
 
   return { user, isAuthenticated, initializing };
 };
-
-export default useAuthentication;
